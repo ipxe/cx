@@ -8,8 +8,15 @@
 \begin_preamble
 \usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage{url}
+\usepackage{etoolbox}
+
+\input{version.tex}
+\newcommand{\cxDate}{\ifdefempty{\cxVersion}{\textbf{Draft}\space:\space\today}{Version\space\cxVersion\space:\space\today}}
 \end_preamble
 \use_default_options true
+\begin_modules
+customHeadersFooters
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -75,7 +82,7 @@
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 1
-\paperpagestyle default
+\paperpagestyle fancy
 \listings_params "style=colorful,fontsize={\small}"
 \tracking_changes false
 \output_changes false
@@ -111,6 +118,91 @@ href{mailto:mcb30@ipxe.org}{mcb30@ipxe.org}
 \end_inset
 
 >
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cxDate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Left Header
+CX: An architecture for privacy-compatible distributed contact tracing
+\end_layout
+
+\begin_layout Center Header
+
+\end_layout
+
+\begin_layout Right Header
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cxDate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Left Footer
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+leftmark
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Center Footer
+
+\end_layout
+
+\begin_layout Right Footer
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thepage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section

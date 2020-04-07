@@ -11,7 +11,10 @@ test : gen_sample.o gen_test
 
 doc : cx.pdf
 
-%.pdf : %.lyx $(DEPS) Makefile
+version.tex :
+	/bin/echo '\newcommand{\cxVersion}{$(VERSION)}' > $@
+
+%.pdf : %.lyx version.tex $(DEPS) Makefile
 	lyx -e pdf2 $<
 
 %.o : %.c
@@ -22,3 +25,6 @@ gen_test : gen_test.c $(LISTINGS)
 
 clean :
 	$(RM) *.pdf *.o gen_test
+	/bin/echo '\newcommand{\cxVersion}{}' > version.tex
+
+.PHONY : version.tex
