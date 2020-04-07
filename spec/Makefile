@@ -1,4 +1,5 @@
 DEPS = cx.bib
+CFLAGS = -W -Wall -Wextra -Werror -Wno-unused-parameter
 
 all : test doc
 
@@ -11,10 +12,10 @@ doc : cx.pdf
 	lyx -e pdf2 $<
 
 %.o : %.c
-	$(CC) -W -Wall -Wextra -Werror -Wno-unused -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 gen_test : gen_test.c gen_sample.c
-	$(CC) -W -Wall -Wextra -Werror -Wno-unused -o $@ $< -lssl -lcrypto
+	$(CC) $(CFLAGS) -o $@ $< -lssl -lcrypto
 
 clean :
 	$(RM) *.pdf *.o
