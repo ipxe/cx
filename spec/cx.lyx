@@ -1524,15 +1524,15 @@ literal "false"
 
 \begin_deeper
 \begin_layout Itemize
-Set the two most significant bits (bits 6 and 7) of the 
+Set the two most significant bits (bits 7 and 6) of the 
 \emph on
 clock_seq_hi_and_reserved
 \emph default
- to the binary value 01.
+ to the binary value 10.
 \end_layout
 
 \begin_layout Itemize
-Set the four most significant bits (bits 12 through 15) of the 
+Set the four most significant bits (bits 15 through 12) of the 
 \emph on
 time_hi_and_version
 \emph default
