@@ -1,0 +1,20 @@
+name: Build documentation
+
+on: [push]
+
+jobs:
+  build:
+    name: Build specification document
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Install packages
+        run: sudo apt install -y lyx
+      - name: Build
+        run: make -C spec
+      - name: Publish
+        uses: actions/upload-artifact@v1
+        with:
+          name: cx.pdf
+          path: spec/cx.pdf
