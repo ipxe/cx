@@ -18,4 +18,4 @@ gen_test : gen_test.c gen_sample.c
 	$(CC) $(CFLAGS) -o $@ $< -lssl -lcrypto
 
 clean :
-	$(RM) *.pdf *.o
+	$(RM) *.pdf *.o gen_test
