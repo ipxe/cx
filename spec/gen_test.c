@@ -128,6 +128,68 @@ static const struct nist_test nist_aes256_ctr_drbg_df = {
 	.expected_len = sizeof ( nist_aes256_ctr_drbg_df_expected ),
 };
 
+/** A Contact Identifier test vector */
+struct cx_id_test {
+	/** Name */
+	const char *name;
+	/** Generator type */
+	int type;
+	/** Seed value */
+	const unsigned char *seed;
+	/** Expected number of Contact Identifiers */
+	int count;
+	/** Expected initial Contact Identifier */
+	const uuid_t *expected_first;
+	/** Expected final Contact Identifier */
+	const uuid_t *expected_last;
+};
+
+/** Contact Identifier test for AES-128 with natural numbers seed */
+static const unsigned char cx_id_aes128_natural_seed[] = {
+	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
+	0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+};
+static const uuid_t cx_id_aes128_natural_expected_first = {
+	0xae, 0xaa, 0x08, 0x91, 0x03, 0xd8, 0x40, 0x0c, 0xbe, 0xb0, 0x04, 0x6a,
+	0x2d, 0xab, 0x85, 0x22
+};
+static const uuid_t cx_id_aes128_natural_expected_last = {
+	0x61, 0xf3, 0xd4, 0xb4, 0x84, 0x4f, 0x45, 0x16, 0x96, 0x51, 0xd2, 0xd2,
+	0xcf, 0x8a, 0xf3, 0x46
+};
+static const struct cx_id_test cx_id_aes128_natural = {
+	.name = "AES-128 (natural)",
+	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
+	.seed = cx_id_aes128_natural_seed,
+	.count = 2048,
+	.expected_first = &cx_id_aes128_natural_expected_first,
+	.expected_last = &cx_id_aes128_natural_expected_last,
+};
+
+/** NIST-like test matching first AES-128 Contact Identifier test
+ *
+ * This is a test using the NIST test vector structure with a seed
+ * value matching that used in the first Contact Identifier test.  It
+ * is used to verify that the first 16 bytes output from
+ * generator_iterate() matches (excepting the UUIDv4 fixed bits) the
+ * first 16 bytes obtained by using the DRBG directly with the
+ * intended entropy and nonce.
+ */
+static const unsigned char nist_cx_id_aes128_natural_expected[] = {
+	0xae, 0xaa, 0x08, 0x91, 0x03, 0xd8, 0x10, 0x0c, 0xfe, 0xb0, 0x04, 0x6a,
+        0x2d, 0xab, 0x85, 0x22
+};
+static const struct nist_test nist_cx_id_aes128_natural = {
+	.name = "AES-128 (natural) (NIST-like)",
+	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
+	.entropy_input = &cx_id_aes128_natural_seed[0],
+	.entropy_input_len = 16,
+	.nonce = &cx_id_aes128_natural_seed[16],
+	.nonce_len = 8,
+	.expected = nist_cx_id_aes128_natural_expected,
+	.expected_len = sizeof ( nist_cx_id_aes128_natural_expected ),
+};
+
 /**
  * Dump hex data
  *
@@ -147,6 +209,22 @@ static void hex_dump ( const char *name, const unsigned char *data,
 			 ( offset < ( len - 1 ) ) ? "," : "" );
 	}
 	printf ( "\n};\n" );
+}
+
+/**
+ * Dump UUID data
+ *
+ * @v name		C variable name
+ * @v id		UUID
+ */
+static void uuid_dump ( const char *name, const uuid_t *id ) {
+
+	printf ( "// %s: %02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-"
+		 "%02x%02x%02x%02x%02x%02x\n", name,
+		 (*id)[0], (*id)[1], (*id)[2], (*id)[3], (*id)[4], (*id)[5],
+		 (*id)[6], (*id)[7], (*id)[8], (*id)[9], (*id)[10], (*id)[11],
+		 (*id)[12], (*id)[13], (*id)[14], (*id)[15] );
+	hex_dump ( name, *id, sizeof ( *id ) );
 }
 
 /**
@@ -203,6 +281,58 @@ static int nist_test ( const struct nist_test *test ) {
 }
 
 /**
+ * Perform Contact Identifier test
+ *
+ * @v test		Contact identifier test vector
+ * @ret ok		Success indicator
+ */
+static int cx_id_test ( const struct cx_id_test *test ) {
+	const uuid_t *id;
+	int first_ok;
+	int last_ok;
+	int max_ok;
+	int i;
+
+	/* Instantiate the generator */
+	generator_instantiate ( test->type, ( unsigned char * ) test->seed );
+
+	/* Generate the first Contact Identifier */
+	id = generator_iterate();
+	first_ok = ( memcmp ( id, test->expected_first, sizeof ( *id ) ) == 0 );
+	fprintf ( stderr, "CX ID test %s first %s\n", test->name,
+		  ( first_ok ? "ok" : "failed" ) );
+	if ( ! first_ok ) {
+		uuid_dump ( "id", id );
+	}
+
+	/* Generate and discard the intermediate Contact Identifiers */
+	for ( i = 0 ; i < ( test->count - 2 ) ; i++ ) {
+		generator_iterate();
+	}
+
+	/* Generate the last Contact Identifier */
+	id = generator_iterate();
+	last_ok = ( memcmp ( id, test->expected_last, sizeof ( *id ) ) == 0 );
+	fprintf ( stderr, "CX ID test %s last %s\n", test->name,
+		  ( last_ok ? "ok" : "failed" ) );
+	if ( ! last_ok ) {
+		uuid_dump ( "id", id );
+	}
+
+	/* Check that generator refuses to iterate further */
+	id = generator_iterate();
+	max_ok = ( id == NULL );
+	fprintf ( stderr, "CX ID test %s max %s\n", test->name,
+		  ( max_ok ? "ok" : "failed" ) );
+
+	/* Uninstantiate the generator */
+	generator_uninstantiate();
+
+	/* Report result */
+	return ( first_ok && last_ok && max_ok );
+}
+
+/**
  * Run tests
  *
  */
@@ -212,6 +342,8 @@ int main ( void ) {
 	/* Perform tests */
 	ok &= nist_test ( &nist_aes128_ctr_drbg_df );
 	ok &= nist_test ( &nist_aes256_ctr_drbg_df );
+	ok &= cx_id_test ( &cx_id_aes128_natural );
+	ok &= nist_test ( &nist_cx_id_aes128_natural );
 
 	return ( ok ? 0 : 1 );
 }
