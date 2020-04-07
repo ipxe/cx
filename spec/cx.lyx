@@ -1,0 +1,1764 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{url}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+CX: An architecture for privacy-compatible
+\begin_inset Newline newline
+\end_inset
+
+distributed contact tracing
+\end_layout
+
+\begin_layout Author
+
+\family typewriter
+Michael Brown <
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+href{mailto:mcb30@ipxe.org}{mcb30@ipxe.org}
+\end_layout
+
+\end_inset
+
+>
+\end_layout
+
+\begin_layout Section
+Overview
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Overview"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Terminology
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Terminology"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The key words 
+\begin_inset Quotes eld
+\end_inset
+
+MUST
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+MUST NOT
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+REQUIRED
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+SHALL
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+SHALL NOT
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+SHOULD
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+SHOULD NOT
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+RECOMMENDED
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+MAY
+\begin_inset Quotes erd
+\end_inset
+
+, and 
+\begin_inset Quotes eld
+\end_inset
+
+OPTIONAL
+\begin_inset Quotes erd
+\end_inset
+
+ in this document are to be interpreted as described in RFC
+\begin_inset space ~
+\end_inset
+
+2119
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC2119"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Advertisement: A message broadcast by an 
+\series bold
+Advertiser
+\series default
+ containing a single 
+\series bold
+Contact Identifier
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Advertiser: The role played by a 
+\series bold
+Device
+\series default
+ in which it regularly broadcasts 
+\series bold
+Advertisements
+\series default
+ that may be received by other devices in their role as 
+\series bold
+Observers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Alert
+\begin_inset space ~
+\end_inset
+
+Level: A label that may be retroactively associated with a 
+\series bold
+Contact
+\series default
+ indicating a potential hazard presented by the 
+\series bold
+Advertiser
+\series default
+ to any 
+\series bold
+Observers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Contact: The receipt of an 
+\series bold
+Advertisement
+\series default
+ by an 
+\series bold
+Observer
+\series default
+, indicating that the 
+\series bold
+Advertiser
+\series default
+ and 
+\series bold
+Observer
+\series default
+ are in close physical proximity.
+\end_layout
+
+\begin_layout Description
+Contact
+\begin_inset space ~
+\end_inset
+
+Alert: A 
+\series bold
+Contact
+\series default
+ within an 
+\series bold
+Observer's
+\series default
+ recorded history of received 
+\series bold
+Contact Identifiers
+\series default
+ that is subsequently associated with an 
+\series bold
+Alert Level
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Contact
+\begin_inset space ~
+\end_inset
+
+Identifier: An RFC
+\begin_inset space ~
+\end_inset
+
+4122
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC4122"
+literal "false"
+
+\end_inset
+
+ version
+\begin_inset space ~
+\end_inset
+
+4 pseudo-random UUID generated using a 
+\series bold
+Generator
+\series default
+ and broadcast as part of an 
+\series bold
+Advertisement
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Device: An entity (such as a mobile phone) capable of simultaneously acting
+ as both an 
+\series bold
+Advertiser
+\series default
+ and an 
+\series bold
+Observer
+\series default
+.
+\end_layout
+
+\begin_layout Description
+DRBG: A Deterministic Random Bit Generator as defined by NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Generator: An algorithm as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Algorithms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ used to generate 
+\series bold
+Contact Identifiers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Generator
+\begin_inset space ~
+\end_inset
+
+Type: An integer value as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ used as an input to a 
+\series bold
+Generator.
+\end_layout
+
+\begin_layout Description
+Notification: A tuple comprising an 
+\series bold
+Alert Level
+\series default
+, a 
+\series bold
+Generator Type
+\series default
+ and a 
+\series bold
+Seed Value
+\series default
+ that appears within a 
+\series bold
+Publication
+\series default
+ and is used by an 
+\series bold
+Observer
+\series default
+ to identify 
+\series bold
+Contact Alerts
+\series default
+.
+\end_layout
+
+\begin_layout Description
+
+\series bold
+Observer:
+\series default
+ The role played by a 
+\series bold
+Device
+\series default
+ in which it listens for 
+\series bold
+Advertisements
+\series default
+ broadcast by other 
+\series bold
+Devices
+\series default
+ in their role as 
+\series bold
+Advertisers
+\series default
+ and records the received 
+\series bold
+Contact Identifiers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Publication: A digitally signed set of 
+\series bold
+Notifications
+\series default
+ that are made available for download by any interested 
+\series bold
+Observers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Publisher: An entity (such as a national health authority) that provides
+ a source of 
+\series bold
+Publications
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Seed
+\begin_inset space ~
+\end_inset
+
+Value: A sequence of octets used as an input to a 
+\series bold
+Generator
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Section
+Generators
+\end_layout
+
+\begin_layout Standard
+Generators are used to construct a sequence of Contact Identifiers.
+ The values of the Contact Identifiers are RFC
+\begin_inset space ~
+\end_inset
+
+4122
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC4122"
+literal "false"
+
+\end_inset
+
+ version
+\begin_inset space ~
+\end_inset
+
+4 pseudo-random UUIDs.
+ If the Seed Value used to create a Generator is not known, then the 122
+ non–fixed bits of each 128-bit UUID form a bitstring that is indistinguishable
+ from an ideal random bitstring up to a security strength as specified in
+ section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Generator Types
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-Types"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following Generator Type values are defined:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="7">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="middle" width="10text%">
+<column alignment="center" valignment="middle" width="20text%">
+<column alignment="center" valignment="middle" width="10text%">
+<column alignment="center" valignment="middle" width="10text%">
+<column alignment="center" valignment="middle" width="10text%">
+<column alignment="center" valignment="middle" width="10text%">
+<column alignment="center" valignment="middle" width="10text%">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Type
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DRBG Mechanism
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Security Strength (bits)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Seed Length (bytes) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Entropy Input Length (bytes)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nonce Length (bytes)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maximum Iterations
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CTR_DRBG using AES-128 with DF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+128
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2048
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CTR_DRBG using AES-256 with DF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+256
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+48
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2048
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+All other Generator Type values are reserved for future use.
+\end_layout
+
+\begin_layout Standard
+Advertisers SHOULD choose to use Generator Type 1 when generating Contact
+ Identifiers for inclusion in Advertisements.
+\end_layout
+
+\begin_layout Standard
+Observers MUST support all defined Generator Types when processing Notifications
+ to identify Contact Alerts.
+ Observers MUST accept a Notification containing a Generator Type that they
+ do not recognise.
+ Observers SHOULD warn the user and provide a facility for resolving the
+ unrecognised Generator Type (e.g.
+\begin_inset space ~
+\end_inset
+
+by updating to a newer version of the software and reprocessing the Notification
+).
+\end_layout
+
+\begin_layout Standard
+For all Generator Types, the Seed Length SHALL be equal to the sum of the
+ Entropy Input Length and the Nonce Length.
+\end_layout
+
+\begin_layout Standard
+The underlying DRBG mechanisms are defined by NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ and MUST be used as specified in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Algorithms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Generator-Sample-Code"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for a Generator using the standard OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+ Generator implementations MUST produce a sequence of Contact Identifiers
+ matching the test vectors given in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Generator-Test-Vectors"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Generator Algorithms
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-Algorithms"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL use the algorithm defined in this section to generate
+ a sequence of Contact Identifiers for inclusion in Advertisements.
+\end_layout
+
+\begin_layout Standard
+An Observer SHALL use the algorithm defined in this section to regenerate
+ the sequence of Contact Identifiers corresponding to a Notification.
+\end_layout
+
+\begin_layout Standard
+The algorithm comprises three steps:
+\end_layout
+
+\begin_layout Enumerate
+Instantiate the Generator using the algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Instantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Iterate over the Generator using the algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Iteration"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Uninstantiate the Generator using the algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Uninstantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Generator State
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-State"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The state of a Generator comprises:
+\end_layout
+
+\begin_layout Itemize
+A Generator DRBG instantiated using the algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Instantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Generator Instantiation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-Instantiation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The input required to instantiate a Generator comprises:
+\end_layout
+
+\begin_layout Itemize
+A Generator Type as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A Seed Value of the Seed Length specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Generator SHALL instantiate a Generator DRBG using functionality equivalent
+ to the 
+\series bold
+Instantiate_function
+\series default
+ as defined in NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ section
+\begin_inset space ~
+\end_inset
+
+9.1 with the following parameters:
+\end_layout
+
+\begin_layout Itemize
+The DRBG mechanism SHALL be the DRBG Mechanism specified for the Generator
+ Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+requested_instantiation_security_strength
+\emph default
+ SHALL be set to the Security Strength specified for the Generator Type
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+prediction_resistance_flag
+\emph default
+ SHALL be set to False.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+personalization_string
+\emph default
+ SHALL be omitted.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+entropy_input
+\emph default
+ value returned by the 
+\series bold
+Get_entropy_input
+\series default
+ function SHALL be the first N bytes of the Seed Value, where N is the Entropy
+ Input Length specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+nonce
+\emph default
+ value SHALL be the last M bytes of the Seed Value, where M is the Nonce
+ Length specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that this algorithm violates the wording of NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ that for 
+\emph on
+entropy_input
+\emph default
+ and 
+\emph on
+nonce
+\emph default
+:
+\end_layout
+
+\begin_layout Quote
+\begin_inset Quotes eld
+\end_inset
+
+This information 
+\series bold
+shall not
+\series default
+ be provided by the consuming application as an input parameter during the
+ instantiate request
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This violation is REQUIRED in order to allow an Observer to reconstruct
+ a sequence of Contact Identifiers previously broadcast by an Advertiser,
+ where the Advertiser has intentionally chosen to publish the Seed Value
+ for use in a Notification.
+\end_layout
+
+\begin_layout Standard
+An Advertiser MUST construct Seed Values using a construction that is Approved
+ by NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90C
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90C"
+literal "false"
+
+\end_inset
+
+ for the purposes of providing both entropy input and a nonce to a DRBG
+ with the Security Strength specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Advertisers MAY use the construction given in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Value-Construction"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Sample-Instantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for Generator instantiation using the standard OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+\end_layout
+
+\begin_layout Subsubsection
+Generator Iteration
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-Iteration"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Generator SHALL generate the next Contact Identifier in a sequence as
+ follows:
+\end_layout
+
+\begin_layout Itemize
+Generate the next 16 bytes (128 bits) of pseudorandom bits from the Generator
+ DRBG using functionality equivalent to the 
+\series bold
+Generate_function
+\series default
+ as defined in NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ section
+\begin_inset space ~
+\end_inset
+
+9.3.1 with the following parameters:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The 
+\emph on
+state_handle
+\emph default
+ SHALL be set to the 
+\emph on
+state_handle
+\emph default
+ returned by the call to 
+\series bold
+Instantiate_function
+\series default
+ from section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Instantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+requested_number_of_bits
+\emph default
+ SHALL be set to 128.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+requested_security_strength
+\emph default
+ SHALL be set to the Security Strength specified for the Generator Type
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+prediction_resistance_request
+\emph default
+ flag SHALL be set to False.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+additional_input
+\emph default
+ SHALL be omitted.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Treat the 16 bytes of pseudorandom bits as a UUID with all fields in network
+ byte order as defined by RFC
+\begin_inset space ~
+\end_inset
+
+4122
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC4122"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Set the fixed bits that are required for a version
+\begin_inset space ~
+\end_inset
+
+4 UUID as specified in RFC
+\begin_inset space ~
+\end_inset
+
+4122
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC4122"
+literal "false"
+
+\end_inset
+
+ section
+\begin_inset space ~
+\end_inset
+
+4.4:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Set the two most significant bits (bits 6 and 7) of the 
+\emph on
+clock_seq_hi_and_reserved
+\emph default
+ to the binary value 01.
+\end_layout
+
+\begin_layout Itemize
+Set the four most significant bits (bits 12 through 15) of the 
+\emph on
+time_hi_and_version
+\emph default
+ field to the binary value 0100.
+\end_layout
+
+\begin_layout Itemize
+Leave all other bits unaltered from the pseudorandom bits produced by the
+ call to 
+\series bold
+Generate_function
+\series default
+.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Return this UUID as the next Contact Identifier.
+\end_layout
+
+\begin_layout Standard
+A Generator MUST NOT use the Generator DRBG for any purpose other than generatin
+g Contact Identifiers using the algorithm defined in this section.
+\end_layout
+
+\begin_layout Standard
+A Generator MUST limit the total cumulative number of iterations since instantia
+tion to not exceed the Maximum Iterations specified for the Generator Type
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Generator-Sample-Code"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for Generator iteration using the standard OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+\end_layout
+
+\begin_layout Subsubsection
+Generator Uninstantiation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-Uninstantiation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Generator SHALL uninstantiate the DRBG using functionality equivalent
+ to the 
+\series bold
+Uninstantiate_function
+\series default
+ as defined in NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ section
+\begin_inset space ~
+\end_inset
+
+9.4.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Sample-Uninstantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for Generator uninstantiation using the standard OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+\end_layout
+
+\begin_layout Standard
+\start_of_appendix
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "cx"
+options "bibtotoc,plain"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Appendix
+\end_layout
+
+\begin_layout Section
+Generator Sample Code
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Generator-Sample-Code"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Generator Sample Instantiation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-Sample-Instantiation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Generator Sample Iteration
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-Sample-Iteration"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Generator Sample Uninstantiation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Generator-Sample-Uninstantiation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Generator Test Vectors
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Generator-Test-Vectors"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Seed Value Construction
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Seed-Value-Construction"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
