@@ -40,6 +40,12 @@
 #include "gen_sample.c"
 #undef const
 
+/** Include test vectors */
+#include "gen_type1_test1.c"
+#include "gen_type1_test2.c"
+#include "gen_type2_test1.c"
+#include "gen_type2_test2.c"
+
 /** Generator types */
 #define GEN_TYPE_AES_128_CTR_DRBG_DF 1
 #define GEN_TYPE_AES_256_CTR_DRBG_DF 2
@@ -128,6 +134,30 @@ static const struct nist_test nist_aes256_ctr_drbg_df = {
 	.expected_len = sizeof ( nist_aes256_ctr_drbg_df_expected ),
 };
 
+/** NIST-like test matching first AES-128 Contact Identifier test
+ *
+ * This is a test using the NIST test vector structure with a seed
+ * value matching that used in the first Contact Identifier test.  It
+ * is used to verify that the first 16 bytes output from
+ * generator_iterate() matches (excepting the UUIDv4 fixed bits) the
+ * first 16 bytes obtained by using the DRBG directly with the
+ * intended entropy and nonce.
+ */
+static const unsigned char nist_cx_id_aes128_natural_expected[] = {
+	0xae, 0xaa, 0x08, 0x91, 0x03, 0xd8, 0x10, 0x0c, 0xfe, 0xb0, 0x04, 0x6a,
+        0x2d, 0xab, 0x85, 0x22
+};
+static const struct nist_test nist_cx_id_aes128_natural = {
+	.name = "AES-128 (natural) (NIST-like)",
+	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
+	.entropy_input = &type1_test1_seed[0],
+	.entropy_input_len = 16,
+	.nonce = &type1_test1_seed[16],
+	.nonce_len = 8,
+	.expected = nist_cx_id_aes128_natural_expected,
+	.expected_len = sizeof ( nist_cx_id_aes128_natural_expected ),
+};
+
 /** A Contact Identifier test vector */
 struct cx_id_test {
 	/** Name */
@@ -145,49 +175,43 @@ struct cx_id_test {
 };
 
 /** Contact Identifier test for AES-128 with natural numbers seed */
-static const unsigned char cx_id_aes128_natural_seed[] = {
-	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
-	0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-};
-static const uuid_t cx_id_aes128_natural_expected_first = {
-	0xae, 0xaa, 0x08, 0x91, 0x03, 0xd8, 0x40, 0x0c, 0xbe, 0xb0, 0x04, 0x6a,
-	0x2d, 0xab, 0x85, 0x22
-};
-static const uuid_t cx_id_aes128_natural_expected_last = {
-	0x61, 0xf3, 0xd4, 0xb4, 0x84, 0x4f, 0x45, 0x16, 0x96, 0x51, 0xd2, 0xd2,
-	0xcf, 0x8a, 0xf3, 0x46
-};
 static const struct cx_id_test cx_id_aes128_natural = {
 	.name = "AES-128 (natural)",
 	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
-	.seed = cx_id_aes128_natural_seed,
+	.seed = type1_test1_seed,
 	.count = 2048,
-	.expected_first = &cx_id_aes128_natural_expected_first,
-	.expected_last = &cx_id_aes128_natural_expected_last,
+	.expected_first = &type1_test1_first_id,
+	.expected_last = &type1_test1_last_id,
 };
 
-/** NIST-like test matching first AES-128 Contact Identifier test
- *
- * This is a test using the NIST test vector structure with a seed
- * value matching that used in the first Contact Identifier test.  It
- * is used to verify that the first 16 bytes output from
- * generator_iterate() matches (excepting the UUIDv4 fixed bits) the
- * first 16 bytes obtained by using the DRBG directly with the
- * intended entropy and nonce.
- */
-static const unsigned char nist_cx_id_aes128_natural_expected[] = {
-	0xae, 0xaa, 0x08, 0x91, 0x03, 0xd8, 0x10, 0x0c, 0xfe, 0xb0, 0x04, 0x6a,
-        0x2d, 0xab, 0x85, 0x22
-};
-static const struct nist_test nist_cx_id_aes128_natural = {
-	.name = "AES-128 (natural) (NIST-like)",
+/** Contact Identifier test for AES-128 with random seed */
+static const struct cx_id_test cx_id_aes128_random = {
+	.name = "AES-128 (random)",
 	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
-	.entropy_input = &cx_id_aes128_natural_seed[0],
-	.entropy_input_len = 16,
-	.nonce = &cx_id_aes128_natural_seed[16],
-	.nonce_len = 8,
-	.expected = nist_cx_id_aes128_natural_expected,
-	.expected_len = sizeof ( nist_cx_id_aes128_natural_expected ),
+	.seed = type1_test2_seed,
+	.count = 2048,
+	.expected_first = &type1_test2_first_id,
+	.expected_last = &type1_test2_last_id,
+};
+
+/** Contact Identifier test for AES-256 with natural numbers seed */
+static const struct cx_id_test cx_id_aes256_natural = {
+	.name = "AES-256 (natural)",
+	.type = GEN_TYPE_AES_256_CTR_DRBG_DF,
+	.seed = type2_test1_seed,
+	.count = 2048,
+	.expected_first = &type2_test1_first_id,
+	.expected_last = &type2_test1_last_id,
+};
+
+/** Contact Identifier test for AES-256 with random seed */
+static const struct cx_id_test cx_id_aes256_random = {
+	.name = "AES-256 (random)",
+	.type = GEN_TYPE_AES_256_CTR_DRBG_DF,
+	.seed = type2_test2_seed,
+	.count = 2048,
+	.expected_first = &type2_test2_first_id,
+	.expected_last = &type2_test2_last_id,
 };
 
 /**
@@ -342,8 +366,11 @@ int main ( void ) {
 	/* Perform tests */
 	ok &= nist_test ( &nist_aes128_ctr_drbg_df );
 	ok &= nist_test ( &nist_aes256_ctr_drbg_df );
-	ok &= cx_id_test ( &cx_id_aes128_natural );
 	ok &= nist_test ( &nist_cx_id_aes128_natural );
+	ok &= cx_id_test ( &cx_id_aes128_natural );
+	ok &= cx_id_test ( &cx_id_aes128_random );
+	ok &= cx_id_test ( &cx_id_aes256_natural );
+	ok &= cx_id_test ( &cx_id_aes256_random );
 
 	return ( ok ? 0 : 1 );
 }
