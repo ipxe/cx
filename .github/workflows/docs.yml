@@ -10,7 +10,16 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
       - name: Install packages
-        run: sudo apt install -y lyx
+        run: |
+          sudo apt install -y software-properties-common
+          sudo add-apt-repository -y ppa:lyx-devel/release
+          sudo apt install -y lyx texlive-latex-extra python3-pygments \
+                            make gcc libssl-dev
+      - name: Configure LyX
+        run: |
+          mkdir ~/.lyx
+          echo "[shell escape files]" > ~/.lyx/session
+          echo "$(pwd)/spec/cx.lyx,1" >> ~/.lyx/session
       - name: Build
         run: make -C spec
       - name: Publish
