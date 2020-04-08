@@ -15,7 +15,7 @@ jobs:
                            software-properties-common
           sudo add-apt-repository -y ppa:lyx-devel/release
           sudo apt install -y -o Acquire::Retries=50 \
-                           lyx texlive-latex-extra python3-pygments \
+                           lyx cm-super texlive-latex-extra python3-pygments \
                            make gcc libssl-dev
       - name: Configure LyX
         run: |
