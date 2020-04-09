@@ -1,3 +1,6 @@
 *.pdf
 *.o
+*.der
+*.pubkey.c
 gen_test
+seedcalc_test
