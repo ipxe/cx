@@ -9,9 +9,25 @@
 \usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage{url}
 \usepackage{etoolbox}
+\usepackage{draftwatermark}
 
 \input{version.tex}
-\newcommand{\cxDate}{\ifdefempty{\cxVersion}{\textbf{Draft}\space:\space\today}{Version\space\cxVersion\space:\space\today}}
+
+\newcommand{\cxDate}{
+  \ifdefempty{\cxVersion}{
+    \textbf{Draft}\space:\space\today
+  }{
+    Version\space\cxVersion\space:\space\today
+  }
+}
+
+\SetWatermarkLightness{0.9}
+\SetWatermarkScale{5}
+\ifdefempty{\cxVersion}{
+  \SetWatermarkText{DRAFT}
+}{
+  \SetWatermarkText{}
+}
 \end_preamble
 \use_default_options true
 \begin_modules
