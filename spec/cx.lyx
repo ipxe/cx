@@ -380,7 +380,7 @@ Level: A label that may be retroactively associated with a
 \series bold
 Contact
 \series default
- indicating a potential hazard presented by the 
+ indicating a potential hazard presented by an 
 \series bold
 Advertiser
 \series default
@@ -392,7 +392,7 @@ Observers
 \end_layout
 
 \begin_layout Description
-Contact: The receipt of an 
+Contact: A receipt of an 
 \series bold
 Advertisement
 \series default
@@ -607,11 +607,95 @@ Contact Identifiers
 \end_layout
 
 \begin_layout Description
-Publication: A digitally signed set of 
+Preseed
+\begin_inset space ~
+\end_inset
+
+Key
+\begin_inset space ~
+\end_inset
+
+Pair: An asymmetric key pair comprising a 
+\series bold
+Preseed Signing Key
+\series default
+ and a 
+\series bold
+Preseed Verification Key
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Preseed
+\begin_inset space ~
+\end_inset
+
+Signing
+\begin_inset space ~
+\end_inset
+
+Key: The private key component of a 
+\series bold
+Preseed Key Pair
+\series default
+ used to prove authorship of a 
+\series bold
+Seed Report
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Preseed
+\begin_inset space ~
+\end_inset
+
+Value: A sequence of pseudorandom bytes used in conjunction with a 
+\series bold
+Preseed Verification Key
+\series default
+ to construct a 
+\series bold
+Seed Value
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Preseed
+\begin_inset space ~
+\end_inset
+
+Verification
+\begin_inset space ~
+\end_inset
+
+Key: The public key component of a 
+\series bold
+Preseed Key Pair
+\series default
+ used in conjunction with a 
+\series bold
+Preseed Value
+\series default
+ to construct a 
+\series bold
+Seed Value
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Publication: A set of 
 \series bold
 Notifications
 \series default
- that are made available for download by any interested 
+ signed using a 
+\series bold
+Publisher Certificate 
+\series default
+that are made available for download by any interested 
 \series bold
 Observers
 \series default
@@ -628,11 +712,138 @@ Publications
 \end_layout
 
 \begin_layout Description
+Publisher
+\begin_inset space ~
+\end_inset
+
+Certificate: An X.509
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+ certificate identifing a 
+\series bold
+Publisher
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Publisher
+\begin_inset space ~
+\end_inset
+
+Private
+\begin_inset space ~
+\end_inset
+
+Key: The private key corresponding to a 
+\series bold
+Publisher Certificate
+\series default
+ used to prove authorship of a 
+\series bold
+Publication
+\series default
+.
+\end_layout
+
+\begin_layout Description
 Seed
 \begin_inset space ~
 \end_inset
 
-Value: A sequence of octets used as an input to a 
+Calculator: An algorithm as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Calculator-Algorithms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ used to construct 
+\series bold
+Seed Values
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Seed
+\begin_inset space ~
+\end_inset
+
+Report: A tuple comprising a 
+\series bold
+Generator Type
+\series default
+, a 
+\series bold
+Preseed Value
+\series default
+, a 
+\series bold
+Preseed Verification Key
+\series default
+, and a 
+\series bold
+Seed Report Challenge 
+\series default
+that is signed using a 
+\series bold
+Preseed Signing Key
+\series default
+ and uploaded to a 
+\series bold
+Publisher
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Seed
+\begin_inset space ~
+\end_inset
+
+Report
+\begin_inset space ~
+\end_inset
+
+Challenge: A sequence of pseudorandom text characters that is generated
+ by a 
+\series bold
+Publisher
+\series default
+ and signed using a 
+\series bold
+Preseed Signing Key 
+\series default
+as part of a 
+\series bold
+Seed Report
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Seed
+\begin_inset space ~
+\end_inset
+
+Value: A sequence of pseudorandom bytes used as an input to a 
 \series bold
 Generator
 \series default
@@ -645,7 +856,7 @@ Generators
 \end_layout
 
 \begin_layout Standard
-Generators are used to construct a sequence of Contact Identifiers.
+A Generator is used to construct a sequence of Contact Identifiers.
  The values of the Contact Identifiers are RFC
 \begin_inset space ~
 \end_inset
@@ -667,7 +878,10 @@ literal "false"
 \end_inset
 
 4 pseudo-random UUIDs.
- If the Seed Value used to create a Generator is not known, then the 122
+\end_layout
+
+\begin_layout Standard
+If the Seed Value used to create a Generator is not known, then the 122
  non–fixed bits of each 128-bit UUID form a bitstring that is indistinguishable
  from an ideal random bitstring up to a security strength as specified in
  section
@@ -678,6 +892,52 @@ literal "false"
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Generator-Sample-Code"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for a Generator using the standard OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+ Generator implementations MUST produce a sequence of Contact Identifiers
+ matching the test vectors given in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Generator-Test-Vectors"
 plural "false"
 caps "false"
 noprefix "false"
@@ -979,52 +1239,6 @@ noprefix "false"
 .
 \end_layout
 
-\begin_layout Standard
-Appendix
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Generator-Sample-Code"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- provides sample code for a Generator using the standard OpenSSL
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "OpenSSL"
-literal "false"
-
-\end_inset
-
- library.
- Generator implementations MUST produce a sequence of Contact Identifiers
- matching the test vectors given in Appendix
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Generator-Test-Vectors"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Subsection
 Generator Algorithms
 \begin_inset CommandInset label
@@ -1044,6 +1258,11 @@ An Advertiser SHALL use the algorithm defined in this section to generate
 \begin_layout Standard
 An Observer SHALL use the algorithm defined in this section to regenerate
  the sequence of Contact Identifiers corresponding to a Notification.
+\end_layout
+
+\begin_layout Standard
+A Publisher has no need for the algorithm defined in this section since
+ Contact Identifiers do not appear directly in Notifications.
 \end_layout
 
 \begin_layout Standard
@@ -1120,6 +1339,10 @@ The state of a Generator comprises:
 \end_layout
 
 \begin_layout Itemize
+A Generator Iteration Counter.
+\end_layout
+
+\begin_layout Itemize
 A Generator DRBG instantiated using the algorithm defined in section
 \begin_inset space ~
 \end_inset
@@ -1186,6 +1409,10 @@ noprefix "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+A Generator SHALL initialise the Generator Iteration Counter to zero.
 \end_layout
 
 \begin_layout Standard
@@ -1373,51 +1600,19 @@ shall not
 This violation is REQUIRED in order to allow an Observer to reconstruct
  a sequence of Contact Identifiers previously broadcast by an Advertiser,
  where the Advertiser has intentionally chosen to publish the Seed Value
- for use in a Notification.
+ by means of a Seed Report for inclusion in a Notification.
 \end_layout
 
 \begin_layout Standard
-An Advertiser MUST construct Seed Values using a construction that is Approved
- by NIST
-\begin_inset space ~
-\end_inset
-
-SP800-90C
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "SP800-90C"
-literal "false"
-
-\end_inset
-
- for the purposes of providing both entropy input and a nonce to a DRBG
- with the Security Strength specified for the Generator Type in section
+An Advertiser MUST construct new Seed Values using the algorithm defined
+ in section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Generator-Types"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- Advertisers MAY use the construction given in Appendix
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Seed-Value-Construction"
+reference "sec:Seed-Calculators"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1471,6 +1666,29 @@ name "subsec:Generator-Iteration"
 \begin_layout Standard
 A Generator SHALL generate the next Contact Identifier in a sequence as
  follows:
+\end_layout
+
+\begin_layout Itemize
+If the Generator Iteration Counter has reached the Maximum Iterations specified
+ for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ then return with an error indicating that the Generator is exhausted.
+\end_layout
+
+\begin_layout Itemize
+Increment the Generator Iteration Counter by one.
 \end_layout
 
 \begin_layout Itemize
@@ -1786,6 +2004,879 @@ literal "false"
  library.
 \end_layout
 
+\begin_layout Section
+Seed Calculators
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Seed-Calculators"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Seed Calculator is used to construct a Seed Value.
+ The Seed Value is used as the initial input to a Generator, which is then
+ used to construct a sequence of Contact Identifiers.
+\end_layout
+
+\begin_layout Standard
+A Seed Value is constructed from a Preseed Value and a Preseed Verification
+ Key.
+ If the Preseed Value and Preseed Verification Key are not known, then the
+ Seed Value is indistinguishable from an ideal random bitstring up to a
+ security strength as specified in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Calculator-Sample"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for a Seed Calculator using the standard OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+ Seed Calculator implementations MUST produce Seed Values matching the test
+ vectors given in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Calculator-Test"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Seed Calculator Algorithms
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Calculator-Algorithms"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL use the algorithm defined in this section to construct
+ a Seed Value for instantiating a Generator.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL use the algorithm defined in this section to construct
+ a Seed Value for inclusion in a Notification.
+\end_layout
+
+\begin_layout Standard
+An Observer has no need for the algorithm defined in this section, since
+ the constructed Seed Value is already present in the Notification and is
+ signed by the Pubisher Certificate.
+\end_layout
+
+\begin_layout Standard
+The algorithm comprises three steps:
+\end_layout
+
+\begin_layout Enumerate
+Instantiate the Seed Calculator using the algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Calculator-Instantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Construct the Seed Value using the algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Calculator-Generation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Uninstantiate the Seed Calculator using the algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Calculator-Uninstantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the terminology of NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90C
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90C"
+literal "false"
+
+\end_inset
+
+ section 10.1.1, the combination of a Seed Calculator and a Generator produces
+ an Approved construction in which the Seed Calculator is used as the source
+ DRBG and the Generator is used as the target DRBG.
+\end_layout
+
+\begin_layout Subsubsection
+Seed Calculator State
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Calculator-State"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The state of a Seed Calculator comprises:
+\end_layout
+
+\begin_layout Itemize
+A Seed Calculator DRBG instantiated using the algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Calculator-Instantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Seed Calculator Instantiation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Calculator-Instantiation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The input required to instantiate a Seed Calculator comprises:
+\end_layout
+
+\begin_layout Itemize
+A Generator Type as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A Preseed Value of the Seed Length specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A Preseed Verification Key.
+\end_layout
+
+\begin_layout Standard
+A Seed Calculator SHALL instantiate a Seed Calculator DRBG using functionality
+ equivalent to the 
+\series bold
+Instantiate_function
+\series default
+ as defined in NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ section 9.1 with the following parameters:
+\end_layout
+
+\begin_layout Itemize
+The DRBG mechanism SHALL be the DRBG Mechanism specified for the Generator
+ Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+requested_instantiation_security_strength
+\emph default
+ SHALL be set to the Security Strength specified for the Generator Type
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+prediction_resistance_flag
+\emph default
+ SHALL be set to False.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+personalization_string
+\emph default
+ SHALL be set to the Preseed Verification Key encoded using the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of the 
+\series bold
+SubjectPublicKeyInfo
+\series default
+ field as defined by X.509
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+ section
+\begin_inset space ~
+\end_inset
+
+4.1.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+entropy_input
+\emph default
+ value returned by the 
+\series bold
+Get_entropy_input
+\series default
+ function SHALL be the first N bytes of the Preseed Value, where N is the
+ Entropy Input Length specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+nonce
+\emph default
+ value SHALL be the last M bytes of the Preseed Value, where M is the Nonce
+ Length specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that this algorithm violates the wording of NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ that for 
+\emph on
+entropy_input
+\emph default
+ and 
+\emph on
+nonce
+\emph default
+:
+\end_layout
+
+\begin_layout Quote
+\begin_inset Quotes eld
+\end_inset
+
+This information 
+\series bold
+shall not
+\series default
+ be provided by the consuming application as an input parameter during the
+ instantiate request
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This violation is REQUIRED in order to allow a Publisher to reconstruct
+ a Seed Value, where the Advertiser has intentionally chosen to publish
+ the Preseed Value by means of a Seed Report for inclusion of the resulting
+ Seed Value in a Notification.
+\end_layout
+
+\begin_layout Standard
+An Advertiser MUST construct the Preseed Value using an RBG that is known
+ to have a security strength equal to or greater than the security strength
+ specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Calculator-Sample"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for Seed Calculator instantiation using the standard
+ OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+\end_layout
+
+\begin_layout Paragraph
+Caveat
+\end_layout
+
+\begin_layout Standard
+Note that the definition of the 
+\series bold
+SubjectPublicKeyInfo
+\series default
+ field in X.509
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+ allows for some freedom of choice in representation.
+ For example, when the 
+\series bold
+algorithmIdentifier
+\series default
+ field requires no parameters, some implementations will choose to set the
+ 
+\series bold
+parameters
+\series default
+ field to an explicit ASN.1 NULL, while some implementations will choose
+ to simply omit the 
+\series bold
+parameters
+\series default
+ field.
+\end_layout
+
+\begin_layout Standard
+It is REQUIRED that any such implementation choices are made consistently
+ for any given Preseed Verification Key, since any variation in the encoded
+ Preseed Verification Key will result in the construction of an incorrect
+ Seed Value.
+\end_layout
+
+\begin_layout Standard
+Advertisers MAY choose any valid ASN.1
+\begin_inset space ~
+\end_inset
+
+DER encoding of 
+\series bold
+SubjectPublicKeyInfo
+\series default
+.
+ Advertisers MUST choose this same encoding of 
+\series bold
+SubjectPublicKeyInfo
+\series default
+ for all uses of the Preseed Verification Key.
+\end_layout
+
+\begin_layout Standard
+Publishers MUST use the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER encoding exactly as presented in the Seed Report.
+\end_layout
+
+\begin_layout Subsubsection
+Seed Calculator Generation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Calculator-Generation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Seed Calculator SHALL generate the Seed Value as follows:
+\end_layout
+
+\begin_layout Itemize
+Generate pseudorandom bits from the Seed Calculator DRBG using functionality
+ equivalent to the 
+\series bold
+Generate_function
+\series default
+ as defined in NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ section
+\begin_inset space ~
+\end_inset
+
+9.3.1 with the following parameters:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The 
+\emph on
+state_handle
+\emph default
+ SHALL be set to the 
+\emph on
+state_handle
+\emph default
+ returned by the call to 
+\series bold
+Instantiate_function
+\series default
+ from section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Calculator-Instantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+requested_number_of_bits
+\emph default
+ SHALL be set to the number of bits in the Seed Length specified for the
+ Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ (Note that the Seed Length is specified as a number of bytes.)
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+requested_security_strength
+\emph default
+ SHALL be set to the Security Strength specified for the Generator Type
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+prediction_resistance_request
+\emph default
+ flag SHALL be set to False.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+additional_input
+\emph default
+ SHALL be omitted.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Return these bytes as the Seed Value.
+\end_layout
+
+\begin_layout Standard
+A Seed Calculator MUST NOT use the Seed Calculator DRBG for any purpose
+ other than generating the Seed Value using the algorithm defined in this
+ section.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Calculator-Sample"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for Seed Calculator generation using the standard
+ OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+\end_layout
+
+\begin_layout Subsubsection
+Seed Calculator Uninstantiation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Calculator-Uninstantiation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Seed Calculator SHALL uninstantiate the DRBG using functionality equivalent
+ to the 
+\series bold
+Uninstantiate_function
+\series default
+ as defined in NIST
+\begin_inset space ~
+\end_inset
+
+SP800-90A
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SP800-90A"
+literal "false"
+
+\end_inset
+
+ section
+\begin_inset space ~
+\end_inset
+
+9.4.
+\end_layout
+
+\begin_layout Standard
+Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Calculator-Sample"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides sample code for Seed Calculator uninstantiation using the standard
+ OpenSSL
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OpenSSL"
+literal "false"
+
+\end_inset
+
+ library.
+\end_layout
+
 \begin_layout Standard
 \start_of_appendix
 \begin_inset CommandInset bibtex
@@ -2022,10 +3113,21 @@ lstparams "language=C"
 \end_layout
 
 \begin_layout Section
-Seed Value Construction
+Seed Calculator Sample Code
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Seed-Value-Construction"
+name "sec:Seed-Calculator-Sample"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Seed Calculator Test Vectors
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Seed-Calculator-Test"
 
 \end_inset
 
