@@ -6,7 +6,7 @@ CFLAGS = -W -Wall -Wextra -Werror -Wno-unused-parameter
 
 all : test doc
 
-test : gen_sample.o gen_test
+test : gen_sample.o gen_test seedcalc_sample.o
 	./gen_test
 
 doc : cx.pdf
