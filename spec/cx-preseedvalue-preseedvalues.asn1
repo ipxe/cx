@@ -1,0 +1,4 @@
+PreseedValue ::= OCTET STRING
+
+PreseedValues ::= SET SIZE (1..MAX) OF PreseedValue
+

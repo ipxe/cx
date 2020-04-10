@@ -1,0 +1,2 @@
+SeedReportVersion ::= INTEGER { v1(1) }
+

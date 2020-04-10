@@ -1,0 +1,3 @@
+GeneratorType ::= INTEGER { aes128-ctr-drbg-df-n2k(1),
+                            aes256-ctr-drbg-df-n2k(2) }
+

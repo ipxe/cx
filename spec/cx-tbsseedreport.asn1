@@ -1,0 +1,9 @@
+TBSSeedReport ::= SEQUENCE {
+    version                     SeedReportVersion,
+    signatureAlgorithm          AlgorithmIdentifier,
+    generatorType               GeneratorType,
+    preseedValues               PreseedValues,
+    preseedVerificationKey      SubjectPublicKeyInfo,
+    publisherName               UTF8String,
+    seedReportChallenge         UTF8String }
+

@@ -1,0 +1,35 @@
+CXContactTracingV1 { iso(1) identified-organization(3) dod(6) internet(1)
+                     private(4) enterprise(1) 10019 cx(3) id-mod(0)
+                     id-mod-cx-v1(1) }
+
+DEFINITIONS EXPLICIT TAGS ::= BEGIN
+
+IMPORTS
+    AlgorithmIdentifier, SubjectPublicKeyInfo
+    FROM PKIX1Explicit88 { iso(1) identified-organization(3) dod(6) internet(1)
+                           security(5) mechanisms(5) pkix(7) id-mod(0)
+                           id-pkix1-explicit(18) };
+
+GeneratorType ::= INTEGER { aes128-ctr-drbg-df-n2k(1),
+                            aes256-ctr-drbg-df-n2k(2) }
+
+SeedReportVersion ::= INTEGER { v1(1) }
+
+PreseedValue ::= OCTET STRING
+
+PreseedValues ::= SET SIZE (1..MAX) OF PreseedValue
+
+TBSSeedReport ::= SEQUENCE {
+    version                     SeedReportVersion,
+    signatureAlgorithm          AlgorithmIdentifier,
+    generatorType               GeneratorType,
+    preseedValues               PreseedValues,
+    preseedVerificationKey      SubjectPublicKeyInfo,
+    publisherName               UTF8String,
+    seedReportChallenge         UTF8String }
+
+SeedReport ::= SEQUENCE {
+    tbsSeedReport               TBSSeedReport,
+    signatureValue              OCTET STRING }
+
+END

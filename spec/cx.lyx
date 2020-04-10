@@ -88,7 +88,7 @@ customHeadersFooters
 \topmargin 2cm
 \rightmargin 2cm
 \bottommargin 2cm
-\secnumdepth 3
+\secnumdepth 4
 \tocdepth 3
 \paragraph_separation skip
 \defskip medskip
@@ -740,6 +740,19 @@ Publisher
 \begin_inset space ~
 \end_inset
 
+Name: An arbitrary human-readable name used to informally disambiguate between
+ 
+\series bold
+Publishers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Publisher
+\begin_inset space ~
+\end_inset
+
 Private
 \begin_inset space ~
 \end_inset
@@ -853,6 +866,13 @@ Generator
 
 \begin_layout Section
 Generators
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Generators"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2555,7 +2575,7 @@ literal "false"
  library.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Paragraph*
 Caveat
 \end_layout
 
@@ -2615,7 +2635,8 @@ SubjectPublicKeyInfo
 \series bold
 SubjectPublicKeyInfo
 \series default
- for all uses of the Preseed Verification Key.
+ for all uses of the Preseed Verification Key, including when constructing
+ a Seed Report.
 \end_layout
 
 \begin_layout Standard
@@ -2877,6 +2898,1082 @@ literal "false"
  library.
 \end_layout
 
+\begin_layout Section
+Seed Reports
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Seed-Reports"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Seed Report is a message constructed by an Advertiser to be sent to a
+ Publisher.
+ The Seed Report is used to verify original authorship of a set of Seed
+ Values and to associate the Seed Values with an Alert Level for inclusion
+ into a Notification.
+\end_layout
+
+\begin_layout Standard
+Note that the Seed Report does not directly convey an Alert Level; see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Challenges"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Seed Report Challenges
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Report-Challenges"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The association between the Seed Values and the Alert Level is conveyed
+ using a Seed Report Challenge.
+ The Seed Report Challenge is a single-use short-lived authorisation code
+ provided by the Publisher to the Advertiser through an out-of-band mechanism.
+\end_layout
+
+\begin_layout Standard
+For example: a national health authority (a Publisher) could provide its
+ practitioners with the ability to record a positive diagnosis of a patient
+ into the health authority's existing systems.
+ The health authority could then generate a 16-digit PIN code (the Seed
+ Report Challenge) which is associated in the health authority's database
+ with the positive diagnosis.
+ The 16-digit PIN code is given by the practitioner to the patient, who
+ enters it into the Advertiser Device.
+ The Advertiser Device then generates and sends a Seed Report which incorporates
+ the 16-digit PIN code (the Seed Report Challenge), thereby allowing the
+ health authority (the Publisher) to link the Seed Report to the diagnosis
+ already recorded in its database.
+\end_layout
+
+\begin_layout Subsection
+Seed Report Algorithms
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Report-Algorithms"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL use the construction algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Construction"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to construct a Seed Report for uploading to a Publisher.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL use the verification algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Verification"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to verify a Seed Report prior to inclusion in a Notification.
+\end_layout
+
+\begin_layout Standard
+An Observer has no need for the algorithms defined in this section since
+ Observers do not receive Seed Reports.
+\end_layout
+
+\begin_layout Subsubsection
+Seed Report Construction Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Report-Construction"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The algorithm comprises 3 steps:
+\end_layout
+
+\begin_layout Enumerate
+Construct a 
+\series bold
+TBSSeedReport
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSSeedReport-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Compute the 
+\series bold
+signatureValue
+\series default
+ as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedReport-signatureValue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Construct a 
+\series bold
+SeedReport
+\series default
+ data object incorporating both the 
+\series bold
+tbsSeedReport
+\series default
+ and 
+\series bold
+signatureValue
+\series default
+ as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:SeedReport-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Seed Report Verification Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Report-Verification"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The algorithm comprises 4 steps:
+\end_layout
+
+\begin_layout Enumerate
+Extract the 
+\series bold
+tbsSeedReport
+\series default
+ and 
+\series bold
+signatureValue
+\series default
+ fields from the 
+\series bold
+SeedReport
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:SeedReport-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Extract the 
+\series bold
+signatureAlgorithm
+\series default
+ and 
+\series bold
+preseedVerificationKey
+\series default
+ fields from the 
+\series bold
+tbsSeedReport
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSSeedReport-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Verify that the 
+\series bold
+signatureAlgorithm
+\series default
+ is compatible as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSSeedReport-signatureAlgorithm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Verify that the 
+\series bold
+signatureValue
+\series default
+ is correct as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedReport-signatureValue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Seed Report Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Report-Layout"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Seed Report is the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of a 
+\series bold
+SeedReport
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:SeedReport-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ A full ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ schema is provided in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:ASN.1-Schema"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+TBSSeedReport fields
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:TBSSeedReport-fields"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+TBSSeedReport
+\series default
+ data object is defined by the ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ schema fragment:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-tbsseedreport.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+seedReportVersion
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReport-seedReportVersion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-seedreportversion.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+seedReportVersion
+\series default
+ field describes the version of the 
+\series bold
+TBSSeedReport
+\series default
+ and 
+\series bold
+SeedReport
+\series default
+ structures.
+ In the present specification, only a single version is defined.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL set this field to version 1.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL accept any value in this field.
+\end_layout
+
+\begin_layout Paragraph
+signatureAlgorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReport-signatureAlgorithm"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+signatureAlgorithm
+\series default
+ field contains the X.509
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+ 
+\series bold
+AlgorithmIdentifier
+\series default
+ which comprises the object identifier (OID) and optional parameters for
+ the algorithm used to generate the signature in the 
+\series bold
+signatureValue
+\series default
+ field (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedReport-signatureValue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL set this field to the algorithm used to compute the
+ 
+\series bold
+signatureValue
+\series default
+ field, and the algorithm SHALL be compatible with the Preseed Key Pair.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL verify that the algorithm specified in this field is compatibl
+e with the public key algorithm provided in the 
+\series bold
+preseedVerificationKey
+\series default
+ field.
+\end_layout
+
+\begin_layout Paragraph
+generatorType
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReport-generatorType"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-generatortype.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+generatorType
+\series default
+ field contains the Generator Type as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+preseedValues
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReport-preseedValues"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-preseedvalue-preseedvalues.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+preseedValues
+\series default
+ field contains an unordered set of Preseed Values, each encoded as an OCTET
+ STRING of the Seed Length specified for the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+preseedVerificationKey
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReport-preseedVerificationKey"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+preseedVerificationKey
+\series default
+ field contains the X.509
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+ 
+\series bold
+SubjectPublicKeyInfo
+\series default
+ which comprises the algorithm object identifier (OID), optional algorithm
+ parameters, and the public key of the Preseed Verification Key.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL set this field to the same ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoded value as used for Seed Calculator instantiation as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Calculator-Instantiation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL verify that the algorithm specified in this field is compatibl
+e with the signature algorithm specified in the 
+\series bold
+signatureAlgorithm
+\series default
+ field.
+\end_layout
+
+\begin_layout Paragraph
+publisherName
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReport-publisherName"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+publisherName
+\series default
+ field contains the Publisher Name for the Publisher to which the Advertiser
+ intends to upload the Seed Report.
+ This field exists solely to create a namespace for Seed Report Challenges,
+ and thereby to reduce the scope for collision attacks on Seed Report Challenge
+ values, which are necessarily low-entropy since they must be communicated
+ accurately by humans.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL set this field to the Publisher Name of the intended
+ Publisher.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL verify that this field contains its own Publisher Name.
+ Since this is a human-writable text field, a Publisher MAY choose to allow
+ for some expected variations in the Publisher Name, such as variations
+ in casing, punctuation, or whitespace.
+\end_layout
+
+\begin_layout Paragraph
+seedReportChallenge
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReport-seedReportChallenge"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+seedReportChallenge
+\series default
+ field contains a Seed Report Challenge generated by the Publisher and conveyed
+ to the Advertiser via an out-of-band mechanism; see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Challenges"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL set this field to the Seed Report Challenge value provided
+ via the out-of-band mechanism (such as interactive entry via a user interface
+ on the Advertiser Device).
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL verify that this field contains a recognised Seed Report
+ Challenge value that is either:
+\end_layout
+
+\begin_layout Itemize
+Unused and recently created, or
+\end_layout
+
+\begin_layout Itemize
+Already used and associated with a Preseed Verification Key that matches
+ the preseedVerificationKey field.
+\end_layout
+
+\begin_layout Standard
+Since this is a human-writable text field, a Publisher MAY choose to allow
+ for some expected variations in the Seed Report Challenge, such as variations
+ in casing, punctuation, or whitespace.
+\end_layout
+
+\begin_layout Subsubsection
+SeedReport fields
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:SeedReport-fields"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+SeedReport
+\series default
+ data object is defined by the ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ schema fragment:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-seedreport.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+tbsSeedReport
+\begin_inset CommandInset label
+LatexCommand label
+name "par:SeedReport-tbsSeedReport"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+tbsSeedReport
+\series default
+ field contains the Generator Type, Preseed Values, Preseed Verification
+ Key, Seed Report Challenge, and other information.
+ It exists as a separate field since the 
+\series bold
+signatureValue
+\series default
+ is calculated over the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of this field.
+ The layout of this field is defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSSeedReport-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+signatureValue
+\begin_inset CommandInset label
+LatexCommand label
+name "par:SeedReport-signatureValue"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+signatureValue
+\series default
+ field contains a digital signature computed upon the encoded 
+\series bold
+tbsSeedReport
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL compute the 
+\series bold
+signatureValue
+\series default
+ using the algorithm specified by the 
+\series bold
+signatureAlgorithm
+\series default
+ field within 
+\series bold
+tbsSeedReport
+\series default
+ (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSSeedReport-signatureAlgorithm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) with the input data being the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of 
+\series bold
+tbsSeedReport
+\series default
+ (including the initial SEQUENCE tag byte) and the signing key being the
+ Preseed Signing Key.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL verify the 
+\series bold
+signatureValue
+\series default
+ using the algorithm specified by the 
+\series bold
+signatureAlgorithm
+\series default
+ field within 
+\series bold
+tbsSeedReport
+\series default
+ (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSSeedReport-signatureAlgorithm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) with the input data being the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of 
+\series bold
+tbsSeedReport
+\series default
+ (including the initial SEQUENCE tag byte) and the verification key being
+ the Preseed Verification Key extracted from the 
+\series bold
+preseedVerificationKey
+\series default
+ field within 
+\series bold
+tbsSeedReport
+\series default
+ (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSSeedReport-preseedVerificationKey"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
 \begin_layout Standard
 \start_of_appendix
 \begin_inset CommandInset bibtex
@@ -2885,6 +3982,13 @@ btprint "btPrintCited"
 bibfiles "cx"
 options "bibtotoc,plain"
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -2947,6 +4051,13 @@ LatexCommand inputminted
 filename "gen_sample.c"
 lstparams "language=C"
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -3105,6 +4216,13 @@ lstparams "language=C"
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Seed Calculator Sample Code
 \begin_inset CommandInset label
@@ -3158,6 +4276,13 @@ LatexCommand inputminted
 filename "seedcalc_sample.c"
 lstparams "language=C"
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -3538,6 +4663,69 @@ filename "ipxe.pubkey.pem"
 LatexCommand inputminted
 filename "seedcalc_type2_test3.c"
 lstparams "language=C"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+ASN.1 Schema
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:ASN.1-Schema"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This schema includes all ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ data objects defined by this specification.
+ The imported definitions for AlgorithmIdentifier and SubjectPublicKeyInfo
+ may be found in RFC
+\begin_inset space ~
+\end_inset
+
+5280
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx.asn1"
+lstparams "language=Clean"
 
 \end_inset
 
