@@ -4047,6 +4047,9 @@ noprefix "false"
 \end_inset
 
 ).
+ A Publisher SHALL reject a Seed Report that fails signature verification
+ and, where possible, SHALL return an error to the Advertiser indicating
+ that the signature was incorrect.
 \end_layout
 
 \begin_layout Standard
