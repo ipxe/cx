@@ -19,6 +19,12 @@ PreseedValue ::= OCTET STRING
 
 PreseedValues ::= SET SIZE (1..MAX) OF PreseedValue
 
+Extension ::= SEQUENCE {
+    extnID                      OBJECT IDENTIFIER,
+    parameters                  ANY DEFINED BY extnID OPTIONAL }
+
+Extensions ::= SEQUENCE SIZE (1..MAX) OF Extension
+
 TBSSeedReport ::= SEQUENCE {
     version                     SeedReportVersion,
     signatureAlgorithm          AlgorithmIdentifier,
@@ -26,7 +32,8 @@ TBSSeedReport ::= SEQUENCE {
     preseedValues               PreseedValues,
     preseedVerificationKey      SubjectPublicKeyInfo,
     publisherName               UTF8String,
-    seedReportChallenge         UTF8String }
+    seedReportChallenge         UTF8String,
+    extensions              [0] Extensions OPTIONAL }
 
 SeedReport ::= SEQUENCE {
     tbsSeedReport               TBSSeedReport,

@@ -1,0 +1,6 @@
+Extension ::= SEQUENCE {
+    extnID                      OBJECT IDENTIFIER,
+    parameters                  ANY DEFINED BY extnID OPTIONAL }
+
+Extensions ::= SEQUENCE SIZE (1..MAX) OF Extension
+

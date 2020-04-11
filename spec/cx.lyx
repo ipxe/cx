@@ -3390,7 +3390,16 @@ An Advertiser SHALL set this field to version 1.
 \end_layout
 
 \begin_layout Standard
-A Publisher SHALL accept any value in this field.
+A Publisher SHALL accept any value in this field, and SHALL silently accept
+ and ignore any unrecognised additional fields present in the 
+\series bold
+TBSSeedReport
+\series default
+ structure following the 
+\series bold
+seedReportChallenge
+\series default
+ field.
 \end_layout
 
 \begin_layout Paragraph
@@ -3727,6 +3736,71 @@ Already used and associated with a Preseed Verification Key that matches
 Since this is a human-writable text field, a Publisher MAY choose to allow
  for some expected variations in the Seed Report Challenge, such as variations
  in casing, punctuation, or whitespace.
+\end_layout
+
+\begin_layout Paragraph
+extensions
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TSSeedReport-extensions"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-extension-extensions.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+extensions
+\series default
+ field contains OPTIONAL extensions defined outside the scope of this specificat
+ion document.
+ This field exists to support additional information that is not applicable
+ to all Advertisers and Publishers.
+ The layout of each extension comprises an extension identifier 
+\series bold
+extnID
+\series default
+ followed by fields as defined by that extension identifier.
+\end_layout
+
+\begin_layout Standard
+An Advertiser MAY choose to include an 
+\series bold
+extensions
+\series default
+ field.
+\end_layout
+
+\begin_layout Standard
+A Publisher MAY choose to interpret the contents of the 
+\series bold
+extensions
+\series default
+ field, and MAY choose to document extensions that should be included in
+ Seed Reports uploaded to that Publisher.
+ A Publisher SHALL silently accept and ignore any extension that it does
+ not recognise.
+ A Publisher SHALL accept and process a Seed Report that omits a particular
+ extension, or that omits the 
+\series bold
+extensions
+\series default
+ field entirely.
+ A Publisher SHALL NOT require that Advertisers include any particular extension
+ in a Seed Report.
 \end_layout
 
 \begin_layout Subsubsection

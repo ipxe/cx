@@ -11,7 +11,7 @@ SEEDCALC_DEPS = seedcalc_sample.c \
 
 ASN1_FRAGS = cx-generatortype.asn1 cx-seedreportversion.asn1 \
 	     cx-preseedvalue-preseedvalues.asn1 cx-tbsseedreport.asn1 \
-	     cx-seedreport.asn1
+	     cx-seedreport.asn1 cx-extension-extensions.asn1
 
 DEPS = cx.bib $(GEN_DEPS) $(SEEDCALC_DEPS)
 

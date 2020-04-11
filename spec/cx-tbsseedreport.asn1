@@ -5,5 +5,6 @@ TBSSeedReport ::= SEQUENCE {
     preseedValues               PreseedValues,
     preseedVerificationKey      SubjectPublicKeyInfo,
     publisherName               UTF8String,
-    seedReportChallenge         UTF8String }
+    seedReportChallenge         UTF8String,
+    extensions              [0] Extensions OPTIONAL }
 
