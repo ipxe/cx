@@ -6,7 +6,8 @@
 \origin unavailable
 \textclass article
 \begin_preamble
-\usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[bookmarksnumbered=true,bookmarksopen=true,colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{tocbibind}
 \usepackage{url}
 \usepackage{etoolbox}
 \usepackage{draftwatermark}
@@ -89,7 +90,7 @@ customHeadersFooters
 \rightmargin 2cm
 \bottommargin 2cm
 \secnumdepth 4
-\tocdepth 3
+\tocdepth 4
 \paragraph_separation skip
 \defskip medskip
 \is_math_indent 0
@@ -4054,7 +4055,7 @@ noprefix "false"
 LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "cx"
-options "bibtotoc,plain"
+options "plain"
 
 \end_inset
 
