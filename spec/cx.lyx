@@ -3546,8 +3546,9 @@ The
 \series bold
 preseedValues
 \series default
- field contains an unordered set of Preseed Values, each encoded as an OCTET
- STRING of the Seed Length specified for the Generator Type in section
+ field contains an arbitrarily ordered sequence of Preseed Values, each
+ encoded as an OCTET STRING of the Seed Length specified for the Generator
+ Type in section
 \begin_inset space ~
 \end_inset
 

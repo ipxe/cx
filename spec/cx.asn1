@@ -17,7 +17,7 @@ SeedReportVersion ::= INTEGER { v1(1) }
 
 PreseedValue ::= OCTET STRING
 
-PreseedValues ::= SET SIZE (1..MAX) OF PreseedValue
+PreseedValues ::= SEQUENCE SIZE (1..MAX) OF PreseedValue
 
 Extension ::= SEQUENCE {
     extnID                      OBJECT IDENTIFIER,
