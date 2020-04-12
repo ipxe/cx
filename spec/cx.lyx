@@ -3131,6 +3131,41 @@ For example: a national health authority (a Publisher) could provide its
  already recorded in its database.
 \end_layout
 
+\begin_layout Standard
+The mechanism for conveying the Seed Report Challenge is deliberately left
+ unspecified by this document, since the optimal approach will vary according
+ to the needs and existing capabilities of each Publisher.
+ Some potential mechanisms are:
+\end_layout
+
+\begin_layout Itemize
+A numeric PIN code that is provided verbally and entered by the patient
+ on the patient's device
+\end_layout
+
+\begin_layout Itemize
+An SMS message sent to the patient containing a link that is recognised
+ by the app running on the patient's device
+\end_layout
+
+\begin_layout Itemize
+A QR code that is scanned by the patient
+\end_layout
+
+\begin_layout Standard
+An Advertiser MUST provide a capability for the user to interactively enter
+ an arbitrary UTF-8 string as the Seed Report Challlenge, and MAY provide
+ other capabilities such as scanning a QR code or recognising a Publisher-specif
+ic URI format in a link.
+\end_layout
+
+\begin_layout Standard
+A Publisher MUST provide the user with the Seed Report Challenge in the
+ form of a realistically transcribable UTF-8 string for interactive entry
+ by the user, and MAY provide the user with the Seed Report Challenge through
+ other means such as an SMS message.
+\end_layout
+
 \begin_layout Subsection
 Seed Report Algorithms
 \begin_inset CommandInset label
