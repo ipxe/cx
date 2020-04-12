@@ -1,0 +1,3 @@
+AlertLevel ::= INTEGER { no-alert(0), debug-alert(1), expired(2),
+                         unknown-alert(3), symptomatic(4), diagnosed(5) }
+

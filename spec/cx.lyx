@@ -700,6 +700,10 @@ that are made available for download by any interested
 \series bold
 Observers
 \series default
+ or other 
+\series bold
+Publishers
+\series default
 .
 \end_layout
 
@@ -754,7 +758,7 @@ Publisher
 \begin_inset space ~
 \end_inset
 
-Private
+Signing
 \begin_inset space ~
 \end_inset
 
@@ -2999,21 +3003,22 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-A Publisher SHALL use the verification algorithm defined in section
+A Publisher SHALL use the interpretation algorithm defined in section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Seed-Report-Verification"
+reference "subsec:Seed-Report-Interpretation"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- to verify a Seed Report prior to inclusion in a Notification.
+ to interpret a Seed Report prior to inclusion of the Seed Values in a Notificat
+ion.
 \end_layout
 
 \begin_layout Standard
@@ -3111,10 +3116,10 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsubsection
-Seed Report Verification Algorithm
+Seed Report Interpretation Algorithm
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Seed-Report-Verification"
+name "subsec:Seed-Report-Interpretation"
 
 \end_inset
 
@@ -3122,7 +3127,7 @@ name "subsec:Seed-Report-Verification"
 \end_layout
 
 \begin_layout Standard
-The algorithm comprises 4 steps:
+The algorithm comprises 5 steps:
 \end_layout
 
 \begin_layout Enumerate
@@ -3220,6 +3225,28 @@ signatureValue
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:SeedReport-signatureValue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Interpret the 
+\series bold
+tbsSeedReport
+\series default
+ fields as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSSeedReport-fields"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3533,7 +3560,7 @@ name "par:TBSSeedReport-preseedValues"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand inputminted
-filename "cx-preseedvalue-preseedvalues.asn1"
+filename "cx-preseedvalue--preseedvalues.asn1"
 lstparams "language=Clean"
 
 \end_inset
@@ -3754,7 +3781,7 @@ name "par:TSSeedReport-extensions"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand inputminted
-filename "cx-extension-extensions.asn1"
+filename "cx-extension--extensions.asn1"
 lstparams "language=Clean"
 
 \end_inset
@@ -4051,6 +4078,1459 @@ noprefix "false"
  A Publisher SHALL reject a Seed Report that fails signature verification
  and, where possible, SHALL return an error to the Advertiser indicating
  that the signature was incorrect.
+\end_layout
+
+\begin_layout Section
+Publications
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Publications"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publication is a message constructed by a Publisher to be sent to Observers
+ or to other Publishers.
+ The Publication is used to communicate a set of Notifications.
+\end_layout
+
+\begin_layout Standard
+To reduce bandwidth consumption, a Publisher MAY choose to publish a set
+ of concurrent Publications covering an identical underlying logical set
+ of Notifications but where the 
+\series bold
+excludesPublishedBefore
+\series default
+ field (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSPublicationData-excludesPublishedBefore"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is used to elide Notifications that have already been received as part
+ of a prior Publication.
+ An overview of this bandwidth compression mechanism is given in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Bandwidth-Compression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Publication Algorithms
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publication-Algorithms"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL use the construction algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Construction"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to construct a Publication for distribution to Observers to or other Publishers.
+ A Publisher SHALL use the verification algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Interpretation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to verify a Publication received from another Publisher prior to processing
+ the Notifications.
+\end_layout
+
+\begin_layout Standard
+A Observer SHALL use the interpretation algorithm defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Interpretation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to interpret a Publication prior to processing the Notifications.
+\end_layout
+
+\begin_layout Standard
+An Advertiser has no need for the algorithms defined in this section since
+ Advertisers do not construct Publications.
+\end_layout
+
+\begin_layout Subsubsection
+Publication Construction Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publication-Construction"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The algorithm comprises 2 steps:
+\end_layout
+
+\begin_layout Enumerate
+Construct a 
+\series bold
+TBSPublicationData
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSPublicationData-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Construct a digitally signed CMS
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5652"
+literal "false"
+
+\end_inset
+
+ message in the form of a 
+\series bold
+PublicationContentInfo
+\series default
+ data object incorporating the 
+\series bold
+TBSPublicationData
+\series default
+ as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:PublicationContentInfo-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Publication Interpretation Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publication-Interpretation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The algorithm comprises 2 steps:
+\end_layout
+
+\begin_layout Enumerate
+Verify that the CMS
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5652"
+literal "false"
+
+\end_inset
+
+ message includes a valid signature by a valid Publisher Certificate correspondi
+ng to the identity of the Publisher, and is in the form of a valid 
+\series bold
+PublicationContentInfo
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:PublicationContentInfo-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Interpret the encapsulated message content as a 
+\series bold
+TBSPublicationData
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSPublicationData-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Publication Layout
+\end_layout
+
+\begin_layout Standard
+A Publication is the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of a 
+\series bold
+PublicationContentInfo
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:PublicationContentInfo-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ A full ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.680"
+literal "false"
+
+\end_inset
+
+ schema is provided in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:ASN.1-Schema"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Notification fields
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Notification-fields"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+Notification
+\series default
+ data object is defined by the ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.680"
+literal "false"
+
+\end_inset
+
+ schema fragment:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-notification.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+alertLevel
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Notification-alertLevel"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-alertlevel.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+alertLevel
+\series default
+ field contains the most recent Alert Level associated by the Publisher
+ with the Seed Values in the 
+\series bold
+seedValues
+\series default
+ field.
+ To reduce bandwidth consumption, this field applies to a set of Seed Values
+ rather than being specified individually for each Seed Value.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field to indicate
+ the most recent Alert Level associated by the Publisher with the Seed Values
+ in the 
+\series bold
+seedValues
+\series default
+ field.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, a Publisher SHALL accept any unrecognised
+ 
+\series bold
+alertLevel
+\series default
+ values and SHALL propagate these 
+\series bold
+alertLevel
+\series default
+ values verbatim into any derived Publications that it constructs from this
+ Publication.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer SHALL treat any unrecognised
+ 
+\series bold
+alertLevel
+\series default
+ values as equivalent to 
+\series bold
+unknown-alert(3)
+\series default
+.
+\end_layout
+
+\begin_layout Paragraph
+generatorType
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Notification-generatorType"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-generatortype.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+generatorType
+\series default
+ field contains the Generator Type as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the Seed Values in the 
+\series bold
+seedValues
+\series default
+ field.
+ To reduce bandwidth consumption, this field applies to a set of Seed Values
+ rather than being specified individually for each Seed Value.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field to indicate
+ the Generator Type for the Seed Values in the 
+\series bold
+seedValues
+\series default
+ field.
+\end_layout
+
+\begin_layout Paragraph
+seedValues
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Notification-seedValues"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-seedvalues.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+seedValues
+\series default
+ field contains the arbitrarily ordered and concatenated Seed Values for
+ the combination of 
+\series bold
+alertLevel
+\series default
+ and 
+\series bold
+generatorType
+\series default
+.
+ To reduce bandwidth consumption, this field is a single OCTET STRING containing
+ a concatenation of the Seed Values, rather than a SEQUENCE OF OCTET STRING
+ where each OCTET STRING contains a single Seed Value.
+ The length of each individual Seed Value is the Seed Length specified for
+ the Generator Type in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Generator-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field to an
+ arbitrarily ordered concatenation of the relevant Seed Values for the Alert
+ Level in the 
+\series bold
+alertLevel
+\series default
+ field and the Generator Type in the 
+\series bold
+generatorType
+\series default
+ field.
+\end_layout
+
+\begin_layout Subsubsection
+TBSPublicationData fields
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:TBSPublicationData-fields"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+TBSPublicationData
+\series default
+ data object is defined by the ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.680"
+literal "false"
+
+\end_inset
+
+ schema fragment:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-tbspublicationdata.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+version
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-version"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-publicationversion.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+version
+\series default
+ field describes the version of the 
+\series bold
+TBSPublicationData
+\series default
+ structure.
+ In the present specification, only a single version is defined.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field to version
+ 1.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer or Publisher SHALL accept any
+ value in this field, and SHALL silently accept and ignore any unrecognised
+ additional fields present in the 
+\series bold
+TBSPublicationData
+\series default
+ structure following the
+\series bold
+ updateURLs
+\series default
+ field.
+\end_layout
+
+\begin_layout Paragraph
+intendedAudience
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-intendedAudience"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-publicationaudience.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+intendedAudience
+\series default
+ field describes the intended audience for the Publication as one of the
+ following values:
+\end_layout
+
+\begin_layout Description
+observer(1) The Publication is intended to be consumed by Observers and
+ includes all Notifications that are known to be relevant to Observers subscribi
+ng to the Publisher, including relevant Notifications that originated from
+ other Publishers.
+\end_layout
+
+\begin_layout Description
+publisher(2) The Publication is intended to be consumed by another Publisher
+ and contains only Notifications that are relevant to the consuming Publisher.
+\end_layout
+
+\begin_layout Standard
+This field exists primarily to detect misconfigurations.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field to indicate
+ the intended audience, based on the subset of Notifications that the Publisher
+ is including within this Publication.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer SHALL treat a Publication as
+ invalid if this field contains any value other than 
+\series bold
+observer(1)
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Publisher SHALL treat a Publication
+ as invalid if this field contains any value other than 
+\series bold
+publisher(2)
+\series default
+.
+\end_layout
+
+\begin_layout Paragraph
+publishedAt
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-publishedAt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+publishedAt
+\series default
+ field contains the time at which the Publisher created this version of
+ the Publication.
+ The value of this field MUST increase monotonically for new versions of
+ this Publication from a given Publisher.
+ The value of this field MAY be consistent between different Publishers.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field to its
+ notion of the current time, SHALL express the GeneralizedTime value using
+ an explicit UTC
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset Quotes eld
+\end_inset
+
+Z
+\begin_inset Quotes erd
+\end_inset
+
+) time zone, and SHALL ensure that the value of this field is strictly later
+ than the value of all prior versions of this Publication.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer or Publisher SHALL record the
+ 
+\series bold
+publishedAt
+\series default
+ time of a successfully verified and processed Publication, and SHALL treat
+ a Publication as invalid if the 
+\series bold
+publishedAt
+\series default
+ field contains a time that is strictly earlier than the recorded 
+\series bold
+publishedAt
+\series default
+ time for another version of this Publication.
+\end_layout
+
+\begin_layout Paragraph
+nextUpdateNotBefore
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-nextUpdateNotBefore"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+nextUpdateNotBefore
+\series default
+ field contains the Publisher's estimate of the earliest time that it will
+ publish a new version of this Publication.
+ This field is informative only and MAY be used by the Publisher to suggest
+ a rate limit on requests from Observers or from other Publishers.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field to an
+ estimate of the time that it expects to publish a new version of this Publicati
+on, and SHALL express the GeneralizedTime value using an explicit UTC
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset Quotes eld
+\end_inset
+
+Z
+\begin_inset Quotes erd
+\end_inset
+
+) time zone.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer or Publisher SHOULD record
+ the 
+\series bold
+nextUpdateNotBefore
+\series default
+ field of a successfully verified and processed Publication and SHOULD NOT
+ attempt to retrieve a new version of the Publication prior to the time
+ expressed in the 
+\series bold
+nextUpdateNotBefore
+\series default
+ field.
+ The Observer or Publisher SHALL add a suitable random delay to its locally
+ scheduled retrieval time and SHALL NOT schedule the retrieval for the exact
+ time specified in the 
+\series bold
+nextUpdateNotBefore
+\series default
+ field.
+ The Observer or Publisher SHALL disregard the contents of any 
+\series bold
+nextUpdateNotBefore
+\series default
+ field that contains a time greater than 24 hours in the future.
+\end_layout
+
+\begin_layout Paragraph
+nextUpdateNotAfter
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-nextUpdateNotAfter"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+nextUpdateNotAfter
+\series default
+ field contains the time by which the Publisher guarantees to have published
+ a new version of this Publication.
+ This field is used to detect and disregard stale versions of Publications.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field to a time
+ before which it SHALL publish a new version of this Publication, and SHALL
+ express the GeneralizedTime value using an explicit UTC
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset Quotes eld
+\end_inset
+
+Z
+\begin_inset Quotes erd
+\end_inset
+
+) time zone.
+ The Publisher SHALL publish a new version of the Publication before this
+ time, even if the new verison of the Publication contains no new Notifications.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer or Publisher SHALL treat the
+ Publication as invalid if the 
+\series bold
+publishedAt
+\series default
+ field contains a time that is the same as a previously recorded 
+\series bold
+publishedAt
+\series default
+ time for this Publication and the 
+\series bold
+nextUpdateNotAfter
+\series default
+ field contains a time that is in the past.
+\end_layout
+
+\begin_layout Paragraph
+excludesPublishedBefore
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-excludesPublishedBefore"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The optional 
+\series bold
+excludesPublishedBefore
+\series default
+ field contains a time indicating Seed Values that have been elided from
+ the Publication.
+ Any Seed Values that were previously published with the same Alert Level
+ in a version of the Publication with a 
+\series bold
+publishedAt
+\series default
+ time earlier than 
+\series bold
+excludesPublishedBefore
+\series default
+ are elided from this version of the Publication.
+\end_layout
+
+\begin_layout Standard
+Note that Publishers MUST publish at least one Publication that includes
+ the full set of non-expired Seed Values and has no 
+\series bold
+excludesPublishedBefore
+\series default
+ field, as specified in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Bandwidth-Compression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication utilising bandwidth compression as described
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Bandwidth-Compression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, a Publisher MAY set this field to a time earlier than the 
+\series bold
+publishedAt
+\series default
+ time.
+ If a Publisher does this, it SHALL omit from the Notification any Seed
+ Values that were previously published with the same Alert Level in a version
+ of this Publication with a 
+\series bold
+publishedAt
+\series default
+ time that is strictly earlier than this field.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer or Publisher SHALL treat the
+ Publication as invalid if the 
+\series bold
+excludesPublishedBefore
+\series default
+ field contains a time that is not strictly earlier than the most recently
+ recorded 
+\series bold
+publishedAt
+\series default
+ time for this Publication.
+\end_layout
+
+\begin_layout Paragraph
+notifications
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-notifications"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+notifications
+\series default
+ field contains an arbitrarily ordered list of Notifications, where each
+ Notification contains an Alert Level, a Generator Type, and an arbitrarily
+ ordered set of Seed Values.
+ The layout of each element of this field is defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Notification-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHOULD ensure that at most
+ one 
+\series bold
+Notification
+\series default
+ data object exists per combination of 
+\series bold
+alertLevel 
+\series default
+and 
+\series bold
+generatorType
+\series default
+ within a Publication.
+ If the 
+\series bold
+excludesPublishedBefore
+\series default
+ field is not present in the Publication, then the Publisher SHALL NOT include
+ a 
+\series bold
+Notification
+\series default
+ data object with an 
+\series bold
+alertLevel
+\series default
+ set to 
+\series bold
+expired
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication where the 
+\series bold
+excludesPublishedBefore
+\series default
+ field is not present, an Observer or Publisher SHALL assume that any Seed
+ Values included in earlier versions of the Publication but not included
+ in this Publication have an Alert Level of 
+\series bold
+expired
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+Note that a zero-length SEQUENCE is a valid value for this field.
+\end_layout
+
+\begin_layout Paragraph
+updateURLs
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-updateURLs"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+updateURLs
+\series default
+ field contains a preference-ordered list of Uniform Resource Locators (URLs)
+ to be used for retrieving new versions of the Publication, with the first
+ list entry being the first preference URL.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher MAY set this field to an ordered
+ list of URLs to be used for retrieving new versions of the Publication
+ as described in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Bandwidth-Compression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer or Publisher SHOULD record
+ the 
+\series bold
+updateURLs
+\series default
+ field of a successfully verified and processed Publication and SHOULD attempt
+ to retrieve the next version of the Publication from each URL within the
+ 
+\series bold
+updateURLs 
+\series default
+list before attempting to retrieve the next version of the Publication from
+ the original Publication URL.
+ If an Observer or Publisher does this, it SHALL treat any verification
+ or validation failure as equivalent to a failed retrieval, and move to
+ the next URL in the list (or to the original Publication URL, if there
+ are no entries remaining).
+\end_layout
+
+\begin_layout Standard
+Note that a zero-length SEQUENCE is a valid value for this field.
+\end_layout
+
+\begin_layout Paragraph
+extensions
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSPublicationData-extensions"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-extension--extensions.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+extensions
+\series default
+ field contains OPTIONAL extensions defined outside the scope of this specificat
+ion document.
+ This field exists to support additional information that is not applicable
+ to all Publishers and Observers.
+ The layout of each extension comprises an extension identifier 
+\series bold
+extnID
+\series default
+ followed by fields as defined by that extension identifier.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher MAY choose to include an 
+\series bold
+extensions
+\series default
+ field.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer or Publisher MAY choose to
+ interpret the contents of the 
+\series bold
+extensions
+\series default
+ field.
+ If the Observer or Publisher does this, it SHALL silently accept and ignore
+ any extension that it does not recognise.
+\end_layout
+
+\begin_layout Subsubsection
+PublicationContentInfo fields
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:PublicationContentInfo-fields"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+PublicationContentInfo
+\series default
+ data object is defined by the ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.680"
+literal "false"
+
+\end_inset
+
+ schema fragment:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-id-ct-cx-publicationdata--publicationcontentinfo.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+ContentInfo
+\series default
+ type is defined by RFC
+\begin_inset space ~
+\end_inset
+
+5652
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5652"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL construct this data object
+ as specified in RFC
+\begin_inset space ~
+\end_inset
+
+5652
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5652"
+literal "false"
+
+\end_inset
+
+ with the 
+\series bold
+contentType
+\series default
+ set to 
+\series bold
+id-signedData
+\series default
+, the 
+\series bold
+eContentType
+\series default
+ set to 
+\series bold
+id-ct-cx-publicationData
+\series default
+, the 
+\series bold
+eContent
+\series default
+ OCTET STRING contents set to the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of a 
+\series bold
+TBSPublicationData
+\series default
+ data object as defined by section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSPublicationData-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, and with a valid digital signature created using the Publisher Certificate
+ and the Publisher Signing Key.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer or Publisher SHALL verify that
+ the 
+\series bold
+contentType
+\series default
+ is set to 
+\series bold
+id-signedData
+\series default
+ and that at least one digital signature is correct and matches the Publisher
+ Certificate, and SHALL then interpret the contents of the 
+\series bold
+eContent
+\series default
+ OCTET STRING as the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of a 
+\series bold
+TBSPublicationData
+\series default
+ data object as defined by section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSPublicationData-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Publication Bandwidth Compression
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publication-Bandwidth-Compression"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4797,6 +6277,22 @@ literal "false"
 
 \end_inset
 
+, and for ContentInfo in RFC
+\begin_inset space ~
+\end_inset
+
+5652
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5652"
+literal "false"
+
+\end_inset
+
 .
 \end_layout
 
@@ -4804,7 +6300,7 @@ literal "false"
 \begin_inset CommandInset include
 LatexCommand inputminted
 filename "cx.asn1"
-lstparams "language=Clean"
+lstparams "language=Clean,samepage=false"
 
 \end_inset
 

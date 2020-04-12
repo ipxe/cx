@@ -8,7 +8,11 @@ IMPORTS
     AlgorithmIdentifier, SubjectPublicKeyInfo
     FROM PKIX1Explicit88 { iso(1) identified-organization(3) dod(6) internet(1)
                            security(5) mechanisms(5) pkix(7) id-mod(0)
-                           id-pkix1-explicit(18) };
+                           id-pkix1-explicit(18) }
+    ContentInfo
+    FROM CryptographicMessageSyntax2004 { iso(1) member-body(2) us(840)
+                                          rsadsi(113549) pkcs(1) pkcs-9(9)
+                                          smime(16) modules(0) cms-2004(24) };
 
 GeneratorType ::= INTEGER { aes128-ctr-drbg-df-n2k(1),
                             aes256-ctr-drbg-df-n2k(2) }
@@ -38,5 +42,36 @@ TBSSeedReport ::= SEQUENCE {
 SeedReport ::= SEQUENCE {
     tbsSeedReport               TBSSeedReport,
     signatureValue              OCTET STRING }
+
+PublicationVersion ::= INTEGER { v1(1) }
+
+PublicationAudience ::= INTEGER { observer(1), publisher(2) }
+
+AlertLevel ::= INTEGER { no-alert(0), debug-alert(1), expired(2),
+                         unknown-alert(3), symptomatic(4), diagnosed(5) }
+
+SeedValues ::= OCTET STRING
+
+Notification ::= SEQUENCE {
+    alertLevel                  AlertLevel,
+    generatorType               GeneratorType,
+    seedValues                  SeedValues }
+
+TBSPublicationData ::= SEQUENCE {
+    version                     PublicationVersion,
+    intendedAudience            PublicationAudience,
+    publishedAt                 GeneralizedTime,
+    nextUpdateNotBefore         GeneralizedTime,
+    nextUpdateNotAfter          GeneralizedTime,
+    excludesPublishedBefore     GeneralizedTime OPTIONAL,
+    notifications               SEQUENCE SIZE (0..MAX) OF Notification,
+    updateURLs                  SEQUENCE SIZE (0..MAX) OF UTF8String,
+    extensions              [0] Extensions OPTIONAL }
+
+id-ct-cx-publicationData OBJECT IDENTIFIER ::= {
+    iso(1) identified-organization(3) dod(6) internet(1) private(4)
+    enterprise(1) 10019 cx(3) publication(1) }
+
+PublicationContentInfo ::= ContentInfo
 
 END

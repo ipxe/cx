@@ -1,0 +1,6 @@
+id-ct-cx-publicationData OBJECT IDENTIFIER ::= {
+    iso(1) identified-organization(3) dod(6) internet(1) private(4)
+    enterprise(1) 10019 cx(3) publication(1) }
+
+PublicationContentInfo ::= ContentInfo
+

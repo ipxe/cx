@@ -1,0 +1,5 @@
+Notification ::= SEQUENCE {
+    alertLevel                  AlertLevel,
+    generatorType               GeneratorType,
+    seedValues                  SeedValues }
+

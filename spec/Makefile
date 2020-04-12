@@ -10,8 +10,12 @@ SEEDCALC_DEPS = seedcalc_sample.c \
 		ipxe.pubkey.c fensystems.pubkey.c
 
 ASN1_FRAGS = cx-generatortype.asn1 cx-seedreportversion.asn1 \
-	     cx-preseedvalue-preseedvalues.asn1 cx-tbsseedreport.asn1 \
-	     cx-seedreport.asn1 cx-extension-extensions.asn1
+	     cx-preseedvalue--preseedvalues.asn1 cx-tbsseedreport.asn1 \
+	     cx-seedreport.asn1 cx-extension--extensions.asn1 \
+	     cx-tbspublicationdata.asn1 cx-publicationversion.asn1 \
+	     cx-publicationaudience.asn1 cx-notification.asn1 \
+	     cx-alertlevel.asn1 cx-seedvalues.asn1 \
+	     cx-id-ct-cx-publicationdata--publicationcontentinfo.asn1
 
 DEPS = cx.bib $(GEN_DEPS) $(SEEDCALC_DEPS)
 
@@ -48,14 +52,16 @@ gen_test : gen_test.c $(GEN_DEPS)
 seedcalc_test : seedcalc_test.c $(SEEDCALC_DEPS)
 	$(CC) $(CFLAGS) -o $@ $< -lssl -lcrypto
 
+asn1.rebuild : $(ASN1_FRAGS)
+
 test-asn1 : $(patsubst %,%.check,$(ASN1_FRAGS))
-	asn1c -EF cx.asn1 rfc5280.asn1 > /dev/null
+	asn1c -EF cx.asn1 rfc5280.asn1 rfc5652.asn1 > /dev/null
 
 cx-%.asn1.check : cx.asn1
-	sed -E -n '/^($(subst -,|,$*)) ::=/I,/^$$/p' $< | diff $(basename $@) -
+	sed -E -n '/^($(subst --,|,$*)) /I,/^$$/p' $< | diff $(basename $@) -
 
 cx-%.asn1 : cx.asn1
-	sed -E -n '/^($(subst -,|,$*)) ::=/I,/^$$/p' $< > $@
+	sed -E -n '/^($(subst --,|,$*)) /I,/^$$/p' $< > $@
 
 .PRECIOUS : cx-%.asn1
 

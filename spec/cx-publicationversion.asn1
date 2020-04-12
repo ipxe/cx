@@ -1,0 +1,2 @@
+PublicationVersion ::= INTEGER { v1(1) }
+
