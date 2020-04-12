@@ -1,4 +1,4 @@
-package org.ipxe.cx.gen
+package org.ipxe.gen
 
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,2 +1,3 @@
 rootProject.name='CX'
 include ':app'
+include ':gen'
