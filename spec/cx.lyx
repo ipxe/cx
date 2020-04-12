@@ -249,7 +249,7 @@ The architecture provides the following features:
 \series bold
 Zero information leakage
 \series default
-: for users who do not choose to publish any information for contact tracing
+: for users who do not choose to disclose any information for contact tracing
  (e.g.
 \begin_inset space ~
 \end_inset
@@ -1768,7 +1768,7 @@ shall not
 \begin_layout Standard
 This violation is REQUIRED in order to allow an Observer to reconstruct
  a sequence of Contact Identifiers previously broadcast by an Advertiser,
- where the Advertiser has intentionally chosen to publish the Seed Value
+ where the Advertiser has intentionally chosen to disclose the Seed Value
  by means of a Seed Report for inclusion in a Notification.
 \end_layout
 
@@ -2668,7 +2668,7 @@ shall not
 
 \begin_layout Standard
 This violation is REQUIRED in order to allow a Publisher to reconstruct
- a Seed Value, where the Advertiser has intentionally chosen to publish
+ a Seed Value, where the Advertiser has intentionally chosen to disclose
  the Preseed Value by means of a Seed Report for inclusion of the resulting
  Seed Value in a Notification.
 \end_layout
