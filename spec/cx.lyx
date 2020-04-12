@@ -3283,7 +3283,7 @@ noprefix "false"
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "X.690"
+key "X.680"
 literal "false"
 
 \end_inset
@@ -3328,7 +3328,7 @@ TBSSeedReport
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "X.690"
+key "X.680"
 literal "false"
 
 \end_inset
@@ -3828,7 +3828,7 @@ SeedReport
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "X.690"
+key "X.680"
 literal "false"
 
 \end_inset
@@ -4774,7 +4774,7 @@ This schema includes all ASN.1
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "X.690"
+key "X.680"
 literal "false"
 
 \end_inset
