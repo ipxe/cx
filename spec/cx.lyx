@@ -271,11 +271,20 @@ Zero collection of location information
 \begin_layout Itemize
 
 \series bold
-Zero trust
+Zero privilege
 \series default
-: there is no third party or central authority who has privileged access,
- with governments and public health services playing a role only as generally
- accepted sources of trusted medical diagnoses.
+: there is no third party, central authority, or software provider who has
+ privileged access to any data.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Trusted diagnoses
+\series default
+: governments and public health services provide trusted medical diagnoses,
+ with the ability for users to distinguish between self-reported symptoms
+ and medical test results.
 \end_layout
 
 \begin_layout Itemize
@@ -300,6 +309,16 @@ Interoperability
 \begin_layout Itemize
 
 \series bold
+Flexibility
+\series default
+: multiple interoperating apps may exist to cover different user niches
+ and preferences, with no restriction on development of new apps and no
+ need for users to be running the same app.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
 International
 \series default
 : the protocol allows for multiple healthcare providers in multiple jurisdiction
@@ -315,6 +334,15 @@ Low bandwidth
 : the protocol includes measures to reduce the bandwidth requirements to
  manageable levels even when dealing with billions of users and frequent
  requests.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Disconnected operation
+\series default
+: the protocol will operate without a data connection, including in environments
+ such as underground, at sea, or within an aircraft.
 \end_layout
 
 \begin_layout Itemize
