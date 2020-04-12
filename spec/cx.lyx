@@ -299,6 +299,15 @@ Distributed contact identification
 \begin_layout Itemize
 
 \series bold
+Immediate deployability
+\series default
+: the protocol may be implemented as an app on existing Android and iOS
+ devices, with no requirement for changes to the core operating system.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
 Interoperability
 \series default
 : the protocol may be implemented by any device and as part of any app,
