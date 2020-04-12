@@ -213,20 +213,136 @@ thepage
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset CommandInset toc
-LatexCommand tableofcontents
+\begin_layout Section
+Overview
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Overview"
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Section
-Overview
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Overview"
+\begin_layout Standard
+CX is an architecture for privacy-compatible distributed contact tracing,
+ designed for use in pandemics such as Covid-19.
+ It operates using a model of proximity-based contact detection over one
+ or more local area broadcast media such as Bluetooth Low Energy
+\begin_inset space ~
+\end_inset
+
+(BLE).
+ Pseudorandom contact identifiers are broadcast and recorded by all participatin
+g devices.
+ A sequence of previously broadcast contact identifiers may be retroactively
+ associated with a hazard (such as a positive Covid-19 diagnosis), and the
+ sequence then made available to all other participating devices.
+\end_layout
+
+\begin_layout Standard
+The architecture provides the following features:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Zero information leakage
+\series default
+: for users who do not choose to publish any information for contact tracing
+ (e.g.
+\begin_inset space ~
+\end_inset
+
+because they are never diagnosed with the disease), the information broadcast
+ by that user is indistinguishable from an ideal random bitstring.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Zero collection of location information
+\series default
+: the devices running the protocol can choose to do so with no source of
+ location information, and can therefore guarantee that no location history
+ is collected.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Zero trust
+\series default
+: there is no third party or central authority who has privileged access,
+ with governments and public health services playing a role only as generally
+ accepted sources of trusted medical diagnoses.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Distributed contact identification
+\series default
+: users can identify only their own hazardous contacts, and no central authority
+ has access to the information required to identify contacts.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Interoperability
+\series default
+: the protocol may be implemented by any device and as part of any app,
+ with all apps and all devices able to benefit equally from the same distributed
+ data set.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+International
+\series default
+: the protocol allows for multiple healthcare providers in multiple jurisdiction
+s, with support for distributed contact identification even for users travelling
+ across national boundaries.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Low bandwidth
+\series default
+: the protocol includes measures to reduce the bandwidth requirements to
+ manageable levels even when dealing with billions of users and frequent
+ requests.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Low resource
+\series default
+: the protocol may be implemented on embedded systems such as an ESP32 microcont
+roller, enabling it to be deployed even in environments where typical Android
+ or iPhone mobile devices are unaffordable.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Ease of implementation
+\series default
+: all cryptographic operations and data formats are chosen to be easily
+ implemented using widely available and well-trusted existing libraries.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
 
 \end_inset
 
