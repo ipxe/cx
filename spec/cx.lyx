@@ -3061,9 +3061,23 @@ name "sec:Seed-Reports"
 \begin_layout Standard
 A Seed Report is a message constructed by an Advertiser to be sent to a
  Publisher.
- The Seed Report is used to verify original authorship of a set of Seed
- Values and to associate the Seed Values with an Alert Level for inclusion
- into a Notification.
+ The Seed Report is used to disclose and to verify original authorship of
+ a set of Seed Values and to associate the Seed Values with an Alert Level
+ for inclusion into a Notification.
+\end_layout
+
+\begin_layout Standard
+The act of sending a Seed Report is a deliberate disclosure of a set of
+ Preseed Values and Seed Values.
+ Once the Seed Report has been sent, the included Preseed Values (and the
+ derived Seed Values) are no longer private to the Advertiser.
+\end_layout
+
+\begin_layout Standard
+The Preseed Signing Key remains private to the Advertiser at all times,
+ and is not disclosed by sending a Seed Report.
+ The act of sending a Seed Report does disclose that the Advertiser is in
+ possession of the Preseed Signing Key, but does not disclose its value.
 \end_layout
 
 \begin_layout Standard
