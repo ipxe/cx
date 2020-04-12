@@ -3348,10 +3348,10 @@ lstparams "language=Clean"
 \end_layout
 
 \begin_layout Paragraph
-seedReportVersion
+version
 \begin_inset CommandInset label
 LatexCommand label
-name "par:TBSSeedReport-seedReportVersion"
+name "par:TBSSeedReport-version"
 
 \end_inset
 
@@ -3372,7 +3372,7 @@ lstparams "language=Clean"
 \begin_layout Standard
 The 
 \series bold
-seedReportVersion
+version
 \series default
  field describes the version of the 
 \series bold
