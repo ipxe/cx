@@ -898,6 +898,43 @@ Publisher
 \begin_inset space ~
 \end_inset
 
+Descriptor: A JSON document used to describe all relevant attributes of
+ a 
+\series bold
+Publisher
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Publisher
+\begin_inset space ~
+\end_inset
+
+Endpoint: An HTTP or HTTPS endpoint exposed by a 
+\series bold
+Publisher
+\series default
+ for use by 
+\series bold
+Advertisers
+\series default
+, 
+\series bold
+Observers
+\series default
+, and other 
+\series bold
+Publishers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Publisher
+\begin_inset space ~
+\end_inset
+
 Name: An arbitrary human-readable name used to informally disambiguate between
  
 \series bold
@@ -3076,6 +3113,24 @@ A Seed Report is a message constructed by an Advertiser to be sent to a
 \end_layout
 
 \begin_layout Standard
+A Seed Report is submitted via a Seed Report Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 The act of sending a Seed Report is a deliberate disclosure of a set of
  Preseed Values and Seed Values.
  Once the Seed Report has been sent, the included Preseed Values (and the
@@ -3898,8 +3953,27 @@ publisherName
 \end_layout
 
 \begin_layout Standard
-An Advertiser SHALL set this field to the Publisher Name of the intended
- Publisher.
+An Advertiser SHALL set this field to the Publisher Name as specified in
+ the 
+\series bold
+name
+\series default
+ field of the Publisher Description for the intended Publisher as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-name"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4300,6 +4374,25 @@ A Publication is a message constructed by a Publisher to be sent to Observers
 \end_layout
 
 \begin_layout Standard
+A Publication is initially retrieved (by an Observer or another Publisher)
+ from a Publication Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 To reduce bandwidth consumption, a Publisher MAY choose to publish a set
  of concurrent Publications covering an identical underlying logical set
  of Notifications but where the 
@@ -4556,6 +4649,13 @@ noprefix "false"
 
 \begin_layout Subsection
 Publication Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publication-Layout"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5234,7 +5334,7 @@ name "par:TBSPublicationData-excludesPublishedBefore"
 \end_layout
 
 \begin_layout Standard
-The optional 
+The OPTIONAL 
 \series bold
 excludesPublishedBefore
 \series default
@@ -5670,8 +5770,23 @@ noprefix "false"
 
 \end_inset
 
-, and with a valid digital signature created using the Publisher Certificate
- and the Publisher Signing Key.
+, and with a valid digital signature created using the Publisher Signing
+ Key and the Publisher Certificate as provided in the Publisher Descriptor
+ (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-cert"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -5685,7 +5800,21 @@ contentType
 id-signedData
 \series default
  and that at least one digital signature is correct and matches the Publisher
- Certificate, and SHALL then interpret the contents of the 
+ Certificate obtained from the Publisher Descriptor (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-cert"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), and SHALL then interpret the contents of the 
 \series bold
 eContent
 \series default
@@ -6468,6 +6597,1175 @@ noprefix "false"
  content from a CDN).
 \end_layout
 
+\begin_layout Section
+Publisher Endpoints
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Publisher-Endpoints"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher Endpoint is a URL used to interact with a Publisher by Advertisers,
+ Observers, and other Publishers.
+\end_layout
+
+\begin_layout Standard
+All Publisher Endpoints defined by this document are open access (with no
+ authentication required), since there is by design no concept of user identity.
+ Authorization is handled where needed through in-band cryptographic operations,
+ such as the use of a Seed Report Challenge (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Challenges"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+All Publisher Endpoint URLs are discovered via a Publisher Descriptor as
+ defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Publisher-Descriptors"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Publisher Descriptor Endpoint
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-Descriptor-Endpoint"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher Descriptor Endpoint is a URL that provides the Publisher Descriptor
+ for the Publisher as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Publisher-Descriptors"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is discovered via the 
+\series bold
+url
+\series default
+ property of the Publisher Descriptor as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-url"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Transport HTTPS only
+\end_layout
+
+\begin_layout Description
+Method GET
+\end_layout
+
+\begin_layout Description
+Parameters None
+\end_layout
+
+\begin_layout Description
+Response
+\begin_inset space ~
+\end_inset
+
+Content-Type application/json
+\end_layout
+
+\begin_layout Description
+Response
+\begin_inset space ~
+\end_inset
+
+Content The Publisher Descriptor as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Publisher-Descriptors"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL fail requests to this endpoint if made through any transport
+ other than HTTPS.
+\end_layout
+
+\begin_layout Standard
+An Advertiser, Observer, or Publisher SHALL refuse to attempt to retrieve
+ content from this endpoint through any transport other than HTTPS.
+\end_layout
+
+\begin_layout Subsection
+Seed Report Endpoint
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Seed-Report-Endpoint"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Seed Report Endpoint is a URL through which a Seed Report (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Reports"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) can be submitted to the Publisher.
+ It is discovered via the 
+\series bold
+report
+\series default
+ property of the Publisher Descriptor as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-report"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Transport HTTPS only
+\end_layout
+
+\begin_layout Description
+Method POST
+\end_layout
+
+\begin_layout Description
+Parameters None
+\end_layout
+
+\begin_layout Description
+Request
+\begin_inset space ~
+\end_inset
+
+Content-Type: application/octet-stream
+\end_layout
+
+\begin_layout Description
+Request
+\begin_inset space ~
+\end_inset
+
+Content: An ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoded Seed Report as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Layout"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Response
+\begin_inset space ~
+\end_inset
+
+Content-Type: text/html (in the case of an error status code)
+\end_layout
+
+\begin_layout Description
+Response Status code only, with a human-readable HTML error description
+ in the case of an error status code.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL fail requests to this endpoint if made through any transport
+ other than HTTPS.
+\end_layout
+
+\begin_layout Standard
+A Pubisher SHALL report a success status code if and only if the Seed Report
+ is successfully validated as described in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Reports"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL refuse to attempt to retrieve content from this endpoint
+ through any transport other than HTTPS.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL provide an indication to the user as to whether or not
+ the reponse was successful, and SHOULD provide an opportunity for the user
+ to view the HTML error description if the response was not successful.
+\end_layout
+
+\begin_layout Subsection
+Publication Endpoint
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publication-Endpoint"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publication Endpoint is a URL that provides the current version of a Publicati
+on (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Publications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ It is discovered via the 
+\series bold
+pub
+\series default
+ or 
+\series bold
+pubs
+\series default
+ properties of the Publisher Descriptor as defined in sections
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-pub"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-pubs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Transport HTTP or HTTPS
+\end_layout
+
+\begin_layout Description
+Method GET
+\end_layout
+
+\begin_layout Description
+Parameters None
+\end_layout
+
+\begin_layout Description
+Response
+\begin_inset space ~
+\end_inset
+
+Content-Type application/octet-stream
+\end_layout
+
+\begin_layout Description
+Response
+\begin_inset space ~
+\end_inset
+
+Content An ASN.1 DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoded Publication as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Layout"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Publication MAY be retrieved via HTTP since the content itself includes
+ an embedded digital signature and so does not rely on transport level security.
+ This design choice also allows for future extensions to support distribution
+ through alternative mechanisms such as peer-to-peer file sharing.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL provide at least one Publication Endpoint for use by Observers
+, and MAY provide additional Publication Endpoints for use by other Publishers.
+\end_layout
+
+\begin_layout Standard
+Note that the Publication Endpoint URL provides only the uncompressed Publicatio
+n (see section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Bandwidth-Compression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The URLs for any bandwidth-compressed Publications are obtained from the
+ 
+\series bold
+updateURLs
+\series default
+ field of the Publication itself as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSPublicationData-updateURLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Publisher Descriptors
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Publisher-Descriptors"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher Descriptor is a JSON
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC8259"
+literal "false"
+
+\end_inset
+
+ document created by a Publisher and made available for download by Advertisers,
+ Observers, and other Publishers.
+ It is used to describe all relevant attributes of a Publisher, such as
+ the Publisher Name, the Publisher Certificate, the URL used for submitting
+ Seed Reports, the URL used for retrieving the default Publication, and
+ so on.
+\end_layout
+
+\begin_layout Standard
+It is expected that Advertisers and Observers are likely to include a preset
+ list of well-known Publisher Descriptors, so that users are able to simply
+ choose from a list, or to have a suitable default choice made automatically
+ based on available information such as a Mobile Country Code obtained from
+ a local mobile phone network.
+ A Publisher that is not included in a preset list may still be used by
+ any Advertiser or Observer by simply entering the URL for the Publisher
+ Descriptor: this ensures that all Advertisers and Observers are able to
+ use any Publisher.
+\end_layout
+
+\begin_layout Standard
+The Publisher Descriptor itself is not signed, since it functions as the
+ root of trust for a Publisher.
+\end_layout
+
+\begin_layout Subsection
+Publisher Descriptor Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-Descriptor-Layout"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher Descriptor is a JSON
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC8259"
+literal "false"
+
+\end_inset
+
+ serialisation of an 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://cx.ipxe.org/json/publisher
+\end_layout
+
+\end_inset
+
+ object, which has the properties defined in this section.
+ A full JSON schema
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JSONSchema"
+literal "false"
+
+\end_inset
+
+ is provided in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:JSON-Schema"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+url
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-url"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+url
+\series default
+ property contains the authoritative absoute URL of the Publsiher Descriptor
+ Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Descriptor-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is used to retrieve updated versions of the Publisher Descriptor.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to the absolute URL of the Publisher
+ Descriptor Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Descriptor-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, and SHALL use the 
+\family typewriter
+https
+\family default
+ URL scheme.
+\end_layout
+
+\begin_layout Standard
+An Advertiser, Observer, or consuming Publisher SHALL retrieve an updated
+ Publisher Descriptor from this URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Descriptor-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (as needed or in response to an explicit user request), and SHALL replace
+ any stored Publisher Descriptor for the same Publisher if and only if:
+\end_layout
+
+\begin_layout Itemize
+the retrieved Publisher Descriptor is successfully validated, and
+\end_layout
+
+\begin_layout Itemize
+the updated Publisher Descriptor contains a 
+\series bold
+url
+\series default
+ property from which an identical copy of the updated Publisher Descriptor
+ can be successfully retrieved.
+\end_layout
+
+\begin_layout Standard
+An Advertiser, Observer, or consuming Publisher SHALL treat the Publisher
+ Descriptor as invalid if the 
+\series bold
+url
+\series default
+ property is not present, is empty, contains a value that is not an absolute
+ URL, or contains a value that uses a URL scheme other than 
+\family typewriter
+https
+\family default
+.
+\end_layout
+
+\begin_layout Subsubsection
+cert
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-cert"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+cert
+\series default
+ property contains the Publisher Certificate in PEM
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC7468"
+literal "false"
+
+\end_inset
+
+ format.
+ It is used to verify Publications as described in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:PublicationContentInfo-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Experience suggests that some Publishers are likely to struggle to comply
+ with any cryptographic requirements over and above the use of a basic self-sign
+ed certificate.
+ This document therefore does not impose a requirement that the Publisher
+ Certificate be signed by a trusted CA, or that the certificate include
+ any particular X.509
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+ extensions or key usages.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to the PEM encoding of the Publisher
+ Certificate that it intends to use to sign Publications as described in
+ section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:PublicationContentInfo-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An Advertiser, Observer, or consuming Publisher SHALL treat the Publisher
+ Descriptor as invalid if the 
+\series bold
+cert
+\series default
+ property is not present, is empty, or contains a value that cannot be parsed
+ as an X.509
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+ certificate in PEM
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC7468"
+literal "false"
+
+\end_inset
+
+ format.
+\end_layout
+
+\begin_layout Subsubsection
+name
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-name"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+name
+\series default
+ property contains a human-readable name for the Publisher.
+ It is used as part of the Seed Report Challenge as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSSeedReport-publisherName"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and MAY be displayed to users as part of a user interface.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to a human-readable name for the Publisher
+ that is sufficiently detailed to allow the Publisher to be unambiguously
+ identified by any user worldwide, including users outside of the Publisher's
+ domain.
+ For example: a name such as 
+\begin_inset Quotes eld
+\end_inset
+
+Government Health Agency
+\begin_inset Quotes erd
+\end_inset
+
+ is too ambiguous since the governmental country is not specified.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL use the value of this property when constructing a Seed
+ Report Challenge for this Publisher as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSSeedReport-seedReportChallenge"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An Advertiser, Observer, or consuming Publisher SHALL treat the Publisher
+ Descriptor as invalid if the 
+\series bold
+name
+\series default
+ property is not present, is empty, or contains a value that is not a UTF-8
+ string.
+\end_layout
+
+\begin_layout Subsubsection
+logo
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-logo"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The OPTIONAL 
+\series bold
+logo
+\series default
+ property contains an absolute URL for a graphical logo for the Publisher.
+ The graphical logo MAY be displayed to the user as part of a user interface.
+\end_layout
+
+\begin_layout Standard
+A Publisher MAY set this property to an absolute URL for a graphical logo
+ that the Publisher believes will help users recognise the Publisher.
+ The content type of the logo MAY be any graphical format that is commonly
+ supported by typical web browsers.
+\end_layout
+
+\begin_layout Standard
+An Advertiser or Observer MAY retrieve this URL and display the graphical
+ logo as part of a user interface.
+\end_layout
+
+\begin_layout Standard
+An Advertiser, Observer, or consuming Publisher SHALL treat the Publisher
+ Descriptor as invalid if the 
+\series bold
+logo
+\series default
+ property is present and contains a value that is not an absolute URL.
+\end_layout
+
+\begin_layout Subsubsection
+report
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-report"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+report
+\series default
+ property contains the absolute URL of the Seed Report Endpoint as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is used by Advertisers to submit the constructed Seed Report as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Seed-Reports"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to the absolute URL of the Seed Report
+ Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, and SHALL use the 
+\family typewriter
+https
+\family default
+ URL scheme.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL submit Seed Reports for this Publisher to this URL as
+ defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An Advertiser, Observer, or consuming Publisher SHALL treat the Publisher
+ Descriptor as invalid if the 
+\series bold
+report
+\series default
+ property is not present, is empty, contains a value that is not an absolute
+ URL, or contains a value that uses a URL scheme other than 
+\family typewriter
+https
+\family default
+.
+\end_layout
+
+\begin_layout Subsubsection
+pub
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-pub"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+pub
+\series default
+ property contains the absolute URL of the default Publication Endpoint
+ as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is used by Observers to retrieve Publications as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Publications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to the absolute URL of the Publication
+ Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the Publication that is intended to be consumed by Observers, and SHALL
+ use the 
+\family typewriter
+https
+\family default
+ URL scheme.
+\end_layout
+
+\begin_layout Standard
+An Observer SHALL retrieve Publications from this URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An Advertiser, Observer, or consuming Publisher SHALL treat the Publisher
+ Descriptor as invalid if the 
+\series bold
+pub
+\series default
+ property is not present, is empty, contains a value that is not an absolute
+ URL, or contains a value that uses a URL scheme other than 
+\family typewriter
+https
+\family default
+.
+\end_layout
+
+\begin_layout Subsubsection
+pubs
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-pubs"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+TODO
+\end_layout
+
 \begin_layout Standard
 \start_of_appendix
 \begin_inset CommandInset bibtex
@@ -7240,6 +8538,21 @@ lstparams "language=Clean,samepage=false"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+JSON Schema
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:JSON-Schema"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+TODO
 \end_layout
 
 \end_body
