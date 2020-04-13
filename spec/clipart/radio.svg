@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="278.74063mm" height="282.22223mm" viewBox="0 0 987.66365 1000" id="svg10789" version="1.1" inkscape:version="0.91 r" sodipodi:docname="radio-signal.svg">
+  <defs id="defs10791"/>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.35" inkscape:cx="298.89035" inkscape:cy="208.95626" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" borderlayer="false"/>
+  <metadata id="metadata10794">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-640.39537,944.39583)">
+    <g id="g7444" transform="matrix(7.9061472,0,0,7.9061472,-4040.2168,-6678.0906)">
+      <path id="path7375" d="m 599.98382,734.79961 a 91.422032,91.422032 0 0 1 82.56434,25.28255 l 0,0 a 91.422032,91.422032 0 0 1 24.49569,83.65999" style="fill:none;stroke:#505050;stroke-width:15.7043972;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" inkscape:connector-curvature="0"/>
+      <path id="path7382" d="m 606.96572,769.05695 a 56.462727,56.462727 0 0 1 50.77314,15.65737 l 0,0 a 56.462727,56.462727 0 0 1 15.09963,51.80278" style="fill:none;stroke:#505050;stroke-width:9.69911861;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" inkscape:connector-curvature="0"/>
+      <path id="path7389" d="m 612.06198,794.06507 a 30.940175,30.940175 0 0 1 27.56774,8.62794 l 0,0 a 30.940175,30.940175 0 0 1 8.23864,28.54791" style="fill:none;stroke:#505050;stroke-width:5.31487656;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" inkscape:connector-curvature="0"/>
+      <circle transform="matrix(0.70964523,-0.70455919,0.70455919,0.70964523,0,0)" r="7.9560771" cy="1020.8055" cx="-142.57642" id="path7391" style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#f0f0f0;fill-opacity:0.99215686;fill-rule:evenodd;stroke:#505050;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"/>
+    </g>
+  </g>
+</svg>
