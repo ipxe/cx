@@ -282,9 +282,9 @@ Zero privilege
 \series bold
 Trusted diagnoses
 \series default
-: governments and public health services provide trusted medical diagnoses,
- with the ability for users to distinguish between self-reported symptoms
- and medical test results.
+: governments and public health services provide trusted and digitally signed
+ medical diagnoses, with the ability for users to distinguish between self-repor
+ted symptoms and medical test results.
 \end_layout
 
 \begin_layout Itemize
