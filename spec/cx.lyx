@@ -540,8 +540,11 @@ The seed value is the only piece of information that is uploaded.
 \end_layout
 
 \begin_layout Standard
-The healthcare provider publishes the list of hazardous seed values correspondin
-g to positive diagnoses.
+The healthcare provider publishes a 
+\series bold
+notification
+\series default
+ list of hazardous seed values corresponding to positive diagnoses.
  Each participating device downloads this list and compares the hazardous
  contact identifiers against its own record of observed contact identifiers.
 \end_layout
@@ -569,6 +572,81 @@ The owner of a device has complete control over all the information associated
  with the contact.
  There is no way for anyone else to find out when or where a contact took
  place.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename international.svg
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The volume of notifications is potentially very large.
+ There are several mechanisms in place to minimise the amount of data that
+ each device needs to download, but it is fundamentally implausible for
+ every device to be aware of every notification in the world.
+\end_layout
+
+\begin_layout Standard
+Most people do not travel internationally on a frequent basis.
+ Most notifications are therefore not relevant to most people.
+\end_layout
+
+\begin_layout Standard
+Healthcare providers publish a comprehensive list of notifications that
+ are relevant to people within their geographical 
+\series bold
+subscription zone
+\series default
+.
+ For a national healthcare provider, this subscription zone is the whole
+ country.
+\end_layout
+
+\begin_layout Standard
+Everyone subscribes to receive notifications from the subscription zone
+ of their own country.
+\end_layout
+
+\begin_layout Standard
+People who travel internationally can choose to also receive notifications
+ from the subscription zones of any country through which they have recently
+ travelled.
+ Devices may choose to manage these subscriptions automatically for convenience.
+\end_layout
+
+\begin_layout Standard
+People who are diagnosed after recent international travel can inform the
+ healthcare provider.
+ The healthcare provider then publishes the notification for that diagnosis
+ to a special worldwide subscription zone.
+ Other healthcare providers see this and include that notification within
+ the comprehensive list that they publish for their own subscription zone.
+\end_layout
+
+\begin_layout Standard
+The volume of notifications for people who have been diagnosed shortly after
+ international travel is relatively small, and so does not result in excessive
+ amounts of data to be downloaded.
+\end_layout
+
+\begin_layout Standard
+For healthcare providers in very large geographic areas, this same hierarchical
+ approach can be used to break down subscription zones to state or county
+ levels.
 \end_layout
 
 \begin_layout Standard
