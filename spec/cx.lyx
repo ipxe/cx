@@ -481,10 +481,7 @@ If the device owner becomes infected, the healthcare provider generates
 confirmation code
 \series default
  and communicates this confirmation code to the device owner.
-\end_layout
-
-\begin_layout Standard
-The device owner enters the confirmation code into the device.
+ The device owner enters the confirmation code into the device.
 \end_layout
 
 \begin_layout Standard
@@ -572,6 +569,12 @@ The owner of a device has complete control over all the information associated
  with the contact.
  There is no way for anyone else to find out when or where a contact took
  place.
+\end_layout
+
+\begin_layout Standard
+A healthcare provider can provide guidance or tools to assist in estimating
+ the levels of risk and in suggesting the actions that should be taken by
+ affected device owners.
 \end_layout
 
 \begin_layout Standard
