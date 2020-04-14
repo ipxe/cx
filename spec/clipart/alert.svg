@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1280 1066">
+  <g transform="scale(2.3039) translate(-79.983 -10.482)">
+    <path id="white_bg" fill="#fff" d="m356.09 89.476l194.47 326.21-385.28 1.25 190.81-327.46z"/>
+    <path id="foo" fill="#ea0000" d="m357.25 10.538c-9.51-0.6143-19.22 3.875-25.31 11.938l-250.63 421.06c-1.691 6.36-1.755 10.41-0.247 16.4 1.443 5.73 7.08 11.64 12.469 13.07l521.94 0.15c3.26-0.59 7.76-2.12 9.97-3.4 8.04-4.66 13.48-17.07 7.78-26.5l-253.72-420c-3.71-6.138-11.18-10.56-18.19-12.128-1.33-0.3-2.7-0.506-4.06-0.594zm-1.16 78.938l194.47 326.21-385.28 1.25 190.81-327.46z"/>
+    <path d="m349.16 394.46c-8.8-4.21-15.5-14.35-15.5-23.45 0-16.93 17.69-29.69 34.43-24.82 11.29 3.28 18.96 13.47 18.87 25.06-0.08 9.85-4.34 17.1-13.04 22.2-6.65 3.9-17.79 4.35-24.76 1.01zm2-66.87c-1.1-0.6-3.69-2.71-5.76-4.68-7.21-6.87-7.21-6.81-11.91-80.41-4.18-65.42-4.22-66.44-2.42-71.14 4.03-10.57 13.03-15.2 28.01-14.42 9.52 0.5 16.86 3.85 21.62 9.87 4.08 5.14 4.96 8.05 4.96 16.26-0.01 8.92-5.71 118.37-6.52 125.08-1.06 8.78-6.18 15.91-13.7 19.05-4.29 1.79-11.38 1.99-14.28 0.39z"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Warning sign</dc:title>
+        <dc:date>2006-11-30T07:16:31</dc:date>
+        <dc:description>from http://commons.wikimedia.org/wiki/Image:Achtung.svg</dc:description>
+        <dc:source>http://openclipart.org/detail/1695/warning-sign-by-zeimusu</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>zeimusu</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>caution</rdf:li>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>exclamation</rdf:li>
+            <rdf:li>exclamation mark</rdf:li>
+            <rdf:li>externalsource</rdf:li>
+            <rdf:li>image</rdf:li>
+            <rdf:li>media</rdf:li>
+            <rdf:li>png</rdf:li>
+            <rdf:li>public domain</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>svg</rdf:li>
+            <rdf:li>warning</rdf:li>
+            <rdf:li>wikimedia commons</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
