@@ -497,6 +497,81 @@ The healthcare provider can choose how to communicate the confirmation code
 \end_layout
 
 \begin_layout Standard
+The confirmation code allows the device to upload a list of the contact
+ identifiers that it has broadcast over the past week.
+ The list is uploaded to the healthcare provider's servers.
+\end_layout
+
+\begin_layout Standard
+To save bandwidth, the device uploads only a single piece of information
+ (a secret 
+\series bold
+seed value
+\series default
+) that it had used to generate its sequence of apparently random contact
+ identifiers.
+ This reduces the bandwidth required by around 99.9% compared to uploading
+ the complete list.
+\end_layout
+
+\begin_layout Standard
+The device owner makes a deliberate choice to upload the seed value in order
+ to help alert other people.
+ There is no way for anyone else to find out the seed value unless the device
+ owner chooses to do this.
+\end_layout
+
+\begin_layout Standard
+The seed value is the only piece of information that is uploaded.
+ The healthcare provider has no way to know where the device owner has been
+ or who the device owner has contacted.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename publication.svg
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The healthcare provider publishes the list of hazardous seed values correspondin
+g to positive diagnoses.
+ Each participating device downloads this list and compares the hazardous
+ contact identifiers against its own record of observed contact identifiers.
+\end_layout
+
+\begin_layout Standard
+If an observer device finds a match, then it knows that it has recently
+ been in close proximity to someone who has now been diagnosed and can raise
+ an alert.
+ The owner of the observer device can choose to take an appropriate action
+ such as self-isolating.
+\end_layout
+
+\begin_layout Standard
+The observer device can use any private information that it recorded at
+ the time of observation to help assess the risk level.
+ For example: if the observer device owner chose to record the time and
+ location where the contact identifier was observed, then this could be
+ used to determine that the contact took place while the owner was driving
+ alone to work and so represents a harmless contact with another driver
+ on the road.
+\end_layout
+
+\begin_layout Standard
+The owner of a device has complete control over all the information associated
+ with the contact.
+ There is no way for anyone else to find out when or where a contact took
+ place.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
 
