@@ -459,6 +459,44 @@ The device may choose to record extra information, such as when or where
 \end_layout
 
 \begin_layout Standard
+\noindent
+\align center
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\begin_inset Graphics
+	filename diagnosis.svg
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If the device owner becomes infected, the healthcare provider generates
+ a 
+\series bold
+confirmation code
+\series default
+ and communicates this confirmation code to the device owner.
+\end_layout
+
+\begin_layout Standard
+The device owner enters the confirmation code into the device.
+\end_layout
+
+\begin_layout Standard
+The healthcare provider can choose how to communicate the confirmation code
+ to the device owner.
+ Some healthcare providers will find it easiest to simply read the number
+ out in person.
+ Other healthcare providers may choose to send confirmation codes via SMS
+ messages, or through an existing online system.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -626,6 +664,18 @@ Advertiser
  to any 
 \series bold
 Observers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Confirmation
+\begin_inset space ~
+\end_inset
+
+Code: An informal term for the 
+\series bold
+Seed Report Challenge
 \series default
 .
 \end_layout
