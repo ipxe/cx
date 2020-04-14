@@ -56,6 +56,7 @@ customHeadersFooters
 \output_sync 0
 \bibtex_command default
 \index_command default
+\float_placement H
 \paperfontsize default
 \spacing single
 \use_hyperref false
@@ -371,6 +372,90 @@ Ease of implementation
 \series default
 : all cryptographic operations and data formats are chosen to be easily
  implemented using widely available and well-trusted existing libraries.
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename advertising.svg
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each participating device broadcasts a regular stream of messages.
+ Each message contains a temporary unique
+\series bold
+ contact identifier
+\series default
+, which is a random string of numbers and letters such as 
+\family typewriter
+896e5b31-7c06-456d-afa9-472ae0163da6
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+Other devices that are nearby can observe the temporary unique contact identifie
+r and can record it for future reference.
+ The other devices do not receive any other information besides the contact
+ identifier.
+\end_layout
+
+\begin_layout Standard
+From the perspective of an observer, the contact identifier is completely
+ meaningless: it is indistinguishable from random noise.
+ The observer cannot use the contact identifier to deduce any information
+ about the identity of the device.
+\end_layout
+
+\begin_layout Standard
+The contact identifier changes frequently, making it impossible for unwanted
+ observers (such as a stalker, or the owner of a shopping mall, or a government
+ agency) to use it to track the device.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename observing.svg
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each participating device also listens for messages broadcast by other nearby
+ devices, and keeps a record of all the contact identifiers that it observes
+ in these messages.
+\end_layout
+
+\begin_layout Standard
+The contact identifiers are meaningless at the time they are observed.
+ The only thing that the device can do is to record them for future reference.
+\end_layout
+
+\begin_layout Standard
+The list of recorded contact identifiers is stored on the device and will
+ never be shared with anyone.
+\end_layout
+
+\begin_layout Standard
+The device may choose to record extra information, such as when or where
+ the contact identifier was observed.
+ This extra information is also stored on the device and will never be shared
+ with anyone.
 \end_layout
 
 \begin_layout Standard
