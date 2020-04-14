@@ -1,0 +1,7 @@
+Notification ::= SEQUENCE {
+    alertLevel                  AlertLevel,
+    generatorType               GeneratorType,
+    seedValues                  SeedValues }
+
+Notifications ::= SEQUENCE SIZE (0..MAX) OF Notification
+

@@ -1,0 +1,4 @@
+SignatureValue ::= OCTET STRING
+
+SignatureValues ::= SEQUENCE SIZE (1..MAX) OF SignatureValue
+

@@ -5,7 +5,7 @@ TBSPublicationData ::= SEQUENCE {
     nextUpdateNotBefore         GeneralizedTime,
     nextUpdateNotAfter          GeneralizedTime,
     excludesPublishedBefore     GeneralizedTime OPTIONAL,
-    notifications               SEQUENCE SIZE (0..MAX) OF Notification,
-    updateURLs                  SEQUENCE SIZE (0..MAX) OF UTF8String,
+    notifications               Notifications,
+    updateURLs                  UpdateURLs,
     extensions              [0] Extensions OPTIONAL }
 

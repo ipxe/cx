@@ -1,0 +1,4 @@
+UpdateURL ::= UTF8String
+
+UpdateURLs ::= SEQUENCE SIZE (0..MAX) OF UpdateURL
+

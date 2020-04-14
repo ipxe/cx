@@ -1,4 +1,0 @@
-PreseedValue ::= OCTET STRING
-
-PreseedValues ::= SEQUENCE SIZE (1..MAX) OF PreseedValue
-

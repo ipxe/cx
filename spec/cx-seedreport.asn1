@@ -1,4 +1,4 @@
 SeedReport ::= SEQUENCE {
     tbsSeedReport               TBSSeedReport,
-    signatureValue              OCTET STRING }
+    signatureValues             SignatureValues }
 

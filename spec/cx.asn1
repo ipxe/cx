@@ -17,31 +17,36 @@ IMPORTS
 GeneratorType ::= INTEGER { aes128-ctr-drbg-df-n2k(1),
                             aes256-ctr-drbg-df-n2k(2) }
 
-SeedReportVersion ::= INTEGER { v1(1) }
-
-PreseedValue ::= OCTET STRING
-
-PreseedValues ::= SEQUENCE SIZE (1..MAX) OF PreseedValue
-
 Extension ::= SEQUENCE {
     extnID                      OBJECT IDENTIFIER,
     parameters                  ANY DEFINED BY extnID OPTIONAL }
 
 Extensions ::= SEQUENCE SIZE (1..MAX) OF Extension
 
-TBSSeedReport ::= SEQUENCE {
-    version                     SeedReportVersion,
+SeedReportVersion ::= INTEGER { v1(1) }
+
+SeedDescriptor ::= SEQUENCE {
     signatureAlgorithm          AlgorithmIdentifier,
     generatorType               GeneratorType,
-    preseedValues               PreseedValues,
-    preseedVerificationKey      SubjectPublicKeyInfo,
+    preseedValue                OCTET STRING,
+    preseedVerificationKey      SubjectPublicKeyInfo }
+
+SeedDescriptors ::= SEQUENCE SIZE (1..MAX) OF SeedDescriptor
+
+TBSSeedReport ::= SEQUENCE {
+    version                     SeedReportVersion,
+    seedDescriptors             SeedDescriptors,
     publisherName               UTF8String,
     seedReportChallenge         UTF8String,
     extensions              [0] Extensions OPTIONAL }
 
+SignatureValue ::= OCTET STRING
+
+SignatureValues ::= SEQUENCE SIZE (1..MAX) OF SignatureValue
+
 SeedReport ::= SEQUENCE {
     tbsSeedReport               TBSSeedReport,
-    signatureValue              OCTET STRING }
+    signatureValues             SignatureValues }
 
 PublicationVersion ::= INTEGER { v1(1) }
 
@@ -57,6 +62,12 @@ Notification ::= SEQUENCE {
     generatorType               GeneratorType,
     seedValues                  SeedValues }
 
+Notifications ::= SEQUENCE SIZE (0..MAX) OF Notification
+
+UpdateURL ::= UTF8String
+
+UpdateURLs ::= SEQUENCE SIZE (0..MAX) OF UpdateURL
+
 TBSPublicationData ::= SEQUENCE {
     version                     PublicationVersion,
     intendedAudience            PublicationAudience,
@@ -64,8 +75,8 @@ TBSPublicationData ::= SEQUENCE {
     nextUpdateNotBefore         GeneralizedTime,
     nextUpdateNotAfter          GeneralizedTime,
     excludesPublishedBefore     GeneralizedTime OPTIONAL,
-    notifications               SEQUENCE SIZE (0..MAX) OF Notification,
-    updateURLs                  SEQUENCE SIZE (0..MAX) OF UTF8String,
+    notifications               Notifications,
+    updateURLs                  UpdateURLs,
     extensions              [0] Extensions OPTIONAL }
 
 id-ct-cx-publicationData OBJECT IDENTIFIER ::= {

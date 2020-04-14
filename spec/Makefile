@@ -9,12 +9,22 @@ SEEDCALC_DEPS = seedcalc_sample.c \
 		seedcalc_type2_test3.c \
 		ipxe.pubkey.c fensystems.pubkey.c
 
-ASN1_FRAGS = cx-generatortype.asn1 cx-seedreportversion.asn1 \
-	     cx-preseedvalue--preseedvalues.asn1 cx-tbsseedreport.asn1 \
-	     cx-seedreport.asn1 cx-extension--extensions.asn1 \
-	     cx-tbspublicationdata.asn1 cx-publicationversion.asn1 \
-	     cx-publicationaudience.asn1 cx-notification.asn1 \
-	     cx-alertlevel.asn1 cx-seedvalues.asn1 \
+ASN1_FRAGS = cx-generatortype.asn1 \
+	     cx-extension--extensions.asn1 \
+	     cx-seedreportversion.asn1 \
+	     cx-seeddescriptor.asn1 \
+	     cx-seeddescriptor--seeddescriptors.asn1 \
+	     cx-tbsseedreport.asn1 \
+	     cx-signaturevalue--signaturevalues.asn1 \
+	     cx-seedreport.asn1 \
+	     cx-publicationversion.asn1 \
+	     cx-publicationaudience.asn1 \
+	     cx-alertlevel.asn1 \
+	     cx-seedvalues.asn1 \
+	     cx-notification.asn1 \
+	     cx-notification--notifications.asn1 \
+	     cx-updateurl--updateurls.asn1 \
+	     cx-tbspublicationdata.asn1 \
 	     cx-id-ct-cx-publicationdata--publicationcontentinfo.asn1
 
 DEPS = cx.bib $(GEN_DEPS) $(SEEDCALC_DEPS)

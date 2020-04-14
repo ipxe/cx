@@ -1,0 +1,8 @@
+SeedDescriptor ::= SEQUENCE {
+    signatureAlgorithm          AlgorithmIdentifier,
+    generatorType               GeneratorType,
+    preseedValue                OCTET STRING,
+    preseedVerificationKey      SubjectPublicKeyInfo }
+
+SeedDescriptors ::= SEQUENCE SIZE (1..MAX) OF SeedDescriptor
+
