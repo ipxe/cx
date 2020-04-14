@@ -11,6 +11,7 @@
 \usepackage{url}
 \usepackage{etoolbox}
 \usepackage{draftwatermark}
+\usepackage{titlesec}
 
 \input{version.tex}
 
@@ -825,6 +826,18 @@ Observers
 \end_layout
 
 \begin_layout Description
+Broadcast
+\begin_inset space ~
+\end_inset
+
+Layer: A broadcast-capable commucations medium used to carry 
+\series bold
+Advertisements
+\series default
+.
+\end_layout
+
+\begin_layout Description
 Confirmation
 \begin_inset space ~
 \end_inset
@@ -1346,7 +1359,151 @@ Value: A sequence of pseudorandom bytes used as an input to a
 Generator
 \series default
 .
- 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newcommand{
+\backslash
+sectionbreak}{
+\backslash
+clearpage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Broadcast Layer
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Broadcast-Layer"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The protocol defined by this document is designed in terms of an abstract
+ Broadcast Layer.
+ Advertisers and Observers MAY support multiple Broadcast Layers concurrently.
+ The only fundamental property required of a Broadcast Layer is the ability
+ to broadcast and to receive a 16-byte RFC
+\begin_inset space ~
+\end_inset
+
+4122
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC4122"
+literal "false"
+
+\end_inset
+
+ UUID.
+\end_layout
+
+\begin_layout Standard
+It is expected that the initial implementation will use Bluetooth Low Energy
+ (BLE) as the only available Broadcast Layer.
+\end_layout
+
+\begin_layout Standard
+Advertisers MUST broadcast Advertisements on all supported Broadcast Layers.
+ Advertisers MAY choose to use the same Contact Identifier on multiple Broadcast
+ Layers.
+\end_layout
+
+\begin_layout Standard
+Observers MUST listen for Advertisements on all supported Broadcast Layers.
+\end_layout
+
+\begin_layout Subsection
+Broadcast Layer Requirements
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Broadcast-Layer-Requirements"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Broadcast Layer MUST provide the ability for an Advertiser to logically
+ broadcast a Contact Identifer (which is a 16-byte RFC
+\begin_inset space ~
+\end_inset
+
+4122
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC4122"
+literal "false"
+
+\end_inset
+
+ UUID), and MUST provide the ability for nearby Observers to observe this
+ broadcast Contact Identifier.
+\end_layout
+
+\begin_layout Standard
+A Broadcast Layer MAY implement this logical broadcast functionality as
+ a single physical broadcast.
+ Where this is not possible due to external constraints (such as application-lev
+el API limitations in mobile device operating systems), the Broadcast Layer
+ MAY require additional packets to be exchanged in order to effect the transmiss
+ion of the Contact Identifier from the Advertiser to the Observer.
+\end_layout
+
+\begin_layout Standard
+A Broadcast Layer SHOULD NOT expose any additional information beyond the
+ fact that this broadcast contains a Contact Identifier and the value of
+ the Contact Identifier.
+ Where this is not possible due to external constraints (such as the requirement
+ for a link-layer header to include a hardware MAC address), the Broadcast
+ Layer MUST employ techniques to eliminate or minimise the exposure of any
+ information that could be used to identify an Advertiser or an Observer.
+\end_layout
+
+\begin_layout Standard
+Such techniques MAY include the use of single-use or short-lived values
+ for fields that would normally contain identifying information (such as
+ a hardware MAC address).
+ Where short-lived values are used, the lifecycle of these short-lived values
+ MUST be synchronised with the lifecycle of a single Contact Identifier,
+ to avoid linkage attacks.
+\end_layout
+
+\begin_layout Standard
+An Observer MAY record additional relevant information provided by the Broadcast
+ Layer at the time of receiving the Contact Identifier, such as received
+ signal strength or distance from the Advertiser (if known).
+ Such information is potentially useful when subsequently determining the
+ risk level associated with a contact.
+\end_layout
+
+\begin_layout Standard
+An Observer SHOULD NOT record additional information from the Broadcast
+ Layer that is not relevant to determining the risk level associated with
+ a contact (such as the link-layer MAC address presented by the Advertiser).
 \end_layout
 
 \begin_layout Section
@@ -8405,13 +8562,6 @@ options "plain"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
 \begin_layout Part*
 Appendix
 \end_layout
@@ -8469,13 +8619,6 @@ LatexCommand inputminted
 filename "gen_sample.c"
 lstparams "language=C"
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -8634,13 +8777,6 @@ lstparams "language=C"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Seed Calculator Sample Code
 \begin_inset CommandInset label
@@ -8694,13 +8830,6 @@ LatexCommand inputminted
 filename "seedcalc_sample.c"
 lstparams "language=C"
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -9087,13 +9216,6 @@ lstparams "language=C"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 ASN.1 Schema
 \begin_inset CommandInset label
@@ -9161,13 +9283,6 @@ LatexCommand inputminted
 filename "cx.asn1"
 lstparams "language=Clean,samepage=false"
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
 \end_inset
 
 
