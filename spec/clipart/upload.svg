@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://web.resource.org/cc/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" id="svg1878" viewBox="0 0 52.937 49.841" version="1.0">
+  <defs id="defs3">
+    <linearGradient id="linearGradient3806" x1="-50.436" gradientUnits="userSpaceOnUse" y1="124.95" gradientTransform="matrix(2.1364 0 0 .41825 553.07 180.3)" x2="-50.436" y2="165.63">
+      <stop id="stop2374" stop-color="#006f9d" offset="0"/>
+      <stop id="stop2376" stop-color="#7bcefb" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient3808" x1="-53.428" gradientUnits="userSpaceOnUse" y1="109.79" gradientTransform="matrix(0 -.86707 .59469 0 393.88 233.8)" x2="-31.586" y2="95.684">
+      <stop id="stop2317" stop-color="#83cb46" offset="0"/>
+      <stop id="stop2319" stop-color="#fff" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient3810" x1="-215.2" gradientUnits="userSpaceOnUse" y1="558.8" gradientTransform="matrix(0 -1.2075 .82817 0 0 0)" x2="-232.25" y2="540.77">
+      <stop id="stop7092" stop-color="#ff2a26" offset="0"/>
+      <stop id="stop7094" stop-color="#96000d" offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="layer1" transform="translate(-335.31 -245.5)">
+    <g id="g9859" transform="translate(-79.667 9.1343)">
+      <g id="g9861" transform="translate(-5.2807 1.1198)">
+        <rect id="rect9863" style="color:#000000" rx="1" ry="1" height="36.077" width="46.921" stroke="#0f2965" y="236.74" x="421.13" stroke-width="1.75" fill="#e5e7f6"/>
+        <g id="g9865" fill="#2dabdc" transform="translate(569.7 178.77)">
+          <rect id="rect9867" style="color:#000000" rx="1" ry="1" height="2.4506" width="18.379" y="70.907" x="-136.82"/>
+          <rect id="rect9869" style="color:#000000" transform="scale(-1,1)" rx="1" ry="1" height="2.4506" width="4.0843" y="70.907" x="140.09"/>
+        </g>
+        <g id="g9871" fill="#2dabdc" transform="translate(569.7 183.64)">
+          <rect id="rect9873" style="color:#000000" rx="1" ry="1" height="2.4506" width="18.379" y="70.907" x="-136.82"/>
+          <rect id="rect9875" style="color:#000000" transform="scale(-1,1)" rx="1" ry="1" height="2.4506" width="4.0843" y="70.907" x="140.09"/>
+        </g>
+        <g id="g9877" fill="#2dabdc" transform="translate(569.7 188.51)">
+          <rect id="rect9879" style="color:#000000" rx="1" ry="1" height="2.4506" width="18.379" y="70.907" x="-136.82"/>
+          <rect id="rect9881" style="color:#000000" transform="scale(-1,1)" rx="1" ry="1" height="2.4506" width="4.0843" y="70.907" x="140.09"/>
+        </g>
+        <g id="g9883" fill="#2dabdc" transform="translate(569.7 193.37)">
+          <rect id="rect9885" style="color:#000000" rx="1" ry="1" height="2.4506" width="18.379" y="70.907" x="-136.82"/>
+          <rect id="rect9887" style="color:#000000" transform="scale(-1,1)" rx="1" ry="1" height="2.4506" width="4.0843" y="70.907" x="140.09"/>
+        </g>
+        <rect id="rect9889" style="color:#000000" rx="1" ry="1" height="7.7418" width="46.921" stroke="#0f2965" y="236.12" x="421.13" stroke-width="1.75" fill="url(#linearGradient3806)"/>
+        <g id="g9891" fill="#2dabdc" transform="translate(569.7 183.64)">
+          <rect id="rect9893" style="color:#000000" rx="1" ry="1" height="2.4506" width="18.379" y="70.907" x="-136.82"/>
+          <rect id="rect9895" style="color:#000000" transform="scale(-1,1)" rx="1" ry="1" height="2.4506" width="4.0843" y="70.907" x="140.09"/>
+        </g>
+      </g>
+      <g id="g9897" stroke-linejoin="round">
+        <path id="path9899" style="color:#000000" d="m445.82 267.82h3.86v15.08h11.04v-15.08h3.88l-9.4-10.01-9.38 10.01z" stroke="#fff" stroke-linecap="round" stroke-width="6.625" fill="url(#linearGradient3808)"/>
+        <path id="path9901" style="color:#000000" d="m445.82 267.82h3.86v15.08h11.04v-15.08h3.88l-9.4-10.01-9.38 10.01z" stroke="#6b1a11" stroke-width="1.75" fill="url(#linearGradient3810)"/>
+      </g>
+    </g>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>red menu icon set</dc:title>
+        <dc:date>2008-01-29T12:29:51</dc:date>
+        <dc:description>Kuba's menu icons set with red arrows.</dc:description>
+        <dc:source>http://openclipart.org/detail/12121/red-menu-icon-set-by-pitr-12121</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>pitr</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>collection</rdf:li>
+            <rdf:li>glossy</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>image</rdf:li>
+            <rdf:li>media</rdf:li>
+            <rdf:li>menu</rdf:li>
+            <rdf:li>png</rdf:li>
+            <rdf:li>public domain</rdf:li>
+            <rdf:li>red</rdf:li>
+            <rdf:li>remix</rdf:li>
+            <rdf:li>set</rdf:li>
+            <rdf:li>svg</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
