@@ -6232,7 +6232,7 @@ and
 \series bold
 generatorType
 \series default
- within a Publication.
+ within the Publication.
  If the 
 \series bold
 excludesPublishedBefore
@@ -6251,6 +6251,11 @@ alertLevel
 expired
 \series default
 .
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL ensure that each combination
+ of Generator Type and Seed Value appears at most once within the Publication.
 \end_layout
 
 \begin_layout Standard
