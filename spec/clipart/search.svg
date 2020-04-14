@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" xmlns:ns1="http://sozi.baierouge.fr" id="svg3244" sodipodi:docname="emyller_magnifying_glass.svg" viewBox="0 0 256 256" sodipodi:version="0.32" version="1.0" inkscape:output_extension="org.inkscape.output.svg.inkscape" inkscape:version="0.46">
+  <sodipodi:namedview id="base" bordercolor="#666666" inkscape:pageshadow="2" guidetolerance="10" pagecolor="#ffffff" gridtolerance="10000" inkscape:window-height="726" inkscape:zoom="0.98994949" objecttolerance="10" inkscape:window-y="25" showgrid="false" borderopacity="1.0" inkscape:current-layer="layer1" inkscape:cx="95.748732" inkscape:cy="155.04374" showguides="true" inkscape:guide-bbox="true" inkscape:window-x="0" inkscape:window-width="1280" inkscape:pageopacity="0.0" inkscape:document-units="px"/>
+  <defs id="defs3246">
+    <filter id="filter3881" inkscape:collect="always">
+      <feGaussianBlur id="feGaussianBlur3883" stdDeviation="0.77501872" inkscape:collect="always"/>
+    </filter>
+    <filter id="filter3971" inkscape:collect="always">
+      <feGaussianBlur id="feGaussianBlur3973" stdDeviation="1.4490246" inkscape:collect="always"/>
+    </filter>
+    <linearGradient id="linearGradient3983-997-724-991" y2="177.52" gradientUnits="userSpaceOnUse" y1="203.86" gradientTransform="translate(2.1429 .71429)" x2="199.41" x1="171.43" inkscape:collect="always">
+      <stop id="stop4348" style="stop-color:#1c3e47" offset="0"/>
+      <stop id="stop4435" style="stop-color:#88aeb9" offset=".42765"/>
+      <stop id="stop4437" style="stop-color:#b9d0d6" offset=".58450"/>
+      <stop id="stop4350" style="stop-color:#88aeb9" offset=".74486"/>
+      <stop id="stop4352" style="stop-color:#2d5059" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient4429" y2="135.29" gradientUnits="userSpaceOnUse" x2="149.56" gradientTransform="translate(2.1429 .71429)" y1="151.45" x1="132.33" inkscape:collect="always">
+      <stop id="stop4425" style="stop-color:#999999" offset="0"/>
+      <stop id="stop4431" style="stop-color:#f2f2f2" offset=".55469"/>
+      <stop id="stop4427" style="stop-color:#b3b3b3" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient4439" y2="110.64" gradientUnits="userSpaceOnUse" x2="62.749" gradientTransform="translate(2.1429 .71429)" y1="132.79" x1="38.214" inkscape:collect="always">
+      <stop id="stop3895" style="stop-color:#ffffff" offset="0"/>
+      <stop id="stop3897" style="stop-color:#ffffff;stop-opacity:0" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient4441" y2="97.025" gradientUnits="userSpaceOnUse" x2="125.64" gradientTransform="translate(-82.69 -1.3263)" y1="37.357" x1="217.86" inkscape:collect="always">
+      <stop id="stop3808" style="stop-color:#ffffff" offset="0"/>
+      <stop id="stop3810" style="stop-color:#ffffff;stop-opacity:0" offset="1"/>
+    </linearGradient>
+    <radialGradient id="radialGradient4443" gradientUnits="userSpaceOnUse" cy="84.004" cx="168.98" gradientTransform="matrix(3.5098 -.30766 .30795 3.5131 -437.61 -122.81)" r="63.571" inkscape:collect="always">
+      <stop id="stop4451" style="stop-color:#dcdcf7;stop-opacity:.4" offset="0"/>
+      <stop id="stop4453" style="stop-color:#dcdcf7" offset="1"/>
+    </radialGradient>
+    <radialGradient id="radialGradient4445" gradientUnits="userSpaceOnUse" cy="7.9658" cx="123.17" gradientTransform="matrix(-1.5376 -2.6632 2.6658 -1.5391 315.77 494.99)" r="77.5" inkscape:collect="always">
+      <stop id="stop3861" style="stop-color:#000000" offset="0"/>
+      <stop id="stop3863" style="stop-color:#ffffff" offset="1"/>
+    </radialGradient>
+  </defs>
+  <g id="layer1" inkscape:label="Layer 1" inkscape:groupmode="layer">
+    <path id="path4421" sodipodi:nodetypes="ccccc" style="fill-rule:evenodd;fill:url(#linearGradient4429)" d="m130.94 149.64l5.05 5.3 14.65-13.64-5.06-5.3-14.64 13.64z"/>
+    <path id="path3871" style="filter:url(#filter3881);fill:#000000" d="m84.81 9.8299c-41.857 1.0621-75.5 35.388-75.5 77.5 0.0003 42.78 34.72 77.5 77.5 77.5s77.5-34.72 77.5-77.5-34.72-77.5-77.5-77.5c-0.668-0.0001-1.335-0.0169-2-0.0001zm2 7.5001c38.64 0 70 31.36 70 70s-31.36 70-70 70-70-31.36-70-70 31.36-70 70-70z"/>
+    <path id="path3790" style="fill:url(#radialGradient4445)" d="m84.81 9.8299c-41.857 1.0621-75.5 35.388-75.5 77.5 0.0003 42.78 34.72 77.5 77.5 77.5s77.5-34.72 77.5-77.5-34.72-77.5-77.5-77.5c-0.668-0.0001-1.335-0.0169-2-0.0001zm2 7.5001c38.64 0 70 31.36 70 70s-31.36 70-70 70-70-31.36-70-70 31.36-70 70-70z"/>
+    <path id="path3794" sodipodi:rx="63.57143" sodipodi:ry="63.57143" style="fill:url(#radialGradient4443)" sodipodi:type="arc" d="m213.57 84.571a63.571 63.571 0 1 1 -127.14 0 63.571 63.571 0 1 1 127.14 0z" transform="matrix(1.0347 .37678 -.37678 1.0347 -36.523 -56.703)" sodipodi:cy="84.571426" sodipodi:cx="150"/>
+    <path id="path3800" sodipodi:nodetypes="ccscsc" style="fill:url(#linearGradient4441)" d="m108.76 23.555c-23.715-8.636-63.731-4.161-74.588 27.128 11.751 0.698 28.368 12.213 40.276 16.549 37.772 13.756 66.882 17.84 74.682 49.678 0.51-1.19 1-2.39 1.45-3.63 13.22-36.306-5.51-76.504-41.82-89.725z"/>
+    <path id="path3830" style="opacity:.7;fill:url(#linearGradient4439)" d="m22.56 89.267c0.479 15.443 6.552 30.213 16.907 41.533l6.937-7.44c-10.202-9.11-18.673-20.31-23.844-34.093zm25.125 35.223l-7 7.62c6.548 6.76 14.69 12.19 24.125 15.63 10.379 3.78 21.097 4.69 31.313 3.18-16.634-5.68-34.139-14.08-48.438-26.43z"/>
+    <path id="path3845" style="opacity:.2;filter:url(#filter3971);fill:#000000" d="m84.941 14.88c-39.13 0.993-70.58 33.082-70.58 72.45 0 39.99 32.457 72.45 72.45 72.45 39.989 0 72.449-32.46 72.449-72.45 0-39.992-32.46-72.45-72.449-72.45-0.625 0-1.249-0.016-1.87 0zm1.87 7.011c36.119 0 65.439 29.317 65.439 65.439 0 36.12-29.32 65.44-65.439 65.44-36.122 0-65.439-29.32-65.439-65.44 0-36.122 29.317-65.439 65.439-65.439z"/>
+    <path id="path3975" sodipodi:nodetypes="ccccc" style="stroke-linejoin:bevel;fill-rule:evenodd;stroke:#000000;stroke-width:1px;fill:url(#linearGradient3983-997-724-991)" d="m132.56 157.55l79.46 87.94c8.33-3.28 19.86-15.02 23.9-22.6l-81.63-86.18-21.73 20.84z"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>magnifying glass</dc:title>
+        <dc:date>2008-10-29T16:13:36</dc:date>
+        <dc:description>a simple and transparent magnifying glass.</dc:description>
+        <dc:source>https://openclipart.org/detail/19847/magnifying-glass-by-emyller</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>emyller</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>glass</rdf:li>
+            <rdf:li>magifying</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
