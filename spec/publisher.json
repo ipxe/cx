@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://cx.ipxe.org/json/publisher",
+    "title": "JSON Schema for CX Publisher Descriptor.",
+    "description": "Reference: CX: Publisher Descriptors",
+    "type": "object",
+    "properties": {
+        "url": {
+            "description": "Reference: CX: Publisher Descriptor Layout: url",
+            "$ref": "#/definitions/url-https"
+        },
+        "cert": {
+            "description": "Reference: CX: Publisher Descriptor Layout: cert",
+            "$ref": "#/definitions/x509-pem"
+        },
+        "name": {
+            "description": "Reference: CX: Publisher Descriptor Layout: name",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+        },
+        "logo": {
+            "description": "Reference: CX: Publisher Descriptor Layout: logo",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/url-http"
+                },
+                {
+                    "$ref": "#/definitions/url-https"
+                }
+            ]
+        },
+        "report": {
+            "description": "Reference: CX: Publisher Descriptor Layout: report",
+            "$ref": "#/definitions/url-https"
+        },
+        "pub": {
+            "description": "Reference: CX: Publisher Descriptor Layout: pub",
+            "$ref": "#/definitions/url-https"
+        }
+    },
+    "required": [
+        "url",
+        "cert",
+        "name",
+        "report",
+        "pub"
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "url-http": {
+            "$id": "#url-http",
+            "title": "An absolute URL using scheme http.",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^http://"
+        },
+        "url-https": {
+            "$id": "#url-https",
+            "title": "An absolute URL using scheme https.",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+        },
+        "x509-pem": {
+            "$id": "#x509-pem",
+            "type": "string",
+            "format": "x509:pem",
+            "pattern": "-----BEGIN CERTIFICATE-----"
+        }
+    }
+}
