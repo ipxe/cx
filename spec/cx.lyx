@@ -1493,6 +1493,15 @@ Such techniques MAY include the use of single-use or short-lived values
 \end_layout
 
 \begin_layout Standard
+Note that when the logical broadcast is implemented as a single physical
+ broadcast, there is no need for any device to be able to respond to the
+ physical broadcast or to be able to determine its origin.
+ Under these circumstances, the Broadcast Layer MAY use fixed and non-identifyin
+g values for fields that would normally contain identifying information
+ (such as using an all-zero source MAC address).
+\end_layout
+
+\begin_layout Standard
 An Observer MAY record additional relevant information provided by the Broadcast
  Layer at the time of receiving the Contact Identifier, such as received
  signal strength or distance from the Advertiser (if known).
