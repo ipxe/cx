@@ -1465,8 +1465,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-A Broadcast Layer MAY implement this logical broadcast functionality as
- a single physical broadcast.
+A Broadcast Layer SHOULD implement this logical broadcast functionality
+ as a single physical broadcast.
  Where this is not possible due to external constraints (such as application-lev
 el API limitations in mobile device operating systems), the Broadcast Layer
  MAY require additional packets to be exchanged in order to effect the transmiss
