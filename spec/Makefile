@@ -43,6 +43,25 @@ version.tex :
 %.pdf : %.lyx version.tex $(DEPS) Makefile
 	lyx -e pdf2 $<
 
+%.tex : %.lyx version.tex $(DEPS) Makefile
+	lyx -e pdflatex $<
+
+%.md : %.tex Makefile
+	pandoc --default-image-extension=png -t gfm $< -o $@
+
+cx-intro.md : cx.md Makefile
+	tail -n +2 $< | sed -E '/^#.*/q' | head -n -1 > $@
+
+../%.png : %.svg Makefile
+	rsvg-convert -f png -d 150 -o $@ $<
+
+../README.md : README-header.md.part cx-intro.md README-footer.md.part \
+	       ../advertising.png ../observing.png ../diagnosis.png \
+	       ../publication.png ../international.png Makefile
+	cat README-header.md.part cx-intro.md README-footer.md.part > $@
+
+readme : ../README.md Makefile
+
 test-samples : gen_sample.o gen_test seedcalc_sample.o seedcalc_test
 	./gen_test
 	./seedcalc_test
@@ -76,7 +95,7 @@ cx-%.asn1 : cx.asn1
 .PRECIOUS : cx-%.asn1
 
 clean :
-	$(RM) *.pdf *.o *.der *.pubkey.c gen_test seedcalc_test
+	$(RM) *.pdf *.tex *.md *.o *.der *.pubkey.c gen_test seedcalc_test
 	/bin/echo '\newcommand{\cxVersion}{}' > version.tex
 
 .PHONY : version.tex
