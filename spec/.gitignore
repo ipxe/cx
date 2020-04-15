@@ -1,4 +1,6 @@
 *.pdf
+*.tex
+*.md
 *.o
 *.der
 *.pubkey.c
