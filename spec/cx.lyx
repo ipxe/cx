@@ -8056,6 +8056,23 @@ https
 \end_layout
 
 \begin_layout Standard
+The 
+\series bold
+url
+\series default
+ property acts as the permanent identifier for the Publisher and MUST NOT
+ be changed for the lifetime of the Publisher.
+ A Publisher SHALL select a URL that will be able to handle high traffic
+ volumes (e.g.
+\begin_inset space ~
+\end_inset
+
+by being hosted on a Content Distribution Network) and SHOULD select a URL
+ that will allow the underlying hosting provider to be changed to meet future
+ operational needs.
+\end_layout
+
+\begin_layout Standard
 An Advertiser, Observer, or consuming Publisher SHALL retrieve an updated
  Publisher Descriptor from this URL as defined in section
 \begin_inset space ~
@@ -8072,7 +8089,8 @@ noprefix "false"
 \end_inset
 
  (as needed or in response to an explicit user request), and SHALL replace
- any stored Publisher Descriptor for the same Publisher if and only if:
+ any existing stored Publisher Descriptor for the same Publisher if and
+ only if:
 \end_layout
 
 \begin_layout Itemize
@@ -8084,8 +8102,11 @@ the updated Publisher Descriptor contains a
 \series bold
 url
 \series default
- property from which an identical copy of the updated Publisher Descriptor
- can be successfully retrieved.
+ property that is identical to the current 
+\series bold
+url 
+\series default
+property of the existing stored Publisher Descriptor.
 \end_layout
 
 \begin_layout Standard
@@ -8095,11 +8116,15 @@ An Advertiser, Observer, or consuming Publisher SHALL treat the Publisher
 url
 \series default
  property is not present, is empty, contains a value that is not an absolute
- URL, or contains a value that uses a URL scheme other than 
+ URL, contains a value that uses a URL scheme other than 
 \family typewriter
 https
 \family default
-.
+, or differs from the 
+\series bold
+url
+\series default
+ property of an existing stored Publisher Descriptor for that Publisher.
 \end_layout
 
 \begin_layout Subsubsection
