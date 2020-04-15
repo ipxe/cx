@@ -1489,7 +1489,7 @@ Such techniques MAY include the use of single-use or short-lived values
  a hardware MAC address).
  Where short-lived values are used, the lifecycle of these short-lived values
  MUST be synchronised with the lifecycle of a single Contact Identifier,
- to avoid linkage attacks.
+ to prevent the persistent identification of an Advertiser via linkage attacks.
 \end_layout
 
 \begin_layout Standard
@@ -1499,6 +1499,12 @@ Note that when the logical broadcast is implemented as a single physical
  Under these circumstances, the Broadcast Layer MAY use fixed and non-identifyin
 g values for fields that would normally contain identifying information
  (such as using an all-zero source MAC address).
+\end_layout
+
+\begin_layout Standard
+A Broadcast Layer MUST require the addition of random jitter to the schedule
+ of transmissions, to prevent the persistent identification of an Advertiser
+ via measurement of broadcast timings.
 \end_layout
 
 \begin_layout Standard
