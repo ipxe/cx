@@ -56,7 +56,7 @@ cx-intro.md : cx.md Makefile
 	rsvg-convert -f png -d 150 -o $@ $<
 
 ../README.md : README-header.md.part cx-intro.md README-footer.md.part \
-	       ../advertising.png ../observing.png ../diagnosis.png \
+	       ../broadcasting.png ../observing.png ../diagnosis.png \
 	       ../publication.png ../international.png Makefile
 	cat README-header.md.part cx-intro.md README-footer.md.part > $@
 

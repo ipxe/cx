@@ -71,7 +71,7 @@ The architecture provides the following features:
     formats are chosen to be easily implemented using widely available
     and well-trusted existing libraries.
 
-![image](advertising.png)
+![image](broadcasting.png)
 
 Each participating device broadcasts a regular stream of messages. Each
 message contains a temporary unique **contact identifier**, which is a
