@@ -1,6 +1,7 @@
 TBSPublicationData ::= SEQUENCE {
     version                     PublicationVersion,
-    intendedAudience            PublicationAudience,
+    zone                        UTF8String,
+    aggregated                  BOOLEAN DEFAULT TRUE,
     publishedAt                 GeneralizedTime,
     nextUpdateNotBefore         GeneralizedTime,
     nextUpdateNotAfter          GeneralizedTime,

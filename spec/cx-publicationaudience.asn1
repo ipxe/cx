@@ -1,2 +1,0 @@
-PublicationAudience ::= INTEGER { observer(1), publisher(2) }
-

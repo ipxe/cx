@@ -50,8 +50,6 @@ SeedReport ::= SEQUENCE {
 
 PublicationVersion ::= INTEGER { v1(1) }
 
-PublicationAudience ::= INTEGER { observer(1), publisher(2) }
-
 AlertLevel ::= INTEGER { no-alert(0), debug-alert(1), expired(2),
                          unknown-alert(3), symptomatic(4), diagnosed(5) }
 
@@ -70,7 +68,8 @@ UpdateURLs ::= SEQUENCE SIZE (0..MAX) OF UpdateURL
 
 TBSPublicationData ::= SEQUENCE {
     version                     PublicationVersion,
-    intendedAudience            PublicationAudience,
+    zone                        UTF8String,
+    aggregated                  BOOLEAN DEFAULT TRUE,
     publishedAt                 GeneralizedTime,
     nextUpdateNotBefore         GeneralizedTime,
     nextUpdateNotAfter          GeneralizedTime,

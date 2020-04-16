@@ -18,7 +18,6 @@ ASN1_FRAGS = cx-generatortype.asn1 \
 	     cx-signaturevalue--signaturevalues.asn1 \
 	     cx-seedreport.asn1 \
 	     cx-publicationversion.asn1 \
-	     cx-publicationaudience.asn1 \
 	     cx-alertlevel.asn1 \
 	     cx-seedvalues.asn1 \
 	     cx-notification.asn1 \

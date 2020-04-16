@@ -1145,7 +1145,7 @@ Seed Value
 \end_layout
 
 \begin_layout Description
-Publication: A set of 
+Publication: A regularly updated set of 
 \series bold
 Notifications
 \series default
@@ -1160,6 +1160,22 @@ Observers
  or other 
 \series bold
 Publishers
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Publication
+\begin_inset space ~
+\end_inset
+
+Catalogue: The set of 
+\series bold
+Publications
+\series default
+ provided by a 
+\series bold
+Publisher
 \series default
 .
 \end_layout
@@ -1268,6 +1284,26 @@ Publication
 \end_layout
 
 \begin_layout Description
+Publisher
+\begin_inset space ~
+\end_inset
+
+Topology: A hierarchical topology of 
+\series bold
+Publishers
+\series default
+ cooperating to share relevant 
+\series bold
+Notifications
+\series default
+ across different 
+\series bold
+Subscription Zones
+\series default
+.
+\end_layout
+
+\begin_layout Description
 Seed
 \begin_inset space ~
 \end_inset
@@ -1357,6 +1393,18 @@ Seed
 Value: A sequence of pseudorandom bytes used as an input to a 
 \series bold
 Generator
+\series default
+.
+\end_layout
+
+\begin_layout Description
+Subscription
+\begin_inset space ~
+\end_inset
+
+Zone: A geographical region associated with a 
+\series bold
+Publisher
 \series default
 .
 \end_layout
@@ -3665,6 +3713,29 @@ For example: a national health authority (a Publisher) could provide its
 \end_layout
 
 \begin_layout Standard
+For a Publisher that forms part of a Publisher Topology as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Topology"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the Confirmation Code is also used to link the Seed Report to the relevant
+ Subscription Zone.
+ In the above example, the national health authority might record at the
+ time of diagnosis that the patient had recently travelled internationally
+ and therefore choose to associate the Confirmation Code with the worldwide
+ Subscription Zone rather than the default national Subscription Zone.
+\end_layout
+
+\begin_layout Standard
 The mechanism for conveying the Confirmation Code is deliberately left unspecifi
 ed by this document, since the optimal approach will vary according to the
  needs and existing capabilities of each Publisher.
@@ -4448,7 +4519,7 @@ The
 \series bold
 version
 \series default
- field describes the version of the 
+ field contains the version of the 
 \series bold
 SeedDescriptor,
 \series default
@@ -5125,7 +5196,9 @@ name "sec:Publications"
 \begin_layout Standard
 A Publication is a message constructed by a Publisher to be sent to Observers
  or to other Publishers.
- The Publication is used to communicate a set of Notifications.
+ The Publication is used to communicate a set of Notifications, where each
+ Notification is a logical tuple comprising an Alert Level, a Generator
+ Type, and a Seed Value.
 \end_layout
 
 \begin_layout Standard
@@ -5565,6 +5638,22 @@ When constructing a Publication, a Publisher SHALL set this field to indicate
 seedValues
 \series default
  field.
+ The association of an Alert Level with a Seed Value is established through
+ the use of a Seed Report Challenge as described in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Challenges"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -5794,7 +5883,7 @@ The
 \series bold
 version
 \series default
- field describes the version of the 
+ field contains the version of the 
 \series bold
 TBSPublicationData
 \series default
@@ -5822,21 +5911,10 @@ TBSPublicationData
 \end_layout
 
 \begin_layout Paragraph
-intendedAudience
+zone
 \begin_inset CommandInset label
 LatexCommand label
-name "par:TBSPublicationData-intendedAudience"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand inputminted
-filename "cx-publicationaudience.asn1"
-lstparams "language=Clean"
+name "par:TBSPublicationData-zone"
 
 \end_inset
 
@@ -5846,50 +5924,159 @@ lstparams "language=Clean"
 \begin_layout Standard
 The 
 \series bold
-intendedAudience
+zone
 \series default
- field describes the intended audience for the Publication as one of the
- following values:
-\end_layout
+ field contains the Subscription Zone for the Publication.
+ The value of this field is the Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
 
-\begin_layout Description
-observer(1) The Publication is intended to be consumed by Observers and
- includes all Notifications that are known to be relevant to Observers subscribi
-ng to the Publisher, including relevant Notifications that originated from
- other Publishers.
-\end_layout
 
-\begin_layout Description
-publisher(2) The Publication is intended to be consumed by another Publisher
- and contains only Notifications that are relevant to the consuming Publisher.
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Standard
-This field exists primarily to detect misconfigurations.
-\end_layout
+\end_inset
 
-\begin_layout Standard
-When constructing a Publication, a Publisher SHALL set this field to indicate
- the intended audience, based on the subset of Notifications that the Publisher
- is including within this Publication.
+ for the Publisher associated with the Subscription Zone.
 \end_layout
 
 \begin_layout Standard
-When interpreting a Publication, an Observer SHALL treat a Publication as
- invalid if this field contains any value other than 
-\series bold
-observer(1)
-\series default
+When constructing a Publication, a Publisher SHALL set this field as directed
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Catalogue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
 .
 \end_layout
 
 \begin_layout Standard
-When interpreting a Publication, an Publisher SHALL treat a Publication
- as invalid if this field contains any value other than 
-\series bold
-publisher(2)
-\series default
+When interpreting a Publication, an Observer SHALL verify that this field
+ contains the Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
 .
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, a Publisher SHALL verify that this field
+ contains a value matching the 
+\series bold
+zone
+\series default
+ property as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Publisher-pubs-zone"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+aggregated
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReport-aggregated"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The OPTIONAL 
+\series bold
+aggregated
+\series default
+ field contains a boolean flag indicating whether or not the Publication
+ includes Seed Values that have been aggregated from multiple Publishers
+ as described in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Catalogue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ If the field is not present then it has a default value of True.
+\end_layout
+
+\begin_layout Standard
+This flag exists primarily to prevent Publishers from accidentally consuming
+ Publications that are already aggregated and therefore intended for direct
+ consumption by Observers.
+ Such an accident would lead to loss of traceability of the origin of a
+ Notification and could result in excessively large Notification volumes
+ being propagated through a Publisher Topology.
+\end_layout
+
+\begin_layout Standard
+When constructing a Publication, a Publisher SHALL set this field as directed
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Catalogue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, an Observer SHALL treat the Publication
+ as invalid if this field is set to False.
+\end_layout
+
+\begin_layout Standard
+When interpreting a Publication, a Publisher SHALL treat the Publication
+ as invalid if this field is omitted or is set to True.
 \end_layout
 
 \begin_layout Paragraph
@@ -7840,8 +8027,22 @@ The Publication MAY be retrieved via HTTP since the content itself includes
 \end_layout
 
 \begin_layout Standard
-A Publisher SHALL provide at least one Publication Endpoint for use by Observers
-, and MAY provide additional Publication Endpoints for use by other Publishers.
+A Publisher SHALL provide a Publication Endpoint for each Publication in
+ its Publication Catalogue as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Catalogue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -7911,8 +8112,7 @@ literal "false"
  Observers, and other Publishers.
  It is used to describe all relevant attributes of a Publisher, such as
  the Publisher Name, the Publisher Certificate, the URL used for submitting
- Seed Reports, the URL used for retrieving the default Publication, and
- so on.
+ Seed Reports, the URLs used for retrieving the Publications, and so on.
 \end_layout
 
 \begin_layout Standard
@@ -7928,8 +8128,699 @@ It is expected that Advertisers and Observers are likely to include a preset
 \end_layout
 
 \begin_layout Standard
+The identity of a Publisher is defined to be the Publisher URL as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 The Publisher Descriptor itself is not signed, since it functions as the
  root of trust for a Publisher.
+\end_layout
+
+\begin_layout Subsection
+Publisher URLs
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-URLs"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Publisher URL is the authoritative absolute URL of the Publisher Descriptor
+ Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Descriptor-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Publisher URL acts as the permanent identifier for the Publisher and
+ MUST NOT be changed for the lifetime of the Publisher.
+ A Publisher SHALL select a URL that will be able to handle high traffic
+ volumes (e.g.
+\begin_inset space ~
+\end_inset
+
+by being hosted on a Content Distribution Network) and SHOULD select a URL
+ that will allow the underlying hosting provider to be changed to meet future
+ operational needs.
+\end_layout
+
+\begin_layout Subsection
+Subscription Zones
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Subscription-Zones"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher is conceptually associated with a geographical area known as
+ its Subscription Zone.
+\end_layout
+
+\begin_layout Standard
+There is no formal spatial definition of a Subscription Zone.
+ A Subscription Zone is identified implicitly by association with a Publisher.
+\end_layout
+
+\begin_layout Standard
+The identity of a Subscription Zone is defined to be the associated Publisher
+ URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Publisher Topology
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-Topology"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Publishers are arranged into a conceptual hierarchy by defining for each
+ Publisher:
+\end_layout
+
+\begin_layout Itemize
+an optional Upstream Publisher, and
+\end_layout
+
+\begin_layout Itemize
+zero or more Downstream Publishers.
+\end_layout
+
+\begin_layout Standard
+The hierarchy is expected to reflect a geographical containment relationship
+ of the corresponding Subscription Zones:
+\end_layout
+
+\begin_layout Itemize
+The geographical Upstream Subscription Zone associated with the Upstream
+ Publisher (if any) is expected to wholly contain the geographical Subscription
+ Zone associated with the Publisher.
+\end_layout
+
+\begin_layout Itemize
+The geographical Downstream Subscription Zones associated with the Downstream
+ Publishers (if any) are expected to be wholly contained by the geographical
+ Subscription Zone associated with the Publisher.
+\end_layout
+
+\begin_layout Standard
+Each Upstream or Downstream Publisher is identified within the topology
+ using the Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Publisher Topology may be traversed recursively via the 
+\series bold
+upstream
+\series default
+ and 
+\series bold
+downstream
+\series default
+ properties of the Publisher Descriptors as defined in sections
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-upstream"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-downstream"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Publisher Upstream Set
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-Upstream-Set"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher Upstream Set is an unordered set containing the Publisher itself
+ and all Upstream Publishers obtained by recursively traversing the 
+\series bold
+upstream
+\series default
+ property of the Publisher Descriptor as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-upstream"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL construct a Publisher Upstream Set by recursively traversing
+ the 
+\series bold
+upstream
+\series default
+ property of the Publisher Descriptor as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-upstream"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, starting from its own Publisher Descriptor.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL include itself within the Publisher Upstream Set.
+\end_layout
+
+\begin_layout Subsubsection
+Publisher Topology Set
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-Topology-Set"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher Topology Set is an unordered set containing all Publishers within
+ the Publisher Topology.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL construct a Publisher Topology Set by recursively traversing
+ the 
+\series bold
+downstream
+\series default
+ property of the Publisher Descriptor as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-downstream"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ starting from each Publisher in the Publisher Upstream Set as defined in
+ section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Upstream-Set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Publisher Subscription Set
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-Subscription-Set"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher Subscription Set is an unordered set containing all Publications
+ that are relevant to Observers within the Publisher's Subscription Zone.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL construct a Publisher Subscription Set by identifying
+ all Publications from Publishers in the Publisher Topology Set as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Topology-Set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ where the 
+\series bold
+zone
+\series default
+ of the Publication as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Publisher-pubs-zone"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is a member of the Publisher Upstream Set as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Upstream-Set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Publisher Catalogue
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-Catalogue"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is assumed that a Notification arising from a Seed Report submitted to
+ a Publisher is relevant to all Observers within the Publisher's own Subscriptio
+n Zone.
+\end_layout
+
+\begin_layout Standard
+A Notification arising from a Seed Report submitted to a Publisher can also
+ be relevant to Observers within an Upstream Subscription Zone.
+ For example: a Publisher associated with a national Subscription Zone can
+ receive a Seed Report for a patient who has recently travelled internationally.
+\end_layout
+
+\begin_layout Standard
+The association of a Seed Report with a Subscription Zone is established
+ through the use of a Seed Report Challenge as described in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Seed-Report-Challenges"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Publisher Catalogue for a Publisher includes two categories of Publication:
+\end_layout
+
+\begin_layout Itemize
+A Publication containing all Notifications relevant to Observers within
+ the Publisher's own Subscription Zone, including Notifications aggregated
+ from Publications originally published by other Publishers, as described
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Observer-Publication"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A Publication per Upstream Subscription Zone containing all Notifications
+ submitted and verified by the Publisher itself that are relevant to Observers
+ in that Upstream Subscription Zone, as described in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Upstream-Publications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Observer Publication
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Observer-Publication"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL provide a Publication Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for a Publication relevant to Observers in its own Subscription Zone.
+\end_layout
+
+\begin_layout Standard
+For this Publication, the Publisher SHALL include all Notifications aggregated
+ from all Publications in the Publisher Subscription Set as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Subscription-Set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, SHALL omit the 
+\series bold
+aggregated
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSSeedReport-aggregated"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+,
+\series bold
+ 
+\series default
+and SHALL set the 
+\series bold
+zone
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSPublicationData-zone"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to the Publisher's own Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Upstream Publications
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Upstream-Publications"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL provide a Publication Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for a Publication relevant to Observers in the Upstream Subscription Zone
+ corresponding to each Publisher in the Publisher Upstream Set as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Upstream-Set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For each of these Publications, the Publisher SHALL include only Notifications
+ arising from Seed Reports submitted to the Publisher itself that are associated
+ with the corresponding Upstream Subscription Zone as described in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Catalogue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, SHALL set the 
+\series bold
+aggregated
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSSeedReport-aggregated"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to False, and SHALL set the 
+\series bold
+zone
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:TBSPublicationData-zone"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to the Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the Publisher associated with the corresponding Upstream Subscription
+ Zone.
 \end_layout
 
 \begin_layout Subsection
@@ -8013,15 +8904,14 @@ The
 \series bold
 url
 \series default
- property contains the authoritative absoute URL of the Publsiher Descriptor
- Endpoint as defined in section
+ property contains the Publisher URL as defined in section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Publisher-Descriptor-Endpoint"
+reference "subsec:Publisher-URLs"
 plural "false"
 caps "false"
 noprefix "false"
@@ -8029,7 +8919,8 @@ noprefix "false"
 \end_inset
 
 .
- It is used to retrieve updated versions of the Publisher Descriptor.
+ It is used as a canonical identity for the Publisher and to retrieve updated
+ versions of the Publisher Descriptor.
 \end_layout
 
 \begin_layout Standard
@@ -8053,23 +8944,6 @@ noprefix "false"
 https
 \family default
  URL scheme.
-\end_layout
-
-\begin_layout Standard
-The 
-\series bold
-url
-\series default
- property acts as the permanent identifier for the Publisher and MUST NOT
- be changed for the lifetime of the Publisher.
- A Publisher SHALL select a URL that will be able to handle high traffic
- volumes (e.g.
-\begin_inset space ~
-\end_inset
-
-by being hosted on a Content Distribution Network) and SHOULD select a URL
- that will allow the underlying hosting provider to be changed to meet future
- operational needs.
 \end_layout
 
 \begin_layout Standard
@@ -8475,6 +9349,142 @@ https
 \end_layout
 
 \begin_layout Subsubsection
+upstream
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-upstream"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The OPTIONAL 
+\series bold
+upstream
+\series default
+ property contains the Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the Upstream Publisher as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Topology"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is used by consuming Publishers to traverse the Publisher Topology.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to the Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ of its Upstream Publisher, or SHALL omit this property if the Publisher
+ has no Upstream Publisher defined.
+\end_layout
+
+\begin_layout Subsubsection
+downstream
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Publisher-downstream"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The OPTIONAL 
+\series bold
+downstream
+\series default
+ property contains an arbitrarily ordered list where each element is the
+ Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for a Downstream Publisher as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Topology"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is used by consuming Publishers to traverse the Publisher Topology.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to a list containing the Publisher URL
+ as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for each Downstream Publisher.
+ A Publisher MAY omit this property if no Downstream Publishers are defined.
+\end_layout
+
+\begin_layout Subsubsection
 pub
 \begin_inset CommandInset label
 LatexCommand label
@@ -8490,8 +9500,8 @@ The
 \series bold
 pub
 \series default
- property contains the absolute URL of the default Publication Endpoint
- as defined in section
+ property contains the absolute URL of a Publication Endpoint as defined
+ in section
 \begin_inset space ~
 \end_inset
 
@@ -8499,6 +9509,20 @@ pub
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the Observer Publication as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Observer-Publication"
 plural "false"
 caps "false"
 noprefix "false"
@@ -8539,12 +9563,21 @@ noprefix "false"
 
 \end_inset
 
- for the Publication that is intended to be consumed by Observers, and SHALL
- use the 
-\family typewriter
-https
-\family default
- URL scheme.
+ for the Observer Publication defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Observer-Publication"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -8571,12 +9604,8 @@ An Advertiser, Observer, or consuming Publisher SHALL treat the Publisher
 \series bold
 pub
 \series default
- property is not present, is empty, contains a value that is not an absolute
- URL, or contains a value that uses a URL scheme other than 
-\family typewriter
-https
-\family default
-.
+ property is not present, is empty, or contains a value that is not an absolute
+ URL.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8591,7 +9620,209 @@ name "subsec:Publisher-pubs"
 \end_layout
 
 \begin_layout Standard
-TODO
+The 
+\series bold
+pubs
+\series default
+ property contains a list of absolute URLs of Publication Endpoints as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for Upstream Publications as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Upstream-Publications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is used by other Publishers to retrieve Publications as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Publications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to a list comprising one object per
+ Publisher in the Publisher Upstream Set as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-Upstream-Set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, where each object has the properties defined in this section.
+\end_layout
+
+\begin_layout Paragraph
+zone
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Publisher-pubs-zone"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+zone
+\series default
+ property contains a Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is used by other Publishers to identify the Subscription Zone for this
+ Publication.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to the Publisher URL as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publisher-URLs"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the Upstream Publication as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Upstream-Publications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+url
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Publisher-pubs-url"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+url
+\series default
+ property contains an absolute URL of a Publication Endpoint as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is used by other Publishers to retrieve the Publication.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL set this property to the absolute URL of the Publication
+ Endpoint as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Publication-Endpoint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the Upstream Publication as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Upstream-Publications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
