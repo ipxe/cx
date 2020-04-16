@@ -8239,9 +8239,13 @@ The Publisher URL acts as the permanent identifier for the Publisher and
 \begin_inset space ~
 \end_inset
 
-by being hosted on a Content Distribution Network) and SHOULD select a URL
- that will allow the underlying hosting provider to be changed to meet future
- operational needs.
+by being hosted on a Content Distribution Network), SHALL select a URL using
+ the 
+\family typewriter
+https
+\family default
+ scheme, and SHOULD select a URL that will allow the underlying hosting
+ provider to be changed to meet future operational needs.
 \end_layout
 
 \begin_layout Subsection
