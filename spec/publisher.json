@@ -7,7 +7,7 @@
     "properties": {
         "url": {
             "description": "Reference: CX: Publisher Descriptor Layout: url",
-            "$ref": "#/definitions/url-https"
+            "$ref": "#/definitions/url-publisher"
         },
         "cert": {
             "description": "Reference: CX: Publisher Descriptor Layout: cert",
@@ -34,9 +34,40 @@
             "description": "Reference: CX: Publisher Descriptor Layout: report",
             "$ref": "#/definitions/url-https"
         },
+        "upstream": {
+            "description": "Reference: CX Publisher Descriptor Layout: upstream",
+            "$ref": "#/definitions/url-publisher"
+        },
+        "downstream": {
+            "description": "Reference: CX Publisher Descriptor Layout: downstream",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/url-publisher"
+            }
+        },
         "pub": {
             "description": "Reference: CX: Publisher Descriptor Layout: pub",
-            "$ref": "#/definitions/url-https"
+            "$ref": "#/definitions/url-publication-endpoint"
+        },
+        "pubs": {
+            "description": "Reference: CX: Publisher Descriptor Layout: pubs",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "zone": {
+                        "$ref": "#/definitions/url-publisher"
+                    },
+                    "url": {
+                        "$ref": "#/definitions/url-publication-endpoint"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "zone",
+                    "url"
+                ]
+            }
         }
     },
     "required": [
@@ -44,7 +75,8 @@
         "cert",
         "name",
         "report",
-        "pub"
+        "pub",
+        "pubs"
     ],
     "additionalProperties": false,
     "definitions": {
@@ -61,6 +93,25 @@
             "type": "string",
             "format": "uri",
             "pattern": "^https://"
+        },
+        "url-publisher": {
+            "$id": "#url-publisher",
+            "title": "Reference: CX: Publisher URLs",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+        },
+	"url-publication-endpoint": {
+            "$id": "#url-publication-endpoint",
+            "title": "Reference: CX: Publication Endpoint",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/url-http"
+                },
+                {
+                    "$ref": "#/definitions/url-https"
+                }
+            ]
         },
         "x509-pem": {
             "$id": "#x509-pem",
