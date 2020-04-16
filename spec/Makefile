@@ -56,7 +56,8 @@ cx-intro.md : cx.md Makefile
 
 ../README.md : README-header.md.part cx-intro.md README-footer.md.part \
 	       ../broadcasting.png ../observing.png ../diagnosis.png \
-	       ../publication.png ../international.png Makefile
+	       ../publication.png ../international.png ../cooperation.png \
+	       Makefile
 	cat README-header.md.part cx-intro.md README-footer.md.part > $@
 
 readme : ../README.md Makefile

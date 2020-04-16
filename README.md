@@ -181,8 +181,8 @@ are relevant to people within their geographical **subscription zone**.
 For a national healthcare provider, this subscription zone is the whole
 country.
 
-Everyone subscribes to receive notifications from the subscription zone
-of their own country.
+Everyone subscribes by default to receive notifications from the
+subscription zone of their own country.
 
 People who travel internationally can choose to also receive
 notifications from the subscription zones of any country through which
@@ -203,6 +203,23 @@ in excessive amounts of data to be downloaded.
 For healthcare providers in very large geographic areas, this same
 hierarchical approach can be used to break down subscription zones to
 state or county levels.
+
+![image](cooperation.png)
+
+Any healthcare provider or app developer can deploy this technology.
+There are no licensing fees, patents, or other intellectual property
+barriers.
+
+Any app will work with any healthcare provider. There is no need for
+each healthcare provider to create a dedicated app, although many
+healthcare providers may choose to do so. Users can choose the app that
+best fits their individual needs: for example, a niche app could be
+developed with a user interface designed for a particular visual
+impairment.
+
+Healthcare providers can work independently or can choose to share
+notifications with selected other healthcare providers in order to
+maximise the worldwide effectiveness of contact tracing.
 
 Details
 -------
