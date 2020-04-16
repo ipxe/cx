@@ -630,8 +630,8 @@ subscription zone
 \end_layout
 
 \begin_layout Standard
-Everyone subscribes to receive notifications from the subscription zone
- of their own country.
+Everyone subscribes by default to receive notifications from the subscription
+ zone of their own country.
 \end_layout
 
 \begin_layout Standard
@@ -660,6 +660,38 @@ The volume of notifications for people who have been diagnosed shortly after
 For healthcare providers in very large geographic areas, this same hierarchical
  approach can be used to break down subscription zones to state or county
  levels.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename cooperation.svg
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Any healthcare provider or app developer can deploy this technology.
+ There are no licensing fees, patents, or other intellectual property barriers.
+\end_layout
+
+\begin_layout Standard
+Any app will work with any healthcare provider.
+ There is no need for each healthcare provider to create a dedicated app,
+ although many healthcare providers may choose to do so.
+ Users can choose the app that best fits their individual needs: for example,
+ a niche app could be developed with a user interface designed for a particular
+ visual impairment.
+\end_layout
+
+\begin_layout Standard
+Healthcare providers can work independently or can choose to share notifications
+ with selected other healthcare providers in order to maximise the worldwide
+ effectiveness of contact tracing.
 \end_layout
 
 \begin_layout Standard
