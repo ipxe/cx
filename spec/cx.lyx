@@ -113,6 +113,22 @@ customHeadersFooters
 \begin_body
 
 \begin_layout Title
+\begin_inset VSpace -1cm
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+currentpdfbookmark{Non-Technical Overview}{bm:Overview}
+\end_layout
+
+\end_inset
+
 CX: An architecture for privacy-compatible
 \begin_inset Newline newline
 \end_inset
@@ -215,15 +231,8 @@ thepage
 
 \end_layout
 
-\begin_layout Section
-Overview
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Overview"
-
-\end_inset
-
-
+\begin_layout Part*
+Non-Technical Overview (Informative)
 \end_layout
 
 \begin_layout Standard
@@ -658,6 +667,25 @@ For healthcare providers in very large geographic areas, this same hierarchical
 \end_inset
 
 
+\end_layout
+
+\begin_layout Part*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+currentpdfbookmark{Technical Specification}{bm:Specification}
+\end_layout
+
+\end_inset
+
+Technical Specification (Definitive)
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
