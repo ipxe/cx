@@ -124,6 +124,17 @@ int cx_gen_iterate ( struct cx_generator *gen, struct cx_contact_id *id ) {
 }
 
 /**
+ * Invalidate generator
+ *
+ * @v gen		Generator
+ */
+void cx_gen_invalidate ( struct cx_generator *gen ) {
+
+	/* Invalidate DRBG */
+	cx_drbg_invalidate ( gen->drbg );
+}
+
+/**
  * Uninstantiate generator
  *
  * @v gen		Generator

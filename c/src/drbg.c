@@ -616,11 +616,22 @@ int cx_drbg_generate ( struct cx_drbg *drbg, void *output, size_t len ) {
 		 * permanent failure to avoid silently generating
 		 * incorrect values.
 		 */
-		drbg->remaining = 0;
+		cx_drbg_invalidate ( drbg );
 		return 0;
 	}
 
 	return 1;
+}
+
+/**
+ * Invalidate DRBG
+ *
+ * @v drbg		DRBG
+ */
+void cx_drbg_invalidate ( struct cx_drbg *drbg ) {
+
+	/* Inhibit generation of any further random bytes */
+	drbg->remaining = 0;
 }
 
 /**

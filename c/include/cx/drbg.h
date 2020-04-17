@@ -49,6 +49,8 @@ cx_drbg_instantiate_fresh ( enum cx_generator_type type );
 
 extern int cx_drbg_generate ( struct cx_drbg *drbg, void *output, size_t len );
 
+extern void cx_drbg_invalidate ( struct cx_drbg *drbg );
+
 extern void cx_drbg_uninstantiate ( struct cx_drbg *drbg );
 
 #endif /* _CX_DRBG_H */

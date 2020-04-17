@@ -35,8 +35,12 @@ struct cx_generator;
 extern struct cx_generator * cx_gen_instantiate ( enum cx_generator_type type,
 						  const void *seed,
 						  size_t len );
-extern int cx_gen_iterate ( struct cx_generator *generator,
+
+extern int cx_gen_iterate ( struct cx_generator *gen,
 			    struct cx_contact_id *id );
-extern void cx_gen_uninstantiate ( struct cx_generator *generator );
+
+extern void cx_gen_invalidate ( struct cx_generator *gen );
+
+extern void cx_gen_uninstantiate ( struct cx_generator *gen );
 
 #endif /* _CX_GENERATOR_H */
