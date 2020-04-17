@@ -48,6 +48,16 @@ jobs:
           ./configure
           make
           make check
+          sudo make install
+          sudo ldconfig
+      - name: Usage test
+        working-directory: c/libcx-artifact/src
+        run: |
+          pkg-config --modversion cx
+          gcc -o linktest.o -c linktest.c `pkg-config --cflags cx`
+          gcc -o linktest linktest.o `pkg-config --libs cx`
+          ldd ./linktest | grep libcx.so
+          ./linktest
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:

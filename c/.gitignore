@@ -18,4 +18,5 @@ Makefile
 *.la
 *.log
 *.trs
+*.pc
 *.tar.gz

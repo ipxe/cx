@@ -16,6 +16,8 @@ cxtest_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
 cxtest_CFLAGS = $(AM_CFLAGS) -Wunused-const-variable=2
 cxtest_LDADD = libcx.la $(SSL_LIBS)
 
+EXTRA_DIST = linktest.c
+
 PUBKEY_PEM = tests/key_a.pem tests/key_b.pem
 PUBKEY_DER = $(patsubst %.pem,%.der,$(PUBKEY_PEM))
 PUBKEY_C = $(patsubst %.pem,%.c,$(PUBKEY_PEM))
