@@ -9,6 +9,7 @@ TESTS = cxtest
 
 libcx_la_SOURCES = debug.h drbg.c generator.c seedcalc.c
 libcx_la_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
+libcx_la_LIBADD = $(SSL_LIBS)
 
 cxtest_SOURCES = cxtest.c gentest.h gentest.c seedcalctest.h seedcalctest.c
 cxtest_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
