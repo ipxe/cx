@@ -57,6 +57,20 @@ static int gentest ( const char *name, enum cx_generator_type type,
 	unsigned int count;
 	int ok;
 
+	/* Test seed length */
+	if ( len != cx_gen_seed_len ( type ) ) {
+		fprintf ( stderr, "GEN %s fail: incorrect seed length\n",
+			  name );
+		goto err_seed_len;
+	}
+
+	/* Test maximum number of iterations */
+	if ( max != cx_gen_max_iterations ( type ) ) {
+		fprintf ( stderr, "GEN %s fail: incorrect maximum "
+			  "iterations\n", name );
+		goto err_max_iterations;
+	}
+
 	/* Instantiate generator */
 	gen = cx_gen_instantiate ( type, seed, len );
 	if ( ! gen ) {
@@ -100,7 +114,7 @@ static int gentest ( const char *name, enum cx_generator_type type,
 	if ( ok ) {
 		fprintf ( stderr, "GEN %s fail: could iterate over x%d\n",
 			  name, max );
-		goto err_max;
+		goto err_limit;
 	}
 
 	/* Uninstantiate generator */
@@ -109,11 +123,13 @@ static int gentest ( const char *name, enum cx_generator_type type,
 	fprintf ( stderr, "GEN %s ok\n", name );
 	return 1;
 
- err_max:
+ err_limit:
  err_mismatch:
  err_iterate:
 	cx_gen_uninstantiate ( gen );
  err_instantiate:
+ err_max_iterations:
+ err_seed_len:
 	return 0;
 }
 

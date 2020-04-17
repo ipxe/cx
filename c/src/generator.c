@@ -62,6 +62,30 @@ struct cx_generator {
 };
 
 /**
+ * Get generator seed length
+ *
+ * @v type		Generator type
+ * @ret len		Seed length (or 0 on error)
+ */
+size_t cx_gen_seed_len ( enum cx_generator_type type ) {
+
+	/* Get DRBG seed length */
+	return cx_drbg_seed_len ( type );
+}
+
+/**
+ * Get generator maximum number of iterations
+ *
+ * @v type		Generator type
+ * @ret max		Maximum number of iterations (or 0 on error)
+ */
+unsigned int cx_gen_max_iterations ( enum cx_generator_type type ) {
+
+	/* Get DRBG maximum number of iterations */
+	return cx_drbg_max_iterations ( type );
+}
+
+/**
  * Instantiate generator
  *
  * @v type		Generator type

@@ -127,6 +127,40 @@ cx_drbg_info ( enum cx_generator_type type ) {
 	return info;
 }
 
+/**
+ * Get DRBG seed length
+ *
+ * @v type		Generator type
+ * @ret len		Seed length (or 0 on error)
+ */
+size_t cx_drbg_seed_len ( enum cx_generator_type type ) {
+	const struct cx_drbg_info *info;
+
+	/* Identify Generator type */
+	info = cx_drbg_info ( type );
+	if ( ! info )
+		return 0;
+
+	return ( info->entropy_len + info->nonce_len );
+}
+
+/**
+ * Get DRBG maximum number of iterations
+ *
+ * @v type		Generator type
+ * @ret max		Maximum number of iterations (or 0 on error)
+ */
+unsigned int cx_drbg_max_iterations ( enum cx_generator_type type ) {
+	const struct cx_drbg_info *info;
+
+	/* Identify Generator type */
+	info = cx_drbg_info ( type );
+	if ( ! info )
+		return 0;
+
+	return info->max;
+}
+
 /******************************************************************************
  *
  * External data
@@ -544,19 +578,17 @@ struct cx_drbg * cx_drbg_instantiate ( enum cx_generator_type type,
  * @ret drbg		DRBG (or NULL on error)
  */
 struct cx_drbg * cx_drbg_instantiate_fresh ( enum cx_generator_type type ) {
-	const struct cx_drbg_info *info;
 	struct cx_drbg *drbg;
 	const char *errstr;
 	void *input;
 	size_t len;
 
-	/* Identify Generator type */
-	info = cx_drbg_info ( type );
-	if ( ! info )
-		goto err_info;
+	/* Identify required seed length */
+	len = cx_drbg_seed_len ( type );
+	if ( ! len )
+		goto err_len;
 
 	/* Allocate input buffer */
-	len = ( info->entropy_len + info->nonce_len );
 	input = OPENSSL_secure_malloc ( len );
 	if ( ! input ) {
 		DBG ( "DRBG could not allocate %zd bytes for input\n", len );
@@ -586,7 +618,7 @@ struct cx_drbg * cx_drbg_instantiate_fresh ( enum cx_generator_type type ) {
  err_bytes:
 	OPENSSL_secure_clear_free ( input, len );
  err_alloc:
- err_info:
+ err_len:
 	return NULL;
 }
 

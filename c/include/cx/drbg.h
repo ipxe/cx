@@ -34,6 +34,10 @@
 
 struct cx_drbg;
 
+extern size_t cx_drbg_seed_len ( enum cx_generator_type type );
+
+extern unsigned int cx_drbg_max_iterations ( enum cx_generator_type type );
+
 extern struct cx_drbg *
 cx_drbg_instantiate_split ( enum cx_generator_type type, const void *entropy,
 			    size_t entropy_len, const void *nonce,

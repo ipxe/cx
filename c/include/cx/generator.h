@@ -32,6 +32,10 @@
 
 struct cx_generator;
 
+extern size_t cx_gen_seed_len ( enum cx_generator_type type );
+
+extern unsigned int cx_gen_max_iterations ( enum cx_generator_type type );
+
 extern struct cx_generator * cx_gen_instantiate ( enum cx_generator_type type,
 						  const void *seed,
 						  size_t len );
