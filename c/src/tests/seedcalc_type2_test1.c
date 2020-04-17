@@ -1,0 +1,1 @@
+../../../spec/seedcalc_type2_test1.c

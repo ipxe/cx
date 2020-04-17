@@ -9,6 +9,12 @@ AC_CONFIG_HEADERS([config.h])
 AC_PROG_CC
 AC_PROG_CXX
 AM_PROG_AR
+AC_CHECK_PROG([OPENSSL_PROG],[openssl],[yes])
+AS_IF([test x"$OPENSSL_PROG" != x"yes"],
+      [AC_MSG_ERROR([Please install openssl])])
+AC_CHECK_PROG([XXD_PROG],[xxd],[yes])
+AS_IF([test x"$XXD_PROG" != x"yes"],
+      [AC_MSG_ERROR([Please install xxd])])
 
 # Configure libtool
 LT_INIT([shared])

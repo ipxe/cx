@@ -24,37 +24,15 @@
  * and the licenses of the other code concerned.
  */
 
-/******************************************************************************
- *
- * Self-tests
- *
- ******************************************************************************
- */
+#ifndef _CX_SEEDCALC_H
+#define _CX_SEEDCALC_H
 
-#include <stdio.h>
-#include "gentest.h"
-#include "seedcalctest.h"
+#include <stddef.h>
+#include <openssl/objects.h>
+#include <openssl/x509.h>
+#include <cx.h>
 
-/**
- * Main entry point
- *
- * @ret exit		Exit status
- */
-int main ( void ) {
-	int ok = 1;
+extern int cx_seedcalc ( enum cx_generator_type type, const void *preseed,
+			 size_t len, X509_PUBKEY *key, void *seed );
 
-	/* Run generator self-tests */
-	ok &= gentests();
-
-	/* Run seed calculator self-tests */
-	ok &= seedcalctests();
-
-	/* Report failure */
-	if ( ! ok ) {
-		fprintf ( stderr, "Self-tests failed\n" );
-		return 1;
-	}
-
-	fprintf ( stderr, "Self-tests passed\n" );
-	return 0;
-}
+#endif /* _CX_SEEDCALC_H */

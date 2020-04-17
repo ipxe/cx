@@ -26,35 +26,50 @@
 
 /******************************************************************************
  *
- * Self-tests
+ * Seed calculators
  *
  ******************************************************************************
  */
 
-#include <stdio.h>
-#include "gentest.h"
-#include "seedcalctest.h"
+#include <cx/drbg.h>
+#include <cx/seedcalc.h>
+#include "debug.h"
 
 /**
- * Main entry point
+ * Calculate Seed Value
  *
- * @ret exit		Exit status
+ * @v type		Generator type
+ * @v preseed		Preseed value
+ * @v len		Length of preseed value
+ * @v key		Preseed verification key
+ * @v seed		Seed value to fill in
+ * @ret ok		Success indicator
  */
-int main ( void ) {
-	int ok = 1;
+int cx_seedcalc ( enum cx_generator_type type, const void *preseed, size_t len,
+		  X509_PUBKEY *key, void *seed ) {
+	struct cx_drbg *drbg;
 
-	/* Run generator self-tests */
-	ok &= gentests();
-
-	/* Run seed calculator self-tests */
-	ok &= seedcalctests();
-
-	/* Report failure */
-	if ( ! ok ) {
-		fprintf ( stderr, "Self-tests failed\n" );
-		return 1;
+	/* Instantiate DRBG */
+	drbg = cx_drbg_instantiate ( type, preseed, len, key );
+	if ( ! drbg ) {
+		DBG ( "SEEDCALC could not instantiate type %d preseed %zd "
+		      "bytes\n", type, len );
+		goto err_instantiate;
 	}
 
-	fprintf ( stderr, "Self-tests passed\n" );
+	/* Generate seed value */
+	if ( ! cx_drbg_generate ( drbg, seed, len ) ) {
+		DBG ( "SEEDCALC could not generate seed\n" );
+		goto err_generate;
+	}
+
+	/* Uninstantiate DRBG */
+	cx_drbg_uninstantiate ( drbg );
+
+	return 1;
+
+ err_generate:
+	cx_drbg_uninstantiate ( drbg );
+ err_instantiate:
 	return 0;
 }
