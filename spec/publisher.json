@@ -32,7 +32,7 @@
         },
         "report": {
             "description": "Reference: CX: Publisher Descriptor Layout: report",
-            "$ref": "#/definitions/url-https"
+            "$ref": "#/definitions/url-seed-report-endpoint"
         },
         "upstream": {
             "description": "Reference: CX Publisher Descriptor Layout: upstream",
@@ -97,11 +97,14 @@
         "url-publisher": {
             "$id": "#url-publisher",
             "title": "Reference: CX: Publisher URLs",
-            "type": "string",
-            "format": "uri",
-            "pattern": "^https://"
+            "$ref": "#/definitions/url-https"
         },
-	"url-publication-endpoint": {
+        "url-seed-report-endpoint": {
+            "$id": "#url-seed-report-endpoint",
+            "title": "Reference: CX: Seed Report Endpoint",
+            "$ref": "#/definitions/url-https"
+        },
+        "url-publication-endpoint": {
             "$id": "#url-publication-endpoint",
             "title": "Reference: CX: Publication Endpoint",
             "anyOf": [
