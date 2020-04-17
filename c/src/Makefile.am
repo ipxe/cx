@@ -7,10 +7,10 @@ lib_LTLIBRARIES = libcx.la
 check_PROGRAMS = cxtest
 TESTS = cxtest
 
-libcx_la_SOURCES = drbg.c generator.c seedcalc.c
+libcx_la_SOURCES = debug.h drbg.c generator.c seedcalc.c
 libcx_la_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
 
-cxtest_SOURCES = cxtest.c gentest.c seedcalctest.c
+cxtest_SOURCES = cxtest.c gentest.h gentest.c seedcalctest.h seedcalctest.c
 cxtest_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
 cxtest_CFLAGS = $(AM_CFLAGS) -Wunused-const-variable=2
 cxtest_LDADD = libcx.la $(SSL_LIBS)
