@@ -206,9 +206,9 @@ state or county levels.
 
 ![image](cooperation.png)
 
-Any healthcare provider or app developer can deploy this technology.
-There are no licensing fees, patents, or other intellectual property
-barriers.
+This is an **open standard**. Any healthcare provider or app developer
+can deploy this technology. There are no licensing fees, patents, or
+other intellectual property barriers.
 
 Any app will work with any healthcare provider. There is no need for
 each healthcare provider to create a dedicated app, although many

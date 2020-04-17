@@ -124,7 +124,7 @@ status open
 
 
 \backslash
-currentpdfbookmark{Non-Technical Overview}{bm:Overview}
+pdfbookmark[0]{Non-Technical Overview}{bm:Overview}
 \end_layout
 
 \end_inset
@@ -391,6 +391,19 @@ Ease of implementation
 \begin_layout Standard
 \noindent
 \align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{Contact Identifiers}{bm:Contact Identifiers}
+\end_layout
+
+\end_inset
+
+
 \begin_inset Graphics
 	filename broadcasting.svg
 	width 80text%
@@ -475,6 +488,19 @@ The device may choose to record extra information, such as when or where
 \end_inset
 
 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{Confirmation Codes}{bm:Confirmation Codes}
+\end_layout
+
+\end_inset
+
+
 \begin_inset Graphics
 	filename diagnosis.svg
 	width 80text%
@@ -537,6 +563,19 @@ The seed value is the only piece of information that is uploaded.
 \begin_layout Standard
 \noindent
 \align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{Notifications}{bm:Notifications}
+\end_layout
+
+\end_inset
+
+
 \begin_inset Graphics
 	filename publication.svg
 	width 80text%
@@ -597,6 +636,19 @@ A healthcare provider can provide guidance or tools to assist in estimating
 \begin_layout Standard
 \noindent
 \align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{Subscription Zones}{bm:Subscription Zones}
+\end_layout
+
+\end_inset
+
+
 \begin_inset Graphics
 	filename international.svg
 	width 80text%
@@ -665,6 +717,19 @@ For healthcare providers in very large geographic areas, this same hierarchical
 \begin_layout Standard
 \noindent
 \align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{Open Standards}{bm:Open Standards}
+\end_layout
+
+\end_inset
+
+
 \begin_inset Graphics
 	filename cooperation.svg
 	width 80text%
@@ -675,7 +740,12 @@ For healthcare providers in very large geographic areas, this same hierarchical
 \end_layout
 
 \begin_layout Standard
-Any healthcare provider or app developer can deploy this technology.
+This is an 
+\series bold
+open standard
+\series default
+.
+ Any healthcare provider or app developer can deploy this technology.
  There are no licensing fees, patents, or other intellectual property barriers.
 \end_layout
 
@@ -709,7 +779,7 @@ status open
 
 
 \backslash
-currentpdfbookmark{Technical Specification}{bm:Specification}
+pdfbookmark[0]{Technical Specification}{bm:Specification}
 \end_layout
 
 \end_inset
