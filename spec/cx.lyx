@@ -960,7 +960,7 @@ Broadcast
 \begin_inset space ~
 \end_inset
 
-Layer: A broadcast-capable commucations medium used to carry 
+Layer: A broadcast-capable communications medium used to carry 
 \series bold
 Advertisements
 \series default
@@ -1336,7 +1336,7 @@ literal "false"
 
 \end_inset
 
- certificate identifing a 
+ certificate identifying a 
 \series bold
 Publisher
 \series default
@@ -1622,7 +1622,7 @@ name "subsec:Broadcast-Layer-Requirements"
 
 \begin_layout Standard
 A Broadcast Layer MUST provide the ability for an Advertiser to logically
- broadcast a Contact Identifer (which is a 16-byte RFC
+ broadcast a Contact Identifier (which is a 16-byte RFC
 \begin_inset space ~
 \end_inset
 
@@ -2968,7 +2968,7 @@ A Publisher SHALL use the algorithm defined in this section to construct
 \begin_layout Standard
 An Observer has no need for the algorithm defined in this section, since
  the constructed Seed Value is already present in the Notification and is
- signed by the Pubisher Certificate.
+ signed by the Publisher Certificate.
 \end_layout
 
 \begin_layout Standard
@@ -3578,7 +3578,7 @@ noprefix "false"
 \end_inset
 
 .
- (Note that the Seed Length is specified as a number of bytes.)
+ (Note that the Seed Length is specified as a number of bytes).
 \end_layout
 
 \begin_layout Itemize
@@ -3748,7 +3748,7 @@ name "sec:Seed-Reports"
 A Seed Report is a message constructed by an Advertiser to be sent to a
  Publisher.
  The Seed Report is used to disclose and to verify original authorship of
- a set of Seed Values and to associate the Seed Values with an Alert Level
+ a set of Seed Values, and to associate the Seed Values with an Alert Level
  for inclusion into a Notification.
 \end_layout
 
@@ -6424,7 +6424,7 @@ Z
 
 ) time zone.
  The Publisher SHALL publish a new version of the Publication before this
- time, even if the new verison of the Publication contains no new Notifications.
+ time, even if the new version of the Publication contains no new Notifications.
 \end_layout
 
 \begin_layout Standard
@@ -9031,7 +9031,7 @@ literal "false"
 
 \end_inset
 
- serialisation of an 
+ serialisation of a 
 \begin_inset Flex URL
 status open
 
