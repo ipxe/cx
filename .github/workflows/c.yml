@@ -1,0 +1,47 @@
+name: C library
+
+on: [push]
+
+jobs:
+  build:
+    name: Build C library
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Install packages
+        run: |
+          sudo apt install -y -o Acquire::Retries=50 \
+                           autoconf-archive valgrind
+      - name: Autotools
+        working-directory: c
+        run: |
+          ./autogen.sh
+      - name: Configure
+        working-directory: c
+        run: |
+          ./configure
+      - name: Build
+        working-directory: c
+        run: |
+          make
+      - name: Test
+        working-directory: c
+        run: |
+          make check
+          make check-valgrind
+      - name: Upload failure artifacts
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: failed
+          path: c
+      - name: Distribution
+        working-directory: c
+        run: |
+          make dist VERSION=artifact
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: libcx.tar.gz
+          path: c/libcx-artifact.tar.gz
