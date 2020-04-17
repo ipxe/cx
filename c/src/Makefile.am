@@ -1,3 +1,5 @@
+@VALGRIND_CHECK_RULES@
+
 AM_CPPFLAGS = -I$(top_srcdir)/include
 AM_CFLAGS = -W -Wall -Wextra -Werror
 
