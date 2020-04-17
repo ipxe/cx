@@ -9,6 +9,7 @@ PKG_CHECK_MODULES(SSL, openssl)
 AC_CHECK_HEADERS([stdlib.h openssl/rand_drbg.h openssl/x509.h])
 AC_TYPE_SIZE_T
 AC_CHECK_FUNCS([RAND_DRBG_instantiate])
+AX_VALGRIND_DFLT([sgcheck], [off])
 AX_VALGRIND_CHECK
 AM_EXTRA_RECURSIVE_TARGETS([check-valgrind])
 m4_foreach([vgtool], [valgrind_tool_list],
