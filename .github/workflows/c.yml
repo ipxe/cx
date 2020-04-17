@@ -40,6 +40,14 @@ jobs:
         working-directory: c
         run: |
           make dist VERSION=artifact
+      - name: Check distribution
+        working-directory: c
+        run: |
+          tar xvzf libcx-artifact.tar.gz
+          cd libcx-artifact
+          ./configure
+          make
+          make check
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
