@@ -12,4 +12,6 @@ EXTRA_DIST = autogen.sh \
 	     src/tests/seedcalc_type1_test3.c \
 	     src/tests/seedcalc_type2_test1.c \
 	     src/tests/seedcalc_type2_test2.c \
-	     src/tests/seedcalc_type2_test3.c
+	     src/tests/seedcalc_type2_test3.c \
+	     src/tests/key_a.pem \
+	     src/tests/key_b.pem
