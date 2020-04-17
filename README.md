@@ -3,6 +3,13 @@ CX: Privacy-compatible distributed contact tracing
 
 ![Build documentation](https://github.com/ipxe/cx/workflows/Build%20documentation/badge.svg)
 
+Download the full [architecture
+specification](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
+[![PDF](pdf.png)](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
+
+Overview
+--------
+
 CX is an architecture for privacy-compatible distributed contact
 tracing, designed for use in pandemics such as Covid-19. It operates
 using a model of proximity-based contact detection over one or more
@@ -225,4 +232,5 @@ Details
 -------
 
 For more information, see the [architecture
-specification](https://github.com/ipxe/cx/releases/latest/download/cx.pdf).
+specification](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
+[![PDF](pdf.png)](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
