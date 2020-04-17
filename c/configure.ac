@@ -44,5 +44,5 @@ m4_foreach([vgtool], [valgrind_tool_list],
 	   [AM_EXTRA_RECURSIVE_TARGETS([check-valgrind-]vgtool)])
 
 # Generate files
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile include/Makefile])
 AC_OUTPUT

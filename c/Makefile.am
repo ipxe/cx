@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = src
+SUBDIRS = src include
 
 EXTRA_DIST = autogen.sh \
 	     src/tests/gen_type1_test1.c \
