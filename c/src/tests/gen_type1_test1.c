@@ -1,0 +1,1 @@
+../../../spec/gen_type1_test1.c

@@ -16,3 +16,6 @@ Makefile
 *.o
 *.lo
 *.la
+*.log
+*.trs
+*.tar.gz
