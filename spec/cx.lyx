@@ -3878,6 +3878,11 @@ A numeric PIN code that is provided verbally and entered by the patient
 \end_layout
 
 \begin_layout Itemize
+An SMS message sent to the patient containing a series of three dictionary
+ words that are then entered by the patient on the patient's device
+\end_layout
+
+\begin_layout Itemize
 An SMS message sent to the patient containing a link that is recognised
  by the app running on the patient's device
 \end_layout
