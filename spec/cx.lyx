@@ -531,7 +531,7 @@ The healthcare provider can choose how to communicate the confirmation code
 
 \begin_layout Standard
 The confirmation code allows the device to upload a list of the contact
- identifiers that it has broadcast over the past week.
+ identifiers that it has recently broadcast.
  The list is uploaded to the healthcare provider's servers.
 \end_layout
 
