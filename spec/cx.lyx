@@ -715,6 +715,12 @@ For healthcare providers in very large geographic areas, this same hierarchical
 \end_layout
 
 \begin_layout Standard
+For healthcare providers in neighbouring or overlapping geographic areas,
+ notifications may be exchanged directly to reduce the volume of notifications
+ reaching the worldwide subscription zone.
+\end_layout
+
+\begin_layout Standard
 \noindent
 \align center
 \begin_inset ERT
@@ -8435,7 +8441,7 @@ name "subsec:Publisher-Topology"
 \end_layout
 
 \begin_layout Standard
-Publishers are arranged into a conceptual hierarchy by defining for each
+Publishers are arranged into a conceptual hierarchy by configuring for each
  Publisher:
 \end_layout
 
@@ -8444,12 +8450,16 @@ an optional Upstream Publisher, and
 \end_layout
 
 \begin_layout Itemize
-zero or more Downstream Publishers.
+zero or more Downstream Publishers, and
+\end_layout
+
+\begin_layout Itemize
+zero or more Peer Publishers.
 \end_layout
 
 \begin_layout Standard
-The hierarchy is expected to reflect a geographical containment relationship
- of the corresponding Subscription Zones:
+The hierarchy is expected to reflect a geographical relationship of the
+ corresponding Subscription Zones:
 \end_layout
 
 \begin_layout Itemize
@@ -8464,8 +8474,14 @@ The geographical Downstream Subscription Zones associated with the Downstream
  Subscription Zone associated with the Publisher.
 \end_layout
 
+\begin_layout Itemize
+The geographical Peer Subscription Zones associated with the Peer Publishers
+ (if any) are expected to overlap with or adjoin the geographical Subscription
+ Zone associated with the Publisher.
+\end_layout
+
 \begin_layout Standard
-Each Upstream or Downstream Publisher is identified within the topology
+Each Upstream, Downstream, or Peer Publisher is identified within the topology
  using the Publisher URL as defined in section
 \begin_inset space ~
 \end_inset
@@ -8484,7 +8500,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The Publisher Topology may be traversed recursively via the 
+The Publisher Topology can be traversed recursively via the 
 \series bold
 upstream
 \series default
@@ -8521,6 +8537,14 @@ noprefix "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Note that Peer Publisher relationships are non-hierarchical, unidirectional,
+ and unilateral.
+ There is no requirement for two Publishers to both have the same Upstream
+ Publisher, to both participate in a Peer Publisher relationship, or even
+ to both be aware of the existence of the Peer Publisher relationship.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8725,14 +8749,28 @@ n Zone.
 
 \begin_layout Standard
 A Notification arising from a Seed Report submitted to a Publisher can also
- be relevant to Observers within an Upstream Subscription Zone.
+ be relevant to Observers within the Upstream Subscription Zone of an Upstream
+ Publisher.
  For example: a Publisher associated with a national Subscription Zone can
  receive a Seed Report for a patient who has recently travelled internationally.
 \end_layout
 
 \begin_layout Standard
-The association of a Seed Report with a Subscription Zone is established
- through the use of a Seed Report Challenge as described in section
+Some Subscription Zones will expect to see high volumes of travel to and
+ from other nearby Subscription Zones.
+ For example: political or commercial factors can result in multiple Publishers
+ operating in a single overlapping geographical area, and frictionless border
+ arrangements can result in international travel forming part of a daily
+ commute.
+ A Publisher MAY choose to configure one or more Peer Subscription Zones
+ in order to reduce the number of Notifications that need to be published
+ to an Upstream Subscription Zone.
+\end_layout
+
+\begin_layout Standard
+The association of a Seed Report (and hence a Notification) with one or
+ more Subscription Zones is established through the use of a Seed Report
+ Challenge as described in section
 \begin_inset space ~
 \end_inset
 
@@ -8775,16 +8813,17 @@ noprefix "false"
 \end_layout
 
 \begin_layout Itemize
-A Publication per Upstream Subscription Zone containing all Notifications
- submitted and verified by the Publisher itself that are relevant to Observers
- in that Upstream Subscription Zone, as described in section
+A Publication for each Upstream or Peer Subscription Zone containing all
+ Notifications submitted and verified by the Publisher itself that are relevant
+ to Observers in that Upstream or Peer Subscription Zone, as described in
+ section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Upstream-Publications"
+reference "subsec:Upstream-and-Peer-Publications"
 plural "false"
 caps "false"
 noprefix "false"
@@ -8897,10 +8936,10 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsubsection
-Upstream Publications
+Upstream and Peer Publications
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Upstream-Publications"
+name "subsec:Upstream-and-Peer-Publications"
 
 \end_inset
 
@@ -8922,9 +8961,9 @@ noprefix "false"
 
 \end_inset
 
- for a Publication relevant to Observers in the Upstream Subscription Zone
- corresponding to each Publisher in the Publisher Upstream Set as defined
- in section
+ for a Publication relevant to Observers in the Subscription Zone corresponding
+ to each configured Peer Publisher and to each Publisher in the Publisher
+ Upstream Set as defined in section
 \begin_inset space ~
 \end_inset
 
@@ -8944,7 +8983,8 @@ noprefix "false"
 \begin_layout Standard
 For each of these Publications, the Publisher SHALL include only Notifications
  arising from Seed Reports submitted to the Publisher itself that are associated
- with the corresponding Upstream Subscription Zone as described in section
+ with the corresponding Upstream or Peer Subscription Zone as described
+ in section
 \begin_inset space ~
 \end_inset
 
@@ -9008,8 +9048,8 @@ noprefix "false"
 
 \end_inset
 
- for the Publisher associated with the corresponding Upstream Subscription
- Zone.
+ for the Publisher associated with the corresponding Upstream or Peer Subscripti
+on Zone.
 \end_layout
 
 \begin_layout Subsection
@@ -9828,14 +9868,14 @@ noprefix "false"
 
 \end_inset
 
- for Upstream Publications as defined in section
+ for Upstream and Peer Publications as defined in section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Upstream-Publications"
+reference "subsec:Upstream-and-Peer-Publications"
 plural "false"
 caps "false"
 noprefix "false"
@@ -9862,7 +9902,8 @@ noprefix "false"
 
 \begin_layout Standard
 A Publisher SHALL set this property to a list comprising one object per
- Publisher in the Publisher Upstream Set as defined in section
+ configured Peer Publisher and one object per Publisher in the Publisher
+ Upstream Set as defined in section
 \begin_inset space ~
 \end_inset
 
@@ -9929,14 +9970,14 @@ noprefix "false"
 
 \end_inset
 
- for the Upstream Publication as defined in section
+ for the Upstream or Peer Subscription Zone as defined in section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Upstream-Publications"
+reference "subsec:Upstream-and-Peer-Publications"
 plural "false"
 caps "false"
 noprefix "false"
@@ -9997,14 +10038,14 @@ noprefix "false"
 
 \end_inset
 
- for the Upstream Publication as defined in section
+ for the Upstream or Peer Publication as defined in section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Upstream-Publications"
+reference "subsec:Upstream-and-Peer-Publications"
 plural "false"
 caps "false"
 noprefix "false"
