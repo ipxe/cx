@@ -1,0 +1,3 @@
+[flake8]
+application-import-names=pk
+extend-ignore=D102,D105,D400,F821,N815

@@ -1,0 +1,8 @@
+.eggs/
+.mypy_cache/
+__pycache__/
+build/
+dist/
+*.pyc
+*.egg-info
+.coverage
