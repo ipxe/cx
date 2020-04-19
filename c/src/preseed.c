@@ -73,7 +73,7 @@ int cx_preseed_value ( enum cx_generator_type type, void *preseed,
 	/* Uninstantiate DRBG */
 	cx_drbg_uninstantiate ( drbg );
 
-	return 0;
+	return 1;
 
  err_generate:
 	cx_drbg_uninstantiate ( drbg );
