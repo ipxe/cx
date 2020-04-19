@@ -1671,9 +1671,9 @@ A Broadcast Layer SHOULD NOT expose any additional information beyond the
 Such techniques MAY include the use of single-use or short-lived values
  for fields that would normally contain identifying information (such as
  a hardware MAC address).
- Where short-lived values are used, the lifecycle of these short-lived values
- MUST be synchronised with the lifecycle of a single Contact Identifier,
- to prevent the persistent identification of an Advertiser via linkage attacks.
+ Where short-lived values are used, the lifetime of these short-lived values
+ MUST NOT extend beyond the lifetime of a single Contact Identifier, to
+ prevent the persistent identification of an Advertiser via linkage attacks.
 \end_layout
 
 \begin_layout Standard
