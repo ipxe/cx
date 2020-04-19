@@ -31,14 +31,17 @@
  ******************************************************************************
  */
 
+#include <openssl/objects.h>
+#include <openssl/evp.h>
+#include <openssl/rsa.h>
 #include <cx/drbg.h>
 #include <cx/preseed.h>
 #include "debug.h"
 
 /**
- * Construct a Preseed Value
+ * Construct a preseed value
  *
- * @v type		Generator Type
+ * @v type		Generator type
  * @v preseed		Preseed value to fill in
  * @v len		Length of preseed value to fill in
  * @ret ok		Success indicator
@@ -80,4 +83,55 @@ int cx_preseed_value ( enum cx_generator_type type, void *preseed,
  err_instantiate:
  err_len:
 	return 0;
+}
+
+/**
+ * Construct a preseed key pair using a default algorithm and parameters
+ *
+ * @ret key		Preseed key pair (or NULL on error)
+ *
+ * For more fine-grained control over the preseed key pair (such as
+ * the ability to use a hardware security module), use
+ * EVP_PKEY_keygen() directly.
+ */
+EVP_PKEY * cx_preseed_key ( void ) {
+	EVP_PKEY_CTX *ctx;
+	EVP_PKEY *key = NULL;
+
+	/* Allocate context */
+	ctx = EVP_PKEY_CTX_new_id ( EVP_PKEY_RSA, NULL );
+	if ( ! ctx ) {
+		DBG ( "PRESEED key could not allocate context\n" );
+		goto err_new_id;
+	}
+
+	/* Initialise key generator */
+	if ( EVP_PKEY_keygen_init ( ctx ) <= 0 ) {
+		DBG ( "PRESEED key could not initialise context\n" );
+		goto err_init;
+	}
+
+	/* Configure context */
+	if ( EVP_PKEY_CTX_set_rsa_keygen_bits ( ctx, 2048 ) <= 0 ) {
+		DBG ( "PRESEED key could not set size\n" );
+		goto err_set_bits;
+	}
+
+	/* Generate key */
+	if ( EVP_PKEY_keygen ( ctx, &key ) <= 0 ) {
+		DBG ( "PRESEED key could not generate\n" );
+		goto err_keygen;
+	}
+
+	/* Free context */
+	EVP_PKEY_CTX_free ( ctx );
+
+	return key;
+
+ err_keygen:
+ err_set_bits:
+ err_init:
+	EVP_PKEY_CTX_free ( ctx );
+ err_new_id:
+	return NULL;
 }

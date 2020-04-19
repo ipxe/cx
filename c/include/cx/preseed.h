@@ -28,9 +28,13 @@
 #define _CX_PRESEED_H
 
 #include <stddef.h>
+#include <openssl/objects.h>
+#include <openssl/evp.h>
 #include <cx.h>
 
 extern int cx_preseed_value ( enum cx_generator_type type, void *preseed,
 			      size_t len );
+
+extern EVP_PKEY * cx_preseed_key ( void );
 
 #endif /* _CX_PRESEED_H */
