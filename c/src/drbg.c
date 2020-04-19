@@ -411,11 +411,11 @@ static void cx_drbg_cleanup_nonce ( RAND_DRBG *rdrbg, unsigned char *out,
  * Instantiate DRBG with explicitly split entropy, nonce, and personalization
  *
  * @v type		Generator type
- * @v entropy		Entropy input
+ * @v entropy		Entropy input (or NULL to use system entropy source)
  * @v entropy_len	Length of entropy input
- * @v nonce		Nonce
+ * @v nonce		Nonce (or NULL to use system entropy source)
  * @v nonce_len		Length of nonce
- * @v personal		Personalization string (or NULL)
+ * @v personal		Personalization string (or NULL to use no string)
  * @v personal_len	Length of personalization string
  * @ret drbg		DRBG (or NULL on error)
  */
@@ -428,6 +428,29 @@ struct cx_drbg * cx_drbg_instantiate_split ( enum cx_generator_type type,
 					     size_t personal_len ) {
 	const struct cx_drbg_info *info;
 	struct cx_drbg *drbg;
+
+	/* Validate parameter combinations */
+	if ( entropy_len && ! entropy ) {
+		DBG ( "DRBG invalid NULL entropy len %zd\n", entropy_len );
+		goto err_sanity;
+	}
+	if ( nonce_len && ! nonce ) {
+		DBG ( "DRBG invalid NULL nonce len %zd\n", nonce_len );
+		goto err_sanity;
+	}
+	if ( personal_len && ! personal ) {
+		DBG ( "DRBG invalid NULL personalization len %zd\n",
+		      personal_len );
+		goto err_sanity;
+	}
+	if ( entropy && ! nonce ) {
+		DBG ( "DRBG invalid entropy without nonce\n" );
+		goto err_sanity;
+	}
+	if ( nonce && ! entropy ) {
+		DBG ( "DRBG invalid nonce without entropy\n" );
+		goto err_sanity;
+	}
 
 	/* Identify Generator type */
 	info = cx_drbg_info ( type );
@@ -475,12 +498,15 @@ struct cx_drbg * cx_drbg_instantiate_split ( enum cx_generator_type type,
 	}
 
 	/* Prepare for instantiation */
-	if ( ! RAND_DRBG_set_callbacks ( drbg->drbg, cx_drbg_get_entropy,
-					 cx_drbg_cleanup_entropy,
-					 cx_drbg_get_nonce,
-					 cx_drbg_cleanup_nonce ) ) {
-		DBG ( "DRBG %p could not set callbacks\n", drbg );
-		goto err_set_callbacks;
+	if ( entropy ) {
+		if ( ! RAND_DRBG_set_callbacks ( drbg->drbg,
+						 cx_drbg_get_entropy,
+						 cx_drbg_cleanup_entropy,
+						 cx_drbg_get_nonce,
+						 cx_drbg_cleanup_nonce ) ) {
+			DBG ( "DRBG %p could not set callbacks\n", drbg );
+			goto err_set_callbacks;
+		}
 	}
 
 	/* Instantiate DRBG */
@@ -509,6 +535,7 @@ struct cx_drbg * cx_drbg_instantiate_split ( enum cx_generator_type type,
  err_alloc:
  err_ex_init:
  err_info:
+ err_sanity:
 	return NULL;
 }
 
@@ -578,48 +605,9 @@ struct cx_drbg * cx_drbg_instantiate ( enum cx_generator_type type,
  * @ret drbg		DRBG (or NULL on error)
  */
 struct cx_drbg * cx_drbg_instantiate_fresh ( enum cx_generator_type type ) {
-	struct cx_drbg *drbg;
-	const char *errstr;
-	void *input;
-	size_t len;
-
-	/* Identify required seed length */
-	len = cx_drbg_seed_len ( type );
-	if ( ! len )
-		goto err_len;
-
-	/* Allocate input buffer */
-	input = OPENSSL_secure_malloc ( len );
-	if ( ! input ) {
-		DBG ( "DRBG could not allocate %zd bytes for input\n", len );
-		goto err_alloc;
-	}
-
-	/* Generate entropy */
-	if ( RAND_priv_bytes ( input, len ) != 1 ) {
-		errstr = ERR_error_string ( ERR_get_error(), NULL );
-		DBG ( "DRBG could not generate %zd random bytes: %s\n",
-		      len, ( errstr ? errstr : "<unknown>" ) );
-		goto err_bytes;
-	}
 
 	/* Instantiate DRBG */
-	drbg = cx_drbg_instantiate ( type, input, len, NULL );
-	if ( ! drbg )
-		goto err_instantiate;
-
-	/* Discard entropy */
-	OPENSSL_secure_clear_free ( input, len );
-
-	return drbg;
-
-	cx_drbg_uninstantiate ( drbg );
- err_instantiate:
- err_bytes:
-	OPENSSL_secure_clear_free ( input, len );
- err_alloc:
- err_len:
-	return NULL;
+	return cx_drbg_instantiate_split ( type, NULL, 0, NULL, 0, NULL, 0 );
 }
 
 /**
