@@ -7,7 +7,7 @@ lib_LTLIBRARIES = libcx.la
 check_PROGRAMS = cxtest
 TESTS = cxtest
 
-libcx_la_SOURCES = debug.h drbg.c generator.c seedcalc.c
+libcx_la_SOURCES = debug.h drbg.c generator.c seedcalc.c preseed.c
 libcx_la_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
 libcx_la_LIBADD = $(SSL_LIBS)
 
