@@ -11,7 +11,10 @@ libcx_la_SOURCES = debug.h drbg.c generator.c seedcalc.c preseed.c
 libcx_la_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
 libcx_la_LIBADD = $(SSL_LIBS)
 
-cxtest_SOURCES = cxtest.c gentest.h gentest.c seedcalctest.h seedcalctest.c
+cxtest_SOURCES = cxtest.c \
+		 gentest.h gentest.c \
+		 seedcalctest.h seedcalctest.c \
+		 preseedtest.h preseedtest.c
 cxtest_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
 cxtest_CFLAGS = $(AM_CFLAGS) -Wunused-const-variable=2
 cxtest_LDADD = libcx.la $(SSL_LIBS)

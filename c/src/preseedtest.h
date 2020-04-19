@@ -24,41 +24,9 @@
  * and the licenses of the other code concerned.
  */
 
-/******************************************************************************
- *
- * Self-tests
- *
- ******************************************************************************
- */
+#ifndef _CX_PRESEEDTEST_H
+#define _CX_PRESEEDTEST_H
 
-#include <stdio.h>
-#include "gentest.h"
-#include "seedcalctest.h"
-#include "preseedtest.h"
+extern int preseedtests ( void );
 
-/**
- * Main entry point
- *
- * @ret exit		Exit status
- */
-int main ( void ) {
-	int ok = 1;
-
-	/* Run generator self-tests */
-	ok &= gentests();
-
-	/* Run seed calculator self-tests */
-	ok &= seedcalctests();
-
-	/* Run preseed self-tests */
-	ok &= preseedtests();
-
-	/* Report failure */
-	if ( ! ok ) {
-		fprintf ( stderr, "Self-tests failed\n" );
-		return 1;
-	}
-
-	fprintf ( stderr, "Self-tests passed\n" );
-	return 0;
-}
+#endif /* _CX_PRESEEDTEST_H */
