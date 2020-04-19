@@ -8547,6 +8547,20 @@ Note that Peer Publisher relationships are non-hierarchical, unidirectional,
  to both be aware of the existence of the Peer Publisher relationship.
 \end_layout
 
+\begin_layout Standard
+The Publisher Topology can be reconfigured after deployment as needed.
+ Since each Publisher is configured with only its immediate Upstream, Downstream
+ and Peer Publishers, almost all changes to the Publisher Topology will
+ require configuration changes to only the immediately related Publishers.
+ Each Publisher is responsible for managing its own configuration.
+\end_layout
+
+\begin_layout Standard
+With appropriate care, even complex topological changes can be effected
+ with no disruption to other Publishers or to Observers, and without requiring
+ simultaneous reconfiguration across multiple Publishers.
+\end_layout
+
 \begin_layout Subsubsection
 Publisher Upstream Set
 \begin_inset CommandInset label
