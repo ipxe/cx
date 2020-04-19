@@ -28,6 +28,9 @@ setup(
         'Cython',
         'setuptools_scm',
     ],
+    install_requires = [
+        'pyOpenSSL',
+    ],
     ext_modules=cythonize(extensions, language_level=3, annotate=True),
     test_suite='test',
     zip_safe=False,

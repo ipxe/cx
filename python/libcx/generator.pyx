@@ -51,7 +51,7 @@ cdef class Generator:
         self._type = type
         self.gen = cx_gen_instantiate(type, &seed[0], seed.shape[0])
         if not self.gen:
-            raise ValueError
+            raise ValueError("Invalid seed")
 
     def __dealloc__(self):
         if self.gen:

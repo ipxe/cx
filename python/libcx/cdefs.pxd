@@ -1,6 +1,18 @@
 """libcx C library definitions"""
 
 
+cdef extern from "<openssl/evp.h>":
+
+    ctypedef struct EVP_PKEY
+
+    void EVP_PKEY_free(EVP_PKEY *key)
+
+
+cdef extern from "<openssl/x509.h>":
+
+    EVP_PKEY * d2i_PUBKEY(EVP_PKEY **a, const unsigned char **pp, long length)
+
+
 cdef extern from "<cx.h>":
 
     cpdef enum cx_generator_type:
@@ -26,3 +38,9 @@ cdef extern from "<cx/generator.h>":
     cdef bint cx_gen_iterate(cx_generator *gen, cx_contact_id *id)
 
     cdef void cx_gen_uninstantiate(cx_generator *gen)
+
+
+cdef extern from "<cx/seedcalc.h>":
+
+    cdef bint cx_seedcalc(cx_generator_type type, const void *preseed,
+                          size_t len, EVP_PKEY *key, void *seed)
