@@ -29,7 +29,7 @@
 
 #include <stddef.h>
 #include <openssl/objects.h>
-#include <openssl/x509.h>
+#include <openssl/evp.h>
 #include <cx.h>
 
 struct cx_drbg;
@@ -46,7 +46,7 @@ cx_drbg_instantiate_split ( enum cx_generator_type type, const void *entropy,
 
 extern struct cx_drbg * cx_drbg_instantiate ( enum cx_generator_type type,
 					      const void *input, size_t len,
-					      X509_PUBKEY *key );
+					      EVP_PKEY *key );
 
 extern struct cx_drbg *
 cx_drbg_instantiate_fresh ( enum cx_generator_type type );

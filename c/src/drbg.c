@@ -36,6 +36,7 @@
 #include <string.h>
 #include <openssl/crypto.h>
 #include <openssl/err.h>
+#include <openssl/evp.h>
 #include <openssl/objects.h>
 #include <openssl/rand.h>
 #include <openssl/rand_drbg.h>
@@ -550,7 +551,7 @@ struct cx_drbg * cx_drbg_instantiate_split ( enum cx_generator_type type,
  */
 struct cx_drbg * cx_drbg_instantiate ( enum cx_generator_type type,
 				       const void *input, size_t len,
-				       X509_PUBKEY *key ) {
+				       EVP_PKEY *key ) {
 	const struct cx_drbg_info *info;
 	struct cx_drbg *drbg;
 	const void *entropy;
@@ -579,7 +580,7 @@ struct cx_drbg * cx_drbg_instantiate ( enum cx_generator_type type,
 	/* Get personalization string */
 	if ( key ) {
 		personal = NULL;
-		personal_len = i2d_X509_PUBKEY ( key, &personal );
+		personal_len = i2d_PUBKEY ( key, &personal );
 		if ( personal_len < 0 ) {
 			DBG ( "DRBG could not encode public key\n" );
 			return NULL;

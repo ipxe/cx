@@ -26,6 +26,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <openssl/x509.h>
 #include <cx/seedcalc.h>
 #include "seedcalctest.h"
 
@@ -57,12 +58,12 @@ static int seedcalctest ( const char *name, enum cx_generator_type type,
 			  const unsigned char *expected ) {
 	const unsigned char *tmp_der;
 	unsigned char seed[len];
-	X509_PUBKEY *key;
+	EVP_PKEY *key;
 	int ok;
 
 	/* Parse DER key */
 	tmp_der = key_der;
-	key = d2i_X509_PUBKEY ( NULL, &tmp_der, key_len );
+	key = d2i_PUBKEY ( NULL, &tmp_der, key_len );
 	if ( ! key ) {
 		fprintf ( stderr, "SEEDCALC %s fail: could not parse key\n",
 			  name );
@@ -85,14 +86,14 @@ static int seedcalctest ( const char *name, enum cx_generator_type type,
 	}
 
 	/* Free key */
-	X509_PUBKEY_free ( key );
+	EVP_PKEY_free ( key );
 
 	fprintf ( stderr, "SEEDCALC %s ok\n", name );
 	return 1;
 
  err_seed:
  err_seedcalc:
-	X509_PUBKEY_free ( key );
+	EVP_PKEY_free ( key );
  err_key:
 	return 0;
 }

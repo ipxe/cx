@@ -46,7 +46,7 @@
  * @ret ok		Success indicator
  */
 int cx_seedcalc ( enum cx_generator_type type, const void *preseed, size_t len,
-		  X509_PUBKEY *key, void *seed ) {
+		  EVP_PKEY *key, void *seed ) {
 	struct cx_drbg *drbg;
 
 	/* Instantiate DRBG */

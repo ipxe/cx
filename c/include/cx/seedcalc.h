@@ -29,10 +29,10 @@
 
 #include <stddef.h>
 #include <openssl/objects.h>
-#include <openssl/x509.h>
+#include <openssl/evp.h>
 #include <cx.h>
 
 extern int cx_seedcalc ( enum cx_generator_type type, const void *preseed,
-			 size_t len, X509_PUBKEY *key, void *seed );
+			 size_t len, EVP_PKEY *key, void *seed );
 
 #endif /* _CX_SEEDCALC_H */
