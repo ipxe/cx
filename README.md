@@ -41,13 +41,13 @@ The architecture provides the following features:
     ability for users to distinguish between self-reported symptoms and
     medical test results.
 
+  - **Revocable diagnoses**: a negative medical test result can
+    supersede initial self-reported symptoms, allowing alerted users to
+    minimise unnecessary time spent in isolation.
+
   - **Distributed contact identification**: users can identify only
     their own hazardous contacts, and no central authority has access to
     the information required to identify contacts.
-
-  - **Immediate deployability**: the protocol may be implemented as an
-    app on existing Android and iOS devices, with no requirement for
-    changes to the core operating system.
 
   - **Interoperability**: the protocol may be implemented by any device
     and as part of any app, with all apps and all devices able to

@@ -301,19 +301,19 @@ ted symptoms and medical test results.
 \begin_layout Itemize
 
 \series bold
-Distributed contact identification
+Revocable diagnoses
 \series default
-: users can identify only their own hazardous contacts, and no central authority
- has access to the information required to identify contacts.
+: a negative medical test result can supersede initial self-reported symptoms,
+ allowing alerted users to minimise unnecessary time spent in isolation.
 \end_layout
 
 \begin_layout Itemize
 
 \series bold
-Immediate deployability
+Distributed contact identification
 \series default
-: the protocol may be implemented as an app on existing Android and iOS
- devices, with no requirement for changes to the core operating system.
+: users can identify only their own hazardous contacts, and no central authority
+ has access to the information required to identify contacts.
 \end_layout
 
 \begin_layout Itemize
