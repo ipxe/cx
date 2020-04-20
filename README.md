@@ -130,8 +130,8 @@ choose to send confirmation codes via SMS messages, or through an
 existing online system.
 
 The confirmation code allows the device to upload a list of the contact
-identifiers that it has broadcast over the past week. The list is
-uploaded to the healthcare provider’s servers.
+identifiers that it has recently broadcast. The list is uploaded to the
+healthcare provider’s servers.
 
 To save bandwidth, the device uploads only a single piece of information
 (a secret **seed value**) that it had used to generate its sequence of
@@ -211,6 +211,10 @@ in excessive amounts of data to be downloaded.
 For healthcare providers in very large geographic areas, this same
 hierarchical approach can be used to break down subscription zones to
 state or county levels.
+
+For healthcare providers in neighbouring or overlapping geographic
+areas, notifications may be exchanged directly to reduce the volume of
+notifications reaching the worldwide subscription zone.
 
 ![image](cooperation.png)
 
