@@ -18,6 +18,7 @@ cdef class Preseed:
 
     @staticmethod
     def value(cx_generator_type type):
+        """Construct preseed value"""
         cdef unsigned char[::1] preseed
         cdef size_t len
         len = cx_gen_seed_len(type)
@@ -30,6 +31,7 @@ cdef class Preseed:
 
     @staticmethod
     def key():
+        """Construct preseed key using default algorithm and parameters"""
         cdef EVP_PKEY *key
         cdef unsigned char *key_der = NULL
         cdef int key_der_len
