@@ -1,11 +1,18 @@
 """libcx C library definitions"""
 
 
+cdef extern from "<openssl/crypto.h>":
+
+    void OPENSSL_free(void *addr)
+
+
 cdef extern from "<openssl/evp.h>":
 
     ctypedef struct EVP_PKEY
 
     void EVP_PKEY_free(EVP_PKEY *key)
+
+    int i2d_PUBKEY(EVP_PKEY *a, unsigned char **pp)
 
 
 cdef extern from "<openssl/x509.h>":
@@ -44,3 +51,11 @@ cdef extern from "<cx/seedcalc.h>":
 
     cdef bint cx_seedcalc(cx_generator_type type, const void *preseed,
                           size_t len, EVP_PKEY *key, void *seed)
+
+
+cdef extern from "<cx/preseed.h>":
+
+    cdef bint cx_preseed_value(cx_generator_type type, void *preseed,
+                               size_t len)
+
+    cdef EVP_PKEY * cx_preseed_key()
