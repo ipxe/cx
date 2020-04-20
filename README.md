@@ -3,6 +3,7 @@ CX: Privacy-compatible distributed contact tracing
 
 [![Documentation](https://github.com/ipxe/cx/workflows/Documentation/badge.svg)](https://github.com/ipxe/cx/actions?query=workflow%3ADocumentation+branch%3Amaster)
 [![C library](https://github.com/ipxe/cx/workflows/C%20library/badge.svg)](https://github.com/ipxe/cx/actions?query=workflow%3A%22C+library%22+branch%3Amaster)
+[![Python](https://github.com/ipxe/cx/workflows/Python/badge.svg)](https://github.com/ipxe/cx/actions?query=workflow%3APython+branch%3Amaster)
 
 Download the full [architecture
 specification](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
