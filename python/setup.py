@@ -83,7 +83,10 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     packages=find_packages(exclude=['test']),
-    use_scm_version={'root': '..'},
+    use_scm_version={
+        'root': '..',
+        'tag_regex': r'^python-(?P<version>\d+(?:\.\d+)*)$',
+    },
     python_requires='>=3.7',
     cmdclass={
         'build_ext': BuildExtCommand,
