@@ -6,7 +6,15 @@ from pathlib import Path
 import subprocess
 from setuptools import Extension, setup, find_packages
 from setuptools.command.build_ext import build_ext
-from Cython.Build import cythonize
+
+
+try:
+    from Cython.Build import cythonize
+except ImportError:
+    if Path('libcx/cdefs.c').exists():
+        cythonize = lambda exts, **kwargs: exts
+    else:
+        raise
 
 
 class BuildExtCommand(build_ext):
@@ -92,13 +100,21 @@ setup(
         'build_ext': BuildExtCommand,
     },
     setup_requires=[
-        'Cython',
         'setuptools_scm',
     ],
     install_requires = [
         'pyOpenSSL',
     ],
-    ext_modules=cythonize('libcx/*.pyx', language_level=3, annotate=True),
+    ext_modules=cythonize(
+        [
+            Extension('libcx.cdefs', ['libcx/cdefs.pyx']),
+            Extension('libcx.generator', ['libcx/generator.pyx']),
+            Extension('libcx.seedcalc', ['libcx/seedcalc.pyx']),
+            Extension('libcx.preseed', ['libcx/preseed.pyx']),
+        ],
+        language_level=3,
+        annotate=True,
+    ),
     test_suite='test',
     zip_safe=False,
 )
