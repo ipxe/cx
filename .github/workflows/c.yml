@@ -39,19 +39,15 @@ jobs:
       - name: Distribution
         working-directory: c
         run: |
-          make dist VERSION=artifact
-      - name: Check distribution
+          make distcheck VERSION=artifact
+      - name: Install
         working-directory: c
         run: |
-          tar xvzf libcx-artifact.tar.gz
-          cd libcx-artifact
-          ./configure
           make
-          make check
           sudo make install
           sudo ldconfig
       - name: Usage test
-        working-directory: c/libcx-artifact/src
+        working-directory: c/src
         run: |
           pkg-config --modversion cx
           gcc -o linktest.o -c linktest.c `pkg-config --cflags cx`

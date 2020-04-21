@@ -14,7 +14,8 @@ libcx_la_LIBADD = $(SSL_LIBS)
 cxtest_SOURCES = cxtest.c \
 		 gentest.h gentest.c \
 		 seedcalctest.h seedcalctest.c \
-		 preseedtest.h preseedtest.c
+		 preseedtest.h preseedtest.c \
+		 $(PUBKEY_C)
 cxtest_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
 cxtest_CFLAGS = $(AM_CFLAGS) -Wunused-const-variable=2
 cxtest_LDADD = libcx.la $(SSL_LIBS)
@@ -27,8 +28,8 @@ PUBKEY_C = $(patsubst %.pem,%.c,$(PUBKEY_PEM))
 BUILT_SOURCES = $(PUBKEY_C)
 CLEANFILES = $(PUBKEY_C) $(PUBKEY_DER)
 
-tests/key_%.der : tests/key_%.pem Makefile
+$(srcdir)/tests/key_%.der : $(srcdir)/tests/key_%.pem
 	openssl rsa -pubin -in $< -outform DER -out $@
 
-tests/key_%.c : tests/key_%.der Makefile
+$(srcdir)/tests/key_%.c : $(srcdir)/tests/key_%.der
 	( cd $(dir $<) && xxd -i $(notdir $<) ) > $@
