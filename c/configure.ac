@@ -17,7 +17,7 @@ AS_IF([test x"$XXD_PROG" != x"yes"],
       [AC_MSG_ERROR([Please install xxd])])
 
 # Configure libtool
-LT_INIT([shared])
+LT_INIT([shared pic-only])
 
 # Configure automake
 AM_INIT_AUTOMAKE([foreign subdir-objects])
