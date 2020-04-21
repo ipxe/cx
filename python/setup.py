@@ -65,9 +65,9 @@ class BuildExtCommand(build_ext):
         libdir = str(cxdir / 'src/.libs')
         return {
             'include_dirs': [incdir],
-            'library_dirs': [libdir],
-            'runtime_library_dirs': [libdir],
-            'libraries': ['cx'],
+            'extra_objects': [
+                '-L' + libdir, '-Wl,-Bstatic', '-lcx', '-Wl,-Bdynamic'
+            ],
         }
 
     @staticmethod
