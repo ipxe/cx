@@ -11,6 +11,8 @@
 /stamp-h1
 .deps/
 .libs/
+libcx-*/
+dist-libcx/
 Makefile.in
 Makefile
 *.o

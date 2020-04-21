@@ -4,10 +4,12 @@
 
 from pathlib import Path
 import subprocess
-from setuptools import Extension, setup, find_packages
+from setuptools import Extension, setup, find_packages, findall
 from setuptools.command.build_ext import build_ext
+from setuptools.command.egg_info import egg_info
 
 
+# Use cythonize, if Cython is installed
 try:
     from Cython.Build import cythonize
 except ImportError:
@@ -15,6 +17,44 @@ except ImportError:
         cythonize = lambda exts, **kwargs: exts
     else:
         raise
+
+
+# Use local libcx C library, if present
+cxgitdir = Path('../c')
+cxdistdir = Path('dist-libcx')
+cxdir = next((x for x in (cxgitdir, cxdistdir)
+              if (x / 'src/generator.c').exists()), None)
+
+
+def libcx_prep():
+    """Prepare libcx C library build directory"""
+    if not (cxdir / 'configure').exists():
+        subprocess.check_call(['./autogen.sh'], cwd=cxdir)
+    if not (cxdir / 'Makefile').exists():
+        subprocess.check_call(['./configure'], cwd=cxdir)
+
+
+class EggInfoCommand(egg_info):
+    """Custom egg_info command"""
+
+    def libcx_dist(self):
+        """Build libcx C library distribution"""
+        libcx_prep()
+        subprocess.check_call(['make', 'distdir=dist-libcx', 'distdir'],
+                              cwd=cxdir)
+        if cxdistdir.exists():
+            cxdistdir.unlink()
+        cxdistdir.symlink_to(cxdir / 'dist-libcx')
+        cxdistfile = sorted(findall(cxdistdir))
+        with open('MANIFEST.in', 'wt') as f:
+            f.write('# Generated automatically by setup.py - do not edit\n')
+            f.writelines('include %s\n' % x for x in cxdistfile)
+
+    def find_sources(self):
+        """Find sources"""
+        if cxdir == cxgitdir:
+            self.libcx_dist()
+        super().find_sources()
 
 
 class BuildExtCommand(build_ext):
@@ -30,7 +70,7 @@ class BuildExtCommand(build_ext):
     def initialize_options(self):
         """Initialize options"""
         super().initialize_options()
-        self.extlibcx = not Path('../c/src/generator.c').exists()
+        self.extlibcx = cxdir is None
 
     @staticmethod
     def pkgconf(libname, *args):
@@ -53,14 +93,10 @@ class BuildExtCommand(build_ext):
             'extra_link_args': self.pkgconf(libname, '--libs-only-other'),
         }
 
-    def build_libcx(self):
+    def libcx_build(self):
         """Build libcx C library and return extension attributes"""
-        cxdir = Path('../c').resolve()
-        if not (cxdir / 'configure').exists():
-            subprocess.check_call('./autogen.sh', cwd=cxdir)
-        if not (cxdir / 'Makefile').exists():
-            subprocess.check_call('./configure', cwd=cxdir)
-        subprocess.check_call('make', cwd=cxdir)
+        libcx_prep()
+        subprocess.check_call(['make'], cwd=cxdir)
         incdir = str(cxdir / 'include')
         libdir = str(cxdir / 'src/.libs')
         return {
@@ -79,7 +115,7 @@ class BuildExtCommand(build_ext):
 
     def run(self):
         """Run command"""
-        cx = self.pkgconf_ext('cx') if self.extlibcx else self.build_libcx()
+        cx = self.pkgconf_ext('cx') if self.extlibcx else self.libcx_build()
         openssl = self.pkgconf_ext('openssl')
         for ext in self.extensions:
             self.merge_attributes(ext, cx)
@@ -97,6 +133,7 @@ setup(
     },
     python_requires='>=3.7',
     cmdclass={
+        'egg_info': EggInfoCommand,
         'build_ext': BuildExtCommand,
     },
     setup_requires=[

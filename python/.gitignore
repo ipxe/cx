@@ -3,6 +3,8 @@
 __pycache__/
 build/
 dist/
+dist-libcx
+MANIFEST.in
 *.pyc
 *.egg-info
 .coverage
