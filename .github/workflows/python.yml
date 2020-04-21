@@ -3,13 +3,14 @@ name: Python
 on: [push]
 
 jobs:
-  python:
-    name: Python
+
+  devel:
+    name: Development build
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v1
-      - name: Install packages
+      - name: Prerequisites
         run: |
           sudo apt install -y -o Acquire::Retries=50 \
                            autoconf-archive python3-pip python3-setuptools \
@@ -20,28 +21,68 @@ jobs:
         working-directory: python
         run: |
           ./test.sh
-      - name: Install C library
-        working-directory: c
+      - name: Source distribution
+        working-directory: python
         run: |
+          python3 setup.py sdist
+      - name: Upload sdist
+        uses: actions/upload-artifact@v1
+        with:
+          name: python-sdist
+          path: python/dist
+
+  sdist:
+    name: Build from sdist
+    runs-on: ubuntu-latest
+    needs: devel
+    steps:
+      - name: Prerequisites
+        run: |
+          sudo apt install -y -o Acquire::Retries=50 \
+                           python3-pip python3-setuptools
+      - name: Download sdist
+        uses: actions/download-artifact@v1
+        with:
+          name: python-sdist
+      - name: Install
+        run: |
+          sudo pip3 install python-sdist/libcx-*.tar.gz
+      - name: Usage test
+        run: |
+          python3 -I -c 'import libcx'
+
+  sdist-extlibcx:
+    name: Build from sdist (with external libcx)
+    runs-on: ubuntu-latest
+    needs: devel
+    steps:
+      - name: Prerequisites
+        run: |
+          sudo apt install -y -o Acquire::Retries=50 python3-setuptools
+      - name: Download sdist
+        uses: actions/download-artifact@v1
+        with:
+          name: python-sdist
+      - name: Unpack
+        run: |
+          tar xvzf python-sdist/libcx-*.tar.gz
+          ln -s libcx-* python
+      - name: Install C library
+        working-directory: python/dist-libcx
+        run: |
+          ./configure
           make
           sudo make install
           sudo ldconfig
-      - name: Distribution
+      - name: Delete C library source
         working-directory: python
         run: |
-          python3 setup.py sdist -k
-      - name: Check distribution
+          rm -rf dist-libcx MANIFEST.in
+      - name: Install
         working-directory: python
         run: |
-          cd libcx-*
-          ./test.sh
           python3 setup.py build
           sudo python3 setup.py install
       - name: Usage test
         run: |
           python3 -I -c 'import libcx'
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: python-dist
-          path: python/dist
