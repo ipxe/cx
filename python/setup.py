@@ -131,7 +131,7 @@ setup(
         'root': '..',
         'tag_regex': r'^python-(?P<version>\d+(?:\.\d+)*)$',
     },
-    python_requires='>=3.7',
+    python_requires='>=3.4',
     cmdclass={
         'egg_info': EggInfoCommand,
         'build_ext': BuildExtCommand,
