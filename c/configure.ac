@@ -11,10 +11,10 @@ AC_PROG_CXX
 AM_PROG_AR
 AC_CHECK_PROG([OPENSSL_PROG],[openssl],[yes])
 AS_IF([test x"$OPENSSL_PROG" != x"yes"],
-      [AC_MSG_ERROR([Please install openssl])])
+      [AC_MSG_WARN([openssl missing - cannot (re)build from pristine sources])])
 AC_CHECK_PROG([XXD_PROG],[xxd],[yes])
 AS_IF([test x"$XXD_PROG" != x"yes"],
-      [AC_MSG_ERROR([Please install xxd])])
+      [AC_MSG_WARN([xxd missing - cannot (re)build from pristine sources])])
 
 # Configure libtool
 LT_INIT([shared pic-only])
