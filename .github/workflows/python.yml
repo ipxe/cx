@@ -13,7 +13,8 @@ jobs:
       - name: Prerequisites
         run: |
           sudo apt install -y -o Acquire::Retries=50 \
-                           autoconf-archive python3-pip python3-setuptools \
+                           autoconf-archive openssl xxd asn1c \
+                           python3-pip python3-setuptools \
                            python3-coverage python3-pycodestyle \
                            python3-flake8 pylint3
           sudo pip3 install Cython

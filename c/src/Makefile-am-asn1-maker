@@ -1,0 +1,14 @@
+# This exists as a separate Makefile in order to be able to include
+# the asn1c-generated asn1/Makefile.am.sample in order to extract its
+# list of source files, without polluting the variable or target
+# namespace of our own Makefiles.
+
+include asn1/Makefile.am.sample
+
+PRINTF = printf
+
+SOURCES = $(foreach SRC,$(sort $(ASN_MODULE_HEADERS)) \
+			$(sort $(ASN_MODULE_SOURCES)),asn1/$(SRC))
+
+Makefile.am.asn1 : asn1/Makefile.am.sample
+	$(PRINTF) 'ASN1_SOURCES = $(foreach F,$(SOURCES),\\\n\t$(F))\n' > $@

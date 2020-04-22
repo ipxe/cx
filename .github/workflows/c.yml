@@ -12,7 +12,7 @@ jobs:
       - name: Install packages
         run: |
           sudo apt install -y -o Acquire::Retries=50 \
-                           autoconf-archive valgrind
+                           autoconf-archive valgrind openssl xxd asn1c
       - name: Autotools
         working-directory: c
         run: |

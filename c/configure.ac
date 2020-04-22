@@ -15,6 +15,9 @@ AS_IF([test x"$OPENSSL_PROG" != x"yes"],
 AC_CHECK_PROG([XXD_PROG],[xxd],[yes])
 AS_IF([test x"$XXD_PROG" != x"yes"],
       [AC_MSG_WARN([xxd missing - cannot (re)build from pristine sources])])
+AC_CHECK_PROG([ASN1C_PROG],[asn1c],[yes])
+AS_IF([test x"$ASN1C_PROG" != x"yes"],
+      [AC_MSG_WARN([asn1c missing - cannot (re)build from pristine sources])])
 
 # Configure libtool
 LT_INIT([shared pic-only])
