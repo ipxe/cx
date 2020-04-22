@@ -70,66 +70,66 @@ struct seedcalc_test {
 static const struct seedcalc_test seedcalc_aes128_natural_fensys = {
 	.name = "AES-128 (natural) (Fen Systems)",
 	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
-	.preseed = type1_test1_preseed,
+	.preseed = seedcalc_type1_test1_preseed,
 	.key = fensystems_pubkey_der,
 	.key_len = &fensystems_pubkey_der_len,
-	.expected = type1_test1_seed,
-	.expected_len = sizeof ( type1_test1_seed ),
+	.expected = seedcalc_type1_test1_seed,
+	.expected_len = sizeof ( seedcalc_type1_test1_seed ),
 };
 
 /** Seed Calculator test for AES-128 with natural preseed, iPXE key */
 static const struct seedcalc_test seedcalc_aes128_natural_ipxe = {
 	.name = "AES-128 (natural) (iPXE)",
 	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
-	.preseed = type1_test2_preseed,
+	.preseed = seedcalc_type1_test2_preseed,
 	.key = ipxe_pubkey_der,
 	.key_len = &ipxe_pubkey_der_len,
-	.expected = type1_test2_seed,
-	.expected_len = sizeof ( type1_test2_seed ),
+	.expected = seedcalc_type1_test2_seed,
+	.expected_len = sizeof ( seedcalc_type1_test2_seed ),
 };
 
 /** Seed Calculator test for AES-128 with random preseed, iPXE key */
 static const struct seedcalc_test seedcalc_aes128_random_ipxe = {
 	.name = "AES-128 (random) (iPXE)",
 	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
-	.preseed = type1_test3_preseed,
+	.preseed = seedcalc_type1_test3_preseed,
 	.key = ipxe_pubkey_der,
 	.key_len = &ipxe_pubkey_der_len,
-	.expected = type1_test3_seed,
-	.expected_len = sizeof ( type1_test3_seed ),
+	.expected = seedcalc_type1_test3_seed,
+	.expected_len = sizeof ( seedcalc_type1_test3_seed ),
 };
 
 /** Seed Calculator test for AES-256 with natural preseed, Fen Systems key */
 static const struct seedcalc_test seedcalc_aes256_natural_fensys = {
 	.name = "AES-256 (natural) (Fen Systems)",
 	.type = GEN_TYPE_AES_256_CTR_DRBG_DF,
-	.preseed = type2_test1_preseed,
+	.preseed = seedcalc_type2_test1_preseed,
 	.key = fensystems_pubkey_der,
 	.key_len = &fensystems_pubkey_der_len,
-	.expected = type2_test1_seed,
-	.expected_len = sizeof ( type2_test1_seed ),
+	.expected = seedcalc_type2_test1_seed,
+	.expected_len = sizeof ( seedcalc_type2_test1_seed ),
 };
 
 /** Seed Calculator test for AES-256 with natural preseed, iPXE key */
 static const struct seedcalc_test seedcalc_aes256_natural_ipxe = {
 	.name = "AES-256 (natural) (iPXE)",
 	.type = GEN_TYPE_AES_256_CTR_DRBG_DF,
-	.preseed = type2_test2_preseed,
+	.preseed = seedcalc_type2_test2_preseed,
 	.key = ipxe_pubkey_der,
 	.key_len = &ipxe_pubkey_der_len,
-	.expected = type2_test2_seed,
-	.expected_len = sizeof ( type2_test2_seed ),
+	.expected = seedcalc_type2_test2_seed,
+	.expected_len = sizeof ( seedcalc_type2_test2_seed ),
 };
 
 /** Seed Calculator test for AES-256 with random preseed, iPXE key */
 static const struct seedcalc_test seedcalc_aes256_random_ipxe = {
 	.name = "AES-256 (random) (iPXE)",
 	.type = GEN_TYPE_AES_256_CTR_DRBG_DF,
-	.preseed = type2_test3_preseed,
+	.preseed = seedcalc_type2_test3_preseed,
 	.key = ipxe_pubkey_der,
 	.key_len = &ipxe_pubkey_der_len,
-	.expected = type2_test3_seed,
-	.expected_len = sizeof ( type2_test3_seed ),
+	.expected = seedcalc_type2_test3_seed,
+	.expected_len = sizeof ( seedcalc_type2_test3_seed ),
 };
 
 /**

@@ -24,42 +24,37 @@
  * and the licenses of the other code concerned.
  */
 
-/******************************************************************************
- *
- * Self-tests
- *
- ******************************************************************************
- */
+#ifndef _CX_TEST_H
+#define _CX_TEST_H
 
-#include <stdio.h>
-#include "cxtest.h"
-#include "gentest.h"
-#include "seedcalctest.h"
-#include "preseedtest.h"
+typedef unsigned char uuid_t[16];
 
-/**
- * Main entry point
- *
- * @ret exit		Exit status
- */
-int main ( void ) {
-	int ok = 1;
+#define DECL_GEN_TEST( name, seed_len )				\
+	extern const unsigned char name ## _seed[seed_len];	\
+	extern const uuid_t name ## _first_id;			\
+	extern const uuid_t name ## _last_id;
 
-	/* Run generator self-tests */
-	ok &= gentests();
+#define DECL_SEEDCALC_TEST( name, seed_len )			\
+	extern const unsigned char name ## _preseed[seed_len];	\
+	extern const unsigned char name ## _seed[seed_len];
 
-	/* Run seed calculator self-tests */
-	ok &= seedcalctests();
+#define DECL_KEY( name )					\
+	extern unsigned char name ## _der[];			\
+	extern unsigned int name ## _der_len;
 
-	/* Run preseed self-tests */
-	ok &= preseedtests();
+DECL_GEN_TEST ( gen_type1_test1, 24 );
+DECL_GEN_TEST ( gen_type1_test2, 24 );
+DECL_GEN_TEST ( gen_type2_test1, 48 );
+DECL_GEN_TEST ( gen_type2_test2, 48 );
 
-	/* Report failure */
-	if ( ! ok ) {
-		fprintf ( stderr, "Self-tests failed\n" );
-		return 1;
-	}
+DECL_SEEDCALC_TEST ( seedcalc_type1_test1, 24 );
+DECL_SEEDCALC_TEST ( seedcalc_type1_test2, 24 );
+DECL_SEEDCALC_TEST ( seedcalc_type1_test3, 24 );
+DECL_SEEDCALC_TEST ( seedcalc_type2_test1, 48 );
+DECL_SEEDCALC_TEST ( seedcalc_type2_test2, 48 );
+DECL_SEEDCALC_TEST ( seedcalc_type2_test3, 48 );
 
-	fprintf ( stderr, "Self-tests passed\n" );
-	return 0;
-}
+DECL_KEY ( key_a );
+DECL_KEY ( key_b );
+
+#endif /* _CX_TEST_H */

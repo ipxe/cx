@@ -27,14 +27,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <cx/generator.h>
+#include "cxtest.h"
 #include "gentest.h"
-
-/* Include test vectors */
-typedef unsigned char uuid_t[16];
-#include "tests/gen_type1_test1.c"
-#include "tests/gen_type1_test2.c"
-#include "tests/gen_type2_test1.c"
-#include "tests/gen_type2_test2.c"
 
 /**
  * Run a generator self-test
@@ -155,10 +149,10 @@ int gentests ( void ) {
 	int ok = 1;
 
 	/* Run tests */
-	ok &= gentest_std ( CX_GEN_AES_128_CTR_2048, type1_test1, 2048 );
-	ok &= gentest_std ( CX_GEN_AES_128_CTR_2048, type1_test2, 2048 );
-	ok &= gentest_std ( CX_GEN_AES_256_CTR_2048, type2_test1, 2048 );
-	ok &= gentest_std ( CX_GEN_AES_256_CTR_2048, type2_test2, 2048 );
+	ok &= gentest_std ( CX_GEN_AES_128_CTR_2048, gen_type1_test1, 2048 );
+	ok &= gentest_std ( CX_GEN_AES_128_CTR_2048, gen_type1_test2, 2048 );
+	ok &= gentest_std ( CX_GEN_AES_256_CTR_2048, gen_type2_test1, 2048 );
+	ok &= gentest_std ( CX_GEN_AES_256_CTR_2048, gen_type2_test2, 2048 );
 
 	return ok;
 }

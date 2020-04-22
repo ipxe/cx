@@ -28,17 +28,8 @@
 #include <stdio.h>
 #include <openssl/x509.h>
 #include <cx/seedcalc.h>
+#include "cxtest.h"
 #include "seedcalctest.h"
-
-/* Include test vectors */
-#include "tests/seedcalc_type1_test1.c"
-#include "tests/seedcalc_type1_test2.c"
-#include "tests/seedcalc_type1_test3.c"
-#include "tests/seedcalc_type2_test1.c"
-#include "tests/seedcalc_type2_test2.c"
-#include "tests/seedcalc_type2_test3.c"
-#include "tests/key_a.c"
-#include "tests/key_b.c"
 
 /**
  * Run a seed calculator self-test
@@ -109,7 +100,7 @@ static int seedcalctest ( const char *name, enum cx_generator_type type,
 #define seedcalctest_std( type, prefix, key )			\
 	seedcalctest ( #prefix, type, prefix ## _preseed,	\
 		       sizeof ( prefix ## _preseed ),		\
-		       key ## _der, sizeof ( key ## _der ),	\
+		       key ## _der, key ## _der_len,		\
 		       prefix ## _seed )
 
 /**
@@ -121,12 +112,18 @@ int seedcalctests ( void ) {
 	int ok = 1;
 
 	/* Run tests */
-	ok &= seedcalctest_std ( CX_GEN_AES_128_CTR_2048, type1_test1, key_a );
-	ok &= seedcalctest_std ( CX_GEN_AES_128_CTR_2048, type1_test2, key_b );
-	ok &= seedcalctest_std ( CX_GEN_AES_128_CTR_2048, type1_test3, key_b );
-	ok &= seedcalctest_std ( CX_GEN_AES_256_CTR_2048, type2_test1, key_a );
-	ok &= seedcalctest_std ( CX_GEN_AES_256_CTR_2048, type2_test2, key_b );
-	ok &= seedcalctest_std ( CX_GEN_AES_256_CTR_2048, type2_test3, key_b );
+	ok &= seedcalctest_std ( CX_GEN_AES_128_CTR_2048,
+				 seedcalc_type1_test1, key_a );
+	ok &= seedcalctest_std ( CX_GEN_AES_128_CTR_2048,
+				 seedcalc_type1_test2, key_b );
+	ok &= seedcalctest_std ( CX_GEN_AES_128_CTR_2048,
+				 seedcalc_type1_test3, key_b );
+	ok &= seedcalctest_std ( CX_GEN_AES_256_CTR_2048,
+				 seedcalc_type2_test1, key_a );
+	ok &= seedcalctest_std ( CX_GEN_AES_256_CTR_2048,
+				 seedcalc_type2_test2, key_b );
+	ok &= seedcalctest_std ( CX_GEN_AES_256_CTR_2048,
+				 seedcalc_type2_test3, key_b );
 
 	return ok;
 }

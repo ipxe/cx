@@ -150,9 +150,9 @@ static const unsigned char nist_cx_id_aes128_natural_expected[] = {
 static const struct nist_test nist_cx_id_aes128_natural = {
 	.name = "AES-128 (natural) (NIST-like)",
 	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
-	.entropy_input = &type1_test1_seed[0],
+	.entropy_input = &gen_type1_test1_seed[0],
 	.entropy_input_len = 16,
-	.nonce = &type1_test1_seed[16],
+	.nonce = &gen_type1_test1_seed[16],
 	.nonce_len = 8,
 	.expected = nist_cx_id_aes128_natural_expected,
 	.expected_len = sizeof ( nist_cx_id_aes128_natural_expected ),
@@ -178,40 +178,40 @@ struct cx_id_test {
 static const struct cx_id_test cx_id_aes128_natural = {
 	.name = "AES-128 (natural)",
 	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
-	.seed = type1_test1_seed,
+	.seed = gen_type1_test1_seed,
 	.count = 2048,
-	.expected_first = &type1_test1_first_id,
-	.expected_last = &type1_test1_last_id,
+	.expected_first = &gen_type1_test1_first_id,
+	.expected_last = &gen_type1_test1_last_id,
 };
 
 /** Contact Identifier test for AES-128 with random seed */
 static const struct cx_id_test cx_id_aes128_random = {
 	.name = "AES-128 (random)",
 	.type = GEN_TYPE_AES_128_CTR_DRBG_DF,
-	.seed = type1_test2_seed,
+	.seed = gen_type1_test2_seed,
 	.count = 2048,
-	.expected_first = &type1_test2_first_id,
-	.expected_last = &type1_test2_last_id,
+	.expected_first = &gen_type1_test2_first_id,
+	.expected_last = &gen_type1_test2_last_id,
 };
 
 /** Contact Identifier test for AES-256 with natural numbers seed */
 static const struct cx_id_test cx_id_aes256_natural = {
 	.name = "AES-256 (natural)",
 	.type = GEN_TYPE_AES_256_CTR_DRBG_DF,
-	.seed = type2_test1_seed,
+	.seed = gen_type2_test1_seed,
 	.count = 2048,
-	.expected_first = &type2_test1_first_id,
-	.expected_last = &type2_test1_last_id,
+	.expected_first = &gen_type2_test1_first_id,
+	.expected_last = &gen_type2_test1_last_id,
 };
 
 /** Contact Identifier test for AES-256 with random seed */
 static const struct cx_id_test cx_id_aes256_random = {
 	.name = "AES-256 (random)",
 	.type = GEN_TYPE_AES_256_CTR_DRBG_DF,
-	.seed = type2_test2_seed,
+	.seed = gen_type2_test2_seed,
 	.count = 2048,
-	.expected_first = &type2_test2_first_id,
-	.expected_last = &type2_test2_last_id,
+	.expected_first = &gen_type2_test2_first_id,
+	.expected_last = &gen_type2_test2_last_id,
 };
 
 /**

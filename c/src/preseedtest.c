@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <cx/seedcalc.h>
 #include <cx/preseed.h>
+#include "cxtest.h"
 #include "preseedtest.h"
 
 /**
