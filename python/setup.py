@@ -130,6 +130,8 @@ setup(
     use_scm_version={
         'root': '..',
         'tag_regex': r'^python-(?P<version>\d+(?:\.\d+)*)$',
+        'git_describe_command': ('git describe --dirty --tags --long '
+                                 '--match python-*'),
     },
     python_requires='>=3.4',
     cmdclass={
