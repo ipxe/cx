@@ -22,13 +22,14 @@ ASN1_SOURCES = \
 	asn1/SeedDescriptor.h \
 	asn1/SeedDescriptors.h \
 	asn1/SeedReport.h \
+	asn1/SeedReportContent.h \
 	asn1/SeedReportVersion.h \
 	asn1/SeedValues.h \
-	asn1/SignatureValue.h \
-	asn1/SignatureValues.h \
+	asn1/Signature.h \
+	asn1/Signatures.h \
 	asn1/SubjectPublicKeyInfo.h \
 	asn1/TBSPublicationData.h \
-	asn1/TBSSeedReport.h \
+	asn1/TBSSeedReportContent.h \
 	asn1/UTF8String.h \
 	asn1/UpdateURL.h \
 	asn1/UpdateURLs.h \
@@ -78,13 +79,14 @@ ASN1_SOURCES = \
 	asn1/SeedDescriptor.c \
 	asn1/SeedDescriptors.c \
 	asn1/SeedReport.c \
+	asn1/SeedReportContent.c \
 	asn1/SeedReportVersion.c \
 	asn1/SeedValues.c \
-	asn1/SignatureValue.c \
-	asn1/SignatureValues.c \
+	asn1/Signature.c \
+	asn1/Signatures.c \
 	asn1/SubjectPublicKeyInfo.c \
 	asn1/TBSPublicationData.c \
-	asn1/TBSSeedReport.c \
+	asn1/TBSSeedReportContent.c \
 	asn1/UTF8String.c \
 	asn1/UpdateURL.c \
 	asn1/UpdateURLs.c \

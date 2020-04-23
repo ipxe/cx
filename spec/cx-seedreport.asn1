@@ -1,4 +1,4 @@
 SeedReport ::= SEQUENCE {
-    tbsSeedReport               TBSSeedReport,
-    signatureValues             SignatureValues }
+    content                     SeedReportContent,
+    signatures                  Signatures }
 

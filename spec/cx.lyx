@@ -4017,7 +4017,7 @@ The algorithm comprises 3 steps:
 \begin_layout Enumerate
 Construct a 
 \series bold
-TBSSeedReport
+SeedReportContent
 \series default
  data object as defined in section
 \begin_inset space ~
@@ -4026,7 +4026,7 @@ TBSSeedReport
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:TBSSeedReport-fields"
+reference "subsec:SeedReportContent-fields"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4048,7 +4048,7 @@ signatureValues
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:SeedReport-signatureValues"
+reference "par:SeedReport-signatures"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4065,7 +4065,7 @@ SeedReport
 \series default
  data object incorporating both the 
 \series bold
-tbsSeedReport
+seedReportContent
 \series default
  and 
 \series bold
@@ -4106,7 +4106,7 @@ The algorithm comprises 6 steps:
 \begin_layout Enumerate
 Extract the 
 \series bold
-tbsSeedReport
+seedReportContent
 \series default
  and 
 \series bold
@@ -4140,7 +4140,7 @@ seedDescriptors
 \series default
  field from the 
 \series bold
-TBSSeedReport
+SeedReportContent
 \series default
  data object as defined in section
 \begin_inset space ~
@@ -4149,7 +4149,7 @@ TBSSeedReport
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:TBSSeedReport-fields"
+reference "subsec:SeedReportContent-fields"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4205,7 +4205,7 @@ signatureAlgorithm
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:SeedDescriptor-signatureAlgorithm"
+reference "par:Signature-signatureAlgorithm"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4231,7 +4231,7 @@ SignatureValue
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:SeedReport-signatureValues"
+reference "par:SeedReport-signatures"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4244,7 +4244,7 @@ noprefix "false"
 \begin_layout Enumerate
 Interpret the 
 \series bold
-tbsSeedReport
+seedReportContent
 \series default
  fields as defined in section
 \begin_inset space ~
@@ -4253,7 +4253,7 @@ tbsSeedReport
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:TBSSeedReport-fields"
+reference "subsec:SeedReportContent-fields"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4379,83 +4379,6 @@ lstparams "language=Clean"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Paragraph
-signatureAlgorithm
-\begin_inset CommandInset label
-LatexCommand label
-name "par:SeedDescriptor-signatureAlgorithm"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The 
-\series bold
-signatureAlgorithm
-\series default
- field contains the X.509
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RFC5280"
-literal "false"
-
-\end_inset
-
- 
-\series bold
-AlgorithmIdentifier
-\series default
- which comprises the object identifier (OID) and optional parameters for
- the algorithm used to generate the corresponding signature in the 
-\series bold
-signatureValues
-\series default
- field (see section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:SeedReport-signatureValues"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-An Advertiser SHALL set this field to the algorithm used to compute the
- corresponding signature in the 
-\series bold
-signatureValues
-\series default
- field, and the algorithm SHALL be compatible with the public key algorithm
- provided in the 
-\series bold
-preseedVerificationKey
-\series default
- field.
-\end_layout
-
-\begin_layout Standard
-A Publisher SHALL verify that the algorithm specified in this field is compatibl
-e with the public key algorithm provided in the 
-\series bold
-preseedVerificationKey
-\series default
- field.
 \end_layout
 
 \begin_layout Paragraph
@@ -4612,14 +4535,28 @@ e with the signature algorithm specified in the
 \series bold
 signatureAlgorithm
 \series default
- field.
+ field of the corresponding signature as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Signature-signatureAlgorithm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
-TBSSeedReport fields
+SeedReportContent fields
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:TBSSeedReport-fields"
+name "subsec:SeedReportContent-fields"
 
 \end_inset
 
@@ -4629,7 +4566,7 @@ name "subsec:TBSSeedReport-fields"
 \begin_layout Standard
 The 
 \series bold
-TBSSeedReport
+SeedReportContent
 \series default
  data object is defined by the ASN.1
 \begin_inset space ~
@@ -4649,7 +4586,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand inputminted
-filename "cx-tbsseedreport.asn1"
+filename "cx-seedreportcontent.asn1"
 lstparams "language=Clean"
 
 \end_inset
@@ -4661,7 +4598,7 @@ lstparams "language=Clean"
 version
 \begin_inset CommandInset label
 LatexCommand label
-name "par:TBSSeedReport-version"
+name "par:SeedReportContent-version"
 
 \end_inset
 
@@ -4690,7 +4627,7 @@ SeedDescriptor,
 \series default
  
 \series bold
-TBSSeedReport
+SeedReportContent
 \series default
  and 
 \series bold
@@ -4716,7 +4653,7 @@ preseedVerificationKey
 \series default
  field or in the 
 \series bold
-TBSSeedReport
+SeedReportContent
 \series default
  structure following the 
 \series bold
@@ -4729,7 +4666,7 @@ seedReportChallenge
 seedDescriptors
 \begin_inset CommandInset label
 LatexCommand label
-name "par:TBSSeedReport-seedDescriptors"
+name "par:SeedReportContent-seedDescriptors"
 
 \end_inset
 
@@ -4761,8 +4698,8 @@ SeedDescriptor
 \series bold
 SeedDescriptor
 \series default
- contains a signature algorithm, a Generator Type, a Preseed Value, and
- a Preseed Verification Key.
+ contains a Generator Type, a Preseed Value, and a Preseed Verification
+ Key.
  The layout of the 
 \series bold
 SeedDescriptor
@@ -4821,7 +4758,7 @@ SeedDescriptor
 publisherName
 \begin_inset CommandInset label
 LatexCommand label
-name "par:TBSSeedReport-publisherName"
+name "par:SeedReportContent-publisherName"
 
 \end_inset
 
@@ -4876,7 +4813,7 @@ A Publisher SHALL verify that this field contains its own Publisher Name.
 seedReportChallenge
 \begin_inset CommandInset label
 LatexCommand label
-name "par:TBSSeedReport-seedReportChallenge"
+name "par:SeedReportContent-seedReportChallenge"
 
 \end_inset
 
@@ -4958,7 +4895,7 @@ Since this is a human-writable text field, a Publisher MAY choose to allow
 extensions
 \begin_inset CommandInset label
 LatexCommand label
-name "par:TSSeedReport-extensions"
+name "par:SeedReportContent-extensions"
 
 \end_inset
 
@@ -5020,6 +4957,675 @@ extensions
 \end_layout
 
 \begin_layout Subsubsection
+TBSSeedReportContent fields
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:TBSSeedReportContent-fields"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+TBSSeedReportContent
+\series default
+ virtual data object is defined by the ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.680"
+literal "false"
+
+\end_inset
+
+ schema fragment:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-tbsseedreportcontent.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each 
+\series bold
+TBSSeedReportContent
+\series default
+ virtual data object corresponds to a single 
+\series bold
+Signature
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Signature-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that the 
+\series bold
+TBSSeedReportContent
+\series default
+ data object does not appear anywhere within the final 
+\series bold
+SeedReport
+\series default
+ data object; it is a virtual data object over which a signature is constructed.
+\end_layout
+
+\begin_layout Standard
+This virtual data object exists to ensure that the 
+\series bold
+signatureValue
+\series default
+ as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Signature-signatureValue"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ covers the 
+\series bold
+signatureAlgorithm
+\series default
+ as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Signature-signatureAlgorithm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as well as the 
+\series bold
+content
+\series default
+ as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedReport-content"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, thereby preventing an algorithm substitution attack on 
+\series bold
+signatureAlgorithm
+\series default
+.
+\end_layout
+
+\begin_layout Paragraph
+content
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReportContent-content"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+content
+\series default
+ field within this virtual data object contains the value of the 
+\series bold
+content
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedReport-content"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+signatureAlgorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "par:TBSSeedReportContent-signatureAlgorithm"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+signatureAlgorithm
+\series default
+ field within this virtual data object contains the value of the 
+\series bold
+signatureAlgorithm
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Signature-signatureAlgorithm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Signature fields
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Signature-fields"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+Signature
+\series default
+ data object is defined by the ASN.1
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.680"
+literal "false"
+
+\end_inset
+
+ schema fragment:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand inputminted
+filename "cx-signature.asn1"
+lstparams "language=Clean"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each 
+\series bold
+Signature
+\series default
+ data object corresponds to a single 
+\series bold
+SeedDescriptor
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:SeedDescriptor-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The order of 
+\series bold
+Signature
+\series default
+ objects within the 
+\series bold
+signatures
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedReport-signatures"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ corresponds to the order of 
+\series bold
+SeedDescriptor
+\series default
+ objects within the 
+\series bold
+seedDescriptors
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedReportContent-seedDescriptors"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Each 
+\series bold
+Signature
+\series default
+ data object also corresponds to a single 
+\series bold
+TBSSeedReportContent
+\series default
+ virtual data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSSeedReportContent-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+signatureAlgorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Signature-signatureAlgorithm"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+signatureAlgorithm
+\series default
+ field contains the X.509
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RFC5280"
+literal "false"
+
+\end_inset
+
+ 
+\series bold
+AlgorithmIdentifier
+\series default
+ which comprises the object identifier (OID) and optional parameters for
+ the algorithm used to generate the signature in the 
+\series bold
+signatureValue
+\series default
+ field.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL set this field to the algorithm used to compute the
+ signature in the 
+\series bold
+signatureValue
+\series default
+ field, and the algorithm SHALL be compatible with the public key algorithm
+ provided in the 
+\series bold
+preseedVerificationKey
+\series default
+ field of the corresponding 
+\series bold
+SeedDescriptor
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedDescriptor-preseedVerificationKey"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL verify that the algorithm specified in this field is compatibl
+e with the public key algorithm provided in the 
+\series bold
+preseedVerificationKey
+\series default
+ field of the corresponding 
+\series bold
+SeedDescriptor
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedDescriptor-preseedVerificationKey"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+signatureValue
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Signature-signatureValue"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+signatureValue
+\series default
+ field contains a digital signature computed upon the corresponding ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoded 
+\series bold
+TBSSeedReportContent
+\series default
+ virtual data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSSeedReportContent-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An Advertiser SHALL set this field to the signature computed using the algorithm
+ specified by the 
+\series bold
+signatureAlgorithm
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Signature-signatureAlgorithm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ with the input data being the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of the corresponding 
+\series bold
+TBSSeedReportContent
+\series default
+ virtual data object (including the initial SEQUENCE tag byte) as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSSeedReportContent-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and the signing key being the Preseed Signing Key corresponding to the
+ 
+\series bold
+preseedVerificationKey
+\series default
+ field within the corresponding 
+\series bold
+SeedDescriptor
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedDescriptor-preseedVerificationKey"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Publisher SHALL verify the signature in this field using the algorithm
+ specified by the 
+\series bold
+signatureAlgorithm
+\series default
+ field as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Signature-signatureAlgorithm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ with the input data being the ASN.1
+\begin_inset space ~
+\end_inset
+
+DER
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "X.690"
+literal "false"
+
+\end_inset
+
+ encoding of the corresponding 
+\series bold
+TBSSeedReportContent
+\series default
+ virtual data object (including the initial SEQUENCE tag byte) as defined
+ in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:TBSSeedReportContent-fields"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and the verification key being the Preseed Verification Key extracted from
+ the 
+\series bold
+preseedVerificationKey
+\series default
+ field within the corresponding 
+\series bold
+SeedDescriptor
+\series default
+ data object as defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:SeedDescriptor-preseedVerificationKey"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
 SeedReport fields
 \begin_inset CommandInset label
 LatexCommand label
@@ -5062,10 +5668,10 @@ lstparams "language=Clean"
 \end_layout
 
 \begin_layout Paragraph
-tbsSeedReport
+content
 \begin_inset CommandInset label
 LatexCommand label
-name "par:SeedReport-tbsSeedReport"
+name "par:SeedReport-content"
 
 \end_inset
 
@@ -5075,24 +5681,24 @@ name "par:SeedReport-tbsSeedReport"
 \begin_layout Standard
 The 
 \series bold
-tbsSeedReport
+content
 \series default
  field contains a 
 \series bold
-TBSSeedReport
+SeedReportContent
 \series default
  data object.
  The 
 \series bold
-TBSSeedReport 
+SeedReportContent 
 \series default
 contains the Generator Types, Preseed Values, Preseed Verification Keys,
  Seed Report Challenge, and other information.
  It exists as a separate field since the 
 \series bold
-signatureValues
+signatures
 \series default
- are calculated over the ASN.1
+ are calculated using the ASN.1
 \begin_inset space ~
 \end_inset
 
@@ -5111,7 +5717,7 @@ literal "false"
  encoding of this field.
  The layout of the 
 \series bold
-TBSSeedReport
+SeedReportContent
 \series default
  data object is defined in section
 \begin_inset space ~
@@ -5120,7 +5726,7 @@ TBSSeedReport
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:TBSSeedReport-fields"
+reference "subsec:SeedReportContent-fields"
 plural "false"
 caps "false"
 noprefix "false"
@@ -5131,10 +5737,10 @@ noprefix "false"
 \end_layout
 
 \begin_layout Paragraph
-signatureValues
+signatures
 \begin_inset CommandInset label
 LatexCommand label
-name "par:SeedReport-signatureValues"
+name "par:SeedReport-signatures"
 
 \end_inset
 
@@ -5144,7 +5750,7 @@ name "par:SeedReport-signatureValues"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand inputminted
-filename "cx-signaturevalue--signaturevalues.asn1"
+filename "cx-signature--signatures.asn1"
 lstparams "language=Clean"
 
 \end_inset
@@ -5155,11 +5761,11 @@ lstparams "language=Clean"
 \begin_layout Standard
 The 
 \series bold
-signatureValues
+signatures
 \series default
  field contains an ordered list of 
 \series bold
-SignatureValue
+Signature
 \series default
  data objects, matching the length and ordering of the list in the 
 \series bold
@@ -5172,7 +5778,7 @@ seedDescriptors
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:TBSSeedReport-seedDescriptors"
+reference "par:SeedReportContent-seedDescriptors"
 plural "false"
 caps "false"
 noprefix "false"
@@ -5181,7 +5787,7 @@ noprefix "false"
 
 .
  Each element in this list contains a digital signature computed upon the
- ASN.1
+ corresponding ASN.1
 \begin_inset space ~
 \end_inset
 
@@ -5199,9 +5805,9 @@ literal "false"
 
  encoded 
 \series bold
-tbsSeedReport
+TBSSeedReportContent
 \series default
- using the Preseed Signing Key matching the 
+ virtual data object using the Preseed Signing Key matching the 
 \series bold
 preseedVerificationKey 
 \series default
@@ -5217,54 +5823,25 @@ For each ordered element in the
 \series bold
 seedDescriptors
 \series default
- list, an Advertiser SHALL compute the corresponding 
+ list, an Advertiser SHALL set the corresponding element in the 
 \series bold
-SignatureValue
+signatures
 \series default
- using the algorithm specified by the 
-\series bold
-signatureAlgorithm
-\series default
- field (see section
+ list as defined in section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:SeedDescriptor-signatureAlgorithm"
+reference "subsec:Signature-fields"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-) with the input data being the ASN.1
-\begin_inset space ~
-\end_inset
-
-DER
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "X.690"
-literal "false"
-
-\end_inset
-
- encoding of 
-\series bold
-tbsSeedReport
-\series default
- (including the initial SEQUENCE tag byte) and the signing key being the
- Preseed Signing Key corresponding to the 
-\series bold
-preseedVerificationKey
-\series default
- field.
+.
 \end_layout
 
 \begin_layout Standard
@@ -5276,68 +5853,25 @@ seedDescriptors
 \series bold
  
 \series default
-a Publisher SHALL verify the corresponding 
+a Publisher SHALL verify the corresponding element in the 
 \series bold
-SignatureValue
+signatures
 \series default
- using the algorithm specified by the 
-\series bold
-signatureAlgorithm
-\series default
- field (see section
+ list as defined in section
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:SeedDescriptor-signatureAlgorithm"
+reference "subsec:Signature-fields"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-) with the input data being the ASN.1
-\begin_inset space ~
-\end_inset
-
-DER
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "X.690"
-literal "false"
-
-\end_inset
-
- encoding of 
-\series bold
-tbsSeedReport
-\series default
- (including the initial SEQUENCE tag byte) and the verification key being
- the Preseed Verification Key extracted from the 
-\series bold
-preseedVerificationKey
-\series default
- field (see section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:SeedDescriptor-preseedVerificationKey"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
+.
  A Publisher SHALL reject a Seed Report that fails signature verification
  for any element in the 
 \series bold
@@ -6200,7 +6734,7 @@ noprefix "false"
 aggregated
 \begin_inset CommandInset label
 LatexCommand label
-name "par:TBSSeedReport-aggregated"
+name "par:TBSPublicationData-aggregated"
 
 \end_inset
 
@@ -8903,7 +9437,7 @@ aggregated
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:TBSSeedReport-aggregated"
+reference "par:TBSPublicationData-aggregated"
 plural "false"
 caps "false"
 noprefix "false"
@@ -9023,7 +9557,7 @@ aggregated
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:TBSSeedReport-aggregated"
+reference "par:TBSPublicationData-aggregated"
 plural "false"
 caps "false"
 noprefix "false"
@@ -9389,7 +9923,7 @@ name
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:TBSSeedReport-publisherName"
+reference "par:SeedReportContent-publisherName"
 plural "false"
 caps "false"
 noprefix "false"
@@ -9424,7 +9958,7 @@ An Advertiser SHALL use the value of this property when constructing a Seed
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:TBSSeedReport-seedReportChallenge"
+reference "par:SeedReportContent-seedReportChallenge"
 plural "false"
 caps "false"
 noprefix "false"

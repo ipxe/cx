@@ -1,0 +1,6 @@
+Signature ::= SEQUENCE {
+    signatureAlgorithm          AlgorithmIdentifier,
+    signatureValue              OCTET STRING }
+
+Signatures ::= SEQUENCE SIZE (1..MAX) OF Signature
+

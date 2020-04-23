@@ -1,4 +1,4 @@
-TBSSeedReport ::= SEQUENCE {
+SeedReportContent ::= SEQUENCE {
     version                     SeedReportVersion,
     seedDescriptors             SeedDescriptors,
     publisherName               UTF8String,

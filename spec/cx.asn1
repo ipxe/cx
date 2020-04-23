@@ -26,27 +26,32 @@ Extensions ::= SEQUENCE SIZE (1..MAX) OF Extension
 SeedReportVersion ::= INTEGER { v1(1) }
 
 SeedDescriptor ::= SEQUENCE {
-    signatureAlgorithm          AlgorithmIdentifier,
     generatorType               GeneratorType,
     preseedValue                OCTET STRING,
     preseedVerificationKey      SubjectPublicKeyInfo }
 
 SeedDescriptors ::= SEQUENCE SIZE (1..MAX) OF SeedDescriptor
 
-TBSSeedReport ::= SEQUENCE {
+SeedReportContent ::= SEQUENCE {
     version                     SeedReportVersion,
     seedDescriptors             SeedDescriptors,
     publisherName               UTF8String,
     seedReportChallenge         UTF8String,
     extensions              [0] Extensions OPTIONAL }
 
-SignatureValue ::= OCTET STRING
+TBSSeedReportContent ::= SEQUENCE {
+    content                     SeedReportContent,
+    signatureAlgorithm          AlgorithmIdentifier }
 
-SignatureValues ::= SEQUENCE SIZE (1..MAX) OF SignatureValue
+Signature ::= SEQUENCE {
+    signatureAlgorithm          AlgorithmIdentifier,
+    signatureValue              OCTET STRING }
+
+Signatures ::= SEQUENCE SIZE (1..MAX) OF Signature
 
 SeedReport ::= SEQUENCE {
-    tbsSeedReport               TBSSeedReport,
-    signatureValues             SignatureValues }
+    content                     SeedReportContent,
+    signatures                  Signatures }
 
 PublicationVersion ::= INTEGER { v1(1) }
 

@@ -1,0 +1,4 @@
+Signature ::= SEQUENCE {
+    signatureAlgorithm          AlgorithmIdentifier,
+    signatureValue              OCTET STRING }
+

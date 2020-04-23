@@ -1,0 +1,4 @@
+TBSSeedReportContent ::= SEQUENCE {
+    content                     SeedReportContent,
+    signatureAlgorithm          AlgorithmIdentifier }
+
