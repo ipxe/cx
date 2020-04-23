@@ -26,7 +26,6 @@
 
 #include <string.h>
 #include <stdio.h>
-#include <openssl/x509.h>
 #include <cx/seedcalc.h>
 #include "cxtest.h"
 #include "seedcalctest.h"
@@ -38,28 +37,15 @@
  * @v type		Generator type
  * @v preseed		Preseed value
  * @v len		Preseed value length
- * @v key_der		Preseed verification key in DER format
- * @v key_len		Preseed verification key length
+ * @v key		Preseed verification key
  * @v expected		Expected seed value
  * @ret ok		Success indicator
  */
 static int seedcalctest ( const char *name, enum cx_generator_type type,
 			  const unsigned char *preseed, size_t len,
-			  const unsigned char *key_der, size_t key_len,
-			  const unsigned char *expected ) {
-	const unsigned char *tmp_der;
+			  EVP_PKEY *key, const unsigned char *expected ) {
 	unsigned char seed[len];
-	EVP_PKEY *key;
 	int ok;
-
-	/* Parse DER key */
-	tmp_der = key_der;
-	key = d2i_PUBKEY ( NULL, &tmp_der, key_len );
-	if ( ! key ) {
-		fprintf ( stderr, "SEEDCALC %s fail: could not parse key\n",
-			  name );
-		goto err_key;
-	}
 
 	/* Calculate seed value */
 	if ( ! cx_seedcalc ( type, preseed, len, key, seed ) ) {
@@ -76,16 +62,11 @@ static int seedcalctest ( const char *name, enum cx_generator_type type,
 		goto err_seed;
 	}
 
-	/* Free key */
-	EVP_PKEY_free ( key );
-
 	fprintf ( stderr, "SEEDCALC %s ok\n", name );
 	return 1;
 
  err_seed:
  err_seedcalc:
-	EVP_PKEY_free ( key );
- err_key:
 	return 0;
 }
 
@@ -99,8 +80,7 @@ static int seedcalctest ( const char *name, enum cx_generator_type type,
  */
 #define seedcalctest_std( type, prefix, key )			\
 	seedcalctest ( #prefix, type, prefix ## _preseed,	\
-		       sizeof ( prefix ## _preseed ),		\
-		       key ## _der, key ## _der_len,		\
+		       sizeof ( prefix ## _preseed ), key,	\
 		       prefix ## _seed )
 
 /**

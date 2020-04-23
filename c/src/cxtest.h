@@ -27,6 +27,9 @@
 #ifndef _CX_TEST_H
 #define _CX_TEST_H
 
+#include <openssl/objects.h>
+#include <openssl/evp.h>
+
 typedef unsigned char uuid_t[16];
 
 #define DECL_GEN_TEST( name, seed_len )				\
@@ -40,7 +43,8 @@ typedef unsigned char uuid_t[16];
 
 #define DECL_KEY( name )					\
 	extern unsigned char name ## _der[];			\
-	extern unsigned int name ## _der_len;
+	extern unsigned int name ## _der_len;			\
+	extern EVP_PKEY *name;
 
 DECL_GEN_TEST ( gen_type1_test1, 24 );
 DECL_GEN_TEST ( gen_type1_test2, 24 );
@@ -56,5 +60,7 @@ DECL_SEEDCALC_TEST ( seedcalc_type2_test3, 48 );
 
 DECL_KEY ( key_a );
 DECL_KEY ( key_b );
+DECL_KEY ( keypair_c );
+DECL_KEY ( keypair_d );
 
 #endif /* _CX_TEST_H */
