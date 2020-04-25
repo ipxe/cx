@@ -1,0 +1,59 @@
+name: Coverity Scan
+
+on:
+  push:
+    branches:
+      - coverity
+  schedule:
+    - cron: '30 3 * * *'
+
+jobs:
+  scan:
+    name: Submit to Coverity Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Install packages
+        run: |
+          sudo apt install -y -o Acquire::Retries=50 \
+                           autoconf-archive valgrind openssl xxd asn1c
+      - name: Download Coverity Scan build tool
+        run: |
+          curl --form token=${{ secrets.COVERITY_SCAN_TOKEN }} \
+               --form project=${{ github.repository }} \
+               --output coverity.tar.gz \
+               https://scan.coverity.com/download/cxx/linux64
+          mkdir -p /opt/coverity
+          sudo tar xvzf coverity.tar.gz --strip 1 --directory /opt/coverity
+      - name: Prepare build
+        working-directory: c
+        run: |
+          ./autogen.sh
+          ./configure
+          make
+          make distdir VERSION=scan
+          cd libcx-scan
+          ./configure
+      - name: Build via Coverity Scan
+        working-directory: c/libcx-scan
+        run: |
+          /opt/coverity/bin/cov-build --dir cov-int make
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: cov-int
+          path: c/libcx-scan/cov-int
+      - name: Create submission
+        working-directory: c/libcx-scan
+        run : |
+          tar cvzf libcx-scan.tar.gz cov-int
+      - name: Submit to Coverity Scan
+        working-directory: c/libcx-scan
+        run: |
+          curl --form token=${{ secrets.COVERITY_SCAN_TOKEN }} \
+               --form email=${{ secrets.COVERITY_SCAN_EMAIL }} \
+               --form file=@libcx-scan.tar.gz \
+               --form version=${{ github.ref }} \
+               --form description=${{ github.sha }} \
+               https://scan.coverity.com/builds?project=${{ github.repository }}
