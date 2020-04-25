@@ -28,6 +28,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <cx/seedrep.h>
+#include "SeedReport.h"
 #include "cxtest.h"
 #include "seedreptest.h"
 
@@ -152,6 +153,8 @@ static int seedreptest ( const char *name, const char *publisher,
 	struct cx_seed_report *check_der;
 	struct cx_seed_report *fail;
 	CX_SEED_REPORT *seedReport;
+	SeedReport_t *asnSeedReport;
+	asn_dec_rval_t rval;
 	va_list args;
 	void *der;
 	size_t len;
@@ -212,6 +215,24 @@ static int seedreptest ( const char *name, const char *publisher,
 	if ( ! seedreptest_check ( name, "DER", check_der, &report ) )
 		goto err_check_der;
 
+	/* Check DER report can be decoded via asn1c */
+	asnSeedReport = NULL;
+	rval = ber_decode ( NULL, &asn_DEF_SeedReport,
+			    ( ( void ** ) &asnSeedReport ), der, len );
+	if ( rval.code != RC_OK ) {
+		fprintf ( stderr, "SEEDREPORT %s DER could not parse via "
+			  "asn1c\n", name );
+		goto err_ber_decode;
+	}
+
+	/* Check that report meets all schema constraints */
+	if ( asn_check_constraints ( &asn_DEF_SeedReport, asnSeedReport,
+				     NULL, NULL ) != 0 ) {
+		fprintf ( stderr, "SEEDREPORT %s DER did not meet all "
+			  "constraints\n", name );
+		goto err_constraints;
+	}
+
 	/* Ensure verification fails if report is modified */
 	*( ( ( char * ) der ) + 21 ) ^= 'X';
 	fail = cx_seedrep_verify_der ( der, len );
@@ -222,7 +243,8 @@ static int seedreptest ( const char *name, const char *publisher,
 		goto err_fail_der;
 	}
 
-	/* Free reports */
+	/* Free allocated values */
+	ASN_STRUCT_FREE ( asn_DEF_SeedReport, asnSeedReport );
 	cx_seedrep_free ( check_der );
 	OPENSSL_free ( der );
 	cx_seedrep_free ( check_asn1 );
@@ -231,6 +253,9 @@ static int seedreptest ( const char *name, const char *publisher,
 	return 1;
 
  err_fail_der:
+ err_constraints:
+	ASN_STRUCT_FREE ( asn_DEF_SeedReport, asnSeedReport );
+ err_ber_decode:
  err_check_der:
 	cx_seedrep_free ( check_der );
  err_verify_der:
