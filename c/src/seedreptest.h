@@ -24,27 +24,9 @@
  * and the licenses of the other code concerned.
  */
 
+#ifndef _CX_SEEDREPTEST_H
+#define _CX_SEEDREPTEST_H
 
-#ifndef _CX_DEBUG_H
-#define _CX_DEBUG_H
+extern int seedreptests ( void );
 
-#include <stdio.h>
-
-#ifndef DEBUG
-#define DEBUG 0
-#endif
-
-#define DBG(...) do {							\
-		if ( DEBUG ) {						\
-			fprintf ( stderr, __VA_ARGS__ );		\
-		}							\
-	} while ( 0 )
-
-#define DBG_SEEDREP( report ) do {					\
-		if ( DEBUG ) {						\
-			PEM_write_CX_SEED_REPORT ( stderr, report );	\
-			CX_SEED_REPORT_print_fp ( stderr, report );	\
-		}							\
-	} while ( 0 )
-
-#endif /* _CX_DEBUG_H */
+#endif /* _CX_SEEDREPTEST_H */

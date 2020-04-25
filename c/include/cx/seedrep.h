@@ -24,27 +24,51 @@
  * and the licenses of the other code concerned.
  */
 
+#ifndef _CX_SEEDREP_H
+#define _CX_SEEDREP_H
 
-#ifndef _CX_DEBUG_H
-#define _CX_DEBUG_H
+#include <stddef.h>
+#include <openssl/objects.h>
+#include <openssl/evp.h>
+#include <cx.h>
+#include <cx/asn1.h>
 
-#include <stdio.h>
+/** A seed descriptor */
+struct cx_seed_descriptor {
+	/** Generator type */
+	enum cx_generator_type type;
+	/** Preseed value */
+	const void *preseed;
+	/** Length of preseed value */
+	size_t len;
+	/** Preseed verification key */
+	EVP_PKEY *key;
+};
 
-#ifndef DEBUG
-#define DEBUG 0
-#endif
+/** A seed report */
+struct cx_seed_report {
+	/** Seed descriptors */
+	const struct cx_seed_descriptor *desc;
+	/** Number of seed descriptors */
+	unsigned int count;
+	/** Publisher name */
+	const char *publisher;
+	/** Seed report challenge */
+	const char *challenge;
+};
 
-#define DBG(...) do {							\
-		if ( DEBUG ) {						\
-			fprintf ( stderr, __VA_ARGS__ );		\
-		}							\
-	} while ( 0 )
+extern CX_SEED_REPORT *
+cx_seedrep_sign_asn1 ( const struct cx_seed_report *report, const EVP_MD *md );
 
-#define DBG_SEEDREP( report ) do {					\
-		if ( DEBUG ) {						\
-			PEM_write_CX_SEED_REPORT ( stderr, report );	\
-			CX_SEED_REPORT_print_fp ( stderr, report );	\
-		}							\
-	} while ( 0 )
+extern void * cx_seedrep_sign_der ( const struct cx_seed_report *report,
+				    const EVP_MD *md, size_t *len );
 
-#endif /* _CX_DEBUG_H */
+extern struct cx_seed_report *
+cx_seedrep_verify_asn1 ( CX_SEED_REPORT *seedReport );
+
+extern struct cx_seed_report * cx_seedrep_verify_der ( const void *der,
+						       size_t der_len );
+
+extern void cx_seedrep_free ( struct cx_seed_report *report );
+
+#endif /* _CX_SEEDREP_H */

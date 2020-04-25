@@ -22,7 +22,7 @@ TESTS = cxtest
 #
 LIBCX_EXPORT = '^(cx_|CX_|d2i_CX_|i2d_CX_|PEM_.*_CX_)'
 libcx_la_SOURCES = debug.h drbg.c generator.c seedcalc.c preseed.c \
-		   asn1.c
+		   asn1.c seedrep.c
 libcx_la_CPPFLAGS = $(SSL_CFLAGS) $(AM_CPPFLAGS)
 libcx_la_LDFLAGS = -export-symbols-regex $(LIBCX_EXPORT) $(AM_LDFLAGS)
 libcx_la_LIBADD = $(SSL_LIBS) libcxasn1.la
@@ -82,6 +82,7 @@ cxtest_SOURCES = cxtest.h cxtest.c \
 		 gentest.h gentest.c \
 		 seedcalctest.h seedcalctest.c \
 		 preseedtest.h preseedtest.c \
+		 seedreptest.h seedreptest.c \
 		 $(TEST_SOURCES) $(TESTKEY_SOURCES)
 cxtest_CPPFLAGS = $(SSL_CFLAGS) -include cxtest.h $(AM_CPPFLAGS)
 cxtest_CFLAGS = $(AM_CFLAGS) -Wunused-const-variable=2

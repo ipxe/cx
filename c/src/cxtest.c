@@ -39,6 +39,7 @@
 #include "gentest.h"
 #include "seedcalctest.h"
 #include "preseedtest.h"
+#include "seedreptest.h"
 
 /* Test keys */
 EVP_PKEY *key_a;
@@ -163,6 +164,9 @@ int main ( void ) {
 
 	/* Run preseed self-tests */
 	ok &= preseedtests();
+
+	/* Run seed report self-tests */
+	ok &= seedreptests();
 
 	/* Report failure */
 	if ( ! ok )
