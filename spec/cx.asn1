@@ -17,6 +17,12 @@ IMPORTS
 GeneratorType ::= INTEGER { aes128-ctr-drbg-df-n2k(1),
                             aes256-ctr-drbg-df-n2k(2) }
 
+Signature ::= SEQUENCE {
+    signatureAlgorithm          AlgorithmIdentifier,
+    signatureValue              OCTET STRING }
+
+Signatures ::= SEQUENCE SIZE (1..MAX) OF Signature
+
 Extension ::= SEQUENCE {
     extnID                      OBJECT IDENTIFIER,
     parameters                  ANY DEFINED BY extnID OPTIONAL }
@@ -42,12 +48,6 @@ SeedReportContent ::= SEQUENCE {
 TBSSeedReportContent ::= SEQUENCE {
     content                     SeedReportContent,
     signatureAlgorithm          AlgorithmIdentifier }
-
-Signature ::= SEQUENCE {
-    signatureAlgorithm          AlgorithmIdentifier,
-    signatureValue              OCTET STRING }
-
-Signatures ::= SEQUENCE SIZE (1..MAX) OF Signature
 
 SeedReport ::= SEQUENCE {
     content                     SeedReportContent,
