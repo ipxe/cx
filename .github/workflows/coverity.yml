@@ -54,6 +54,6 @@ jobs:
           curl --form token=${{ secrets.COVERITY_SCAN_TOKEN }} \
                --form email=${{ secrets.COVERITY_SCAN_EMAIL }} \
                --form file=@libcx-scan.tar.gz \
-               --form version=${{ github.ref }} \
-               --form description=${{ github.sha }} \
+               --form version=${{ github.sha }} \
+               --form description=${{ github.ref }} \
                https://scan.coverity.com/builds?project=${{ github.repository }}
