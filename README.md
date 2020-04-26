@@ -4,6 +4,10 @@ CX: Privacy-compatible distributed contact tracing
 [![Documentation](https://img.shields.io/github/workflow/status/ipxe/cx/Documentation?label=Documentation&logo=latex)](https://github.com/ipxe/cx/actions?query=workflow%3ADocumentation+branch%3Amaster)
 [![C library](https://img.shields.io/github/workflow/status/ipxe/cx/Documentation?label=C%20Library&logo=c)](https://github.com/ipxe/cx/actions?query=workflow%3A%22C+library%22+branch%3Amaster)
 [![Python](https://img.shields.io/github/workflow/status/ipxe/cx/Documentation?label=Python&logo=python)](https://github.com/ipxe/cx/actions?query=workflow%3APython+branch%3Amaster)
+[![Coverity](https://img.shields.io/coverity/scan/20964?label=Coverity&logo=verizon)](https://scan.coverity.com/projects/ipxe-cx)
+
+[![Release](https://img.shields.io/github/v/release/ipxe/cx?label=Release&logo=github)](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
+[![PyPI](https://img.shields.io/pypi/v/libcx?color=informational&label=PyPI&logo=pypi)](https://pypi.org/project/libcx/)
 
 Download the full [architecture
 specification](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
