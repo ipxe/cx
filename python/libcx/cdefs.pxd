@@ -26,7 +26,7 @@ cdef extern from "<cx.h>":
         CX_GEN_AES_128_CTR_2048
         CX_GEN_AES_256_CTR_2048
 
-    cdef struct cx_contact_id:
+    struct cx_contact_id:
         unsigned char bytes[0]
 
 
@@ -35,27 +35,27 @@ cdef extern from "<cx/generator.h>":
     struct cx_generator:
         pass
 
-    cdef size_t cx_gen_seed_len(cx_generator_type type)
+    size_t cx_gen_seed_len(cx_generator_type type)
 
-    cdef unsigned int cx_gen_max_iterations(cx_generator_type type)
+    unsigned int cx_gen_max_iterations(cx_generator_type type)
 
-    cdef cx_generator * cx_gen_instantiate(cx_generator_type type,
-                                           const void *seed, size_t len)
+    cx_generator * cx_gen_instantiate(cx_generator_type type,
+                                      const void *seed, size_t len)
 
-    cdef bint cx_gen_iterate(cx_generator *gen, cx_contact_id *id)
+    bint cx_gen_iterate(cx_generator *gen, cx_contact_id *id)
 
-    cdef void cx_gen_uninstantiate(cx_generator *gen)
+    void cx_gen_uninstantiate(cx_generator *gen)
 
 
 cdef extern from "<cx/seedcalc.h>":
 
-    cdef bint cx_seedcalc(cx_generator_type type, const void *preseed,
-                          size_t len, EVP_PKEY *key, void *seed)
+    bint cx_seedcalc(cx_generator_type type, const void *preseed,
+                     size_t len, EVP_PKEY *key, void *seed)
 
 
 cdef extern from "<cx/preseed.h>":
 
-    cdef bint cx_preseed_value(cx_generator_type type, void *preseed,
-                               size_t len)
+    bint cx_preseed_value(cx_generator_type type, void *preseed,
+                          size_t len)
 
-    cdef EVP_PKEY * cx_preseed_key()
+    EVP_PKEY * cx_preseed_key()
