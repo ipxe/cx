@@ -1,6 +1,9 @@
+#include <openssl/bio.h>
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
 #include <cx.h>
 #include <cx/generator.h>
 #include <cx/seedcalc.h>
 #include <cx/preseed.h>
+#include <cx/asn1.h>
+#include <cx/seedrep.h>
