@@ -2,13 +2,9 @@
 
 import unittest
 
-from OpenSSL import crypto
+from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
 
-from libcx import (
-    CX_GEN_AES_128_CTR_2048,
-    SeedCalculator,
-    Preseed,
-)
+from libcx import CX_GEN_AES_128_CTR_2048, SeedCalculator, Preseed
 
 
 class TestPreseed(unittest.TestCase):
@@ -20,7 +16,7 @@ class TestPreseed(unittest.TestCase):
         self.assertIsInstance(preseed, bytes)
         self.assertEqual(len(preseed), 24)
         key = Preseed.key()
-        self.assertIsInstance(key, crypto.PKey)
+        self.assertIsInstance(key, RSAPrivateKey)
         seedcalc = SeedCalculator(CX_GEN_AES_128_CTR_2048, preseed, key)
         gen = seedcalc.generator
         self.assertEqual(len(list(gen)), 2048)

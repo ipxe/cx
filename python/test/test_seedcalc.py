@@ -3,20 +3,17 @@
 import textwrap
 import unittest
 
-from OpenSSL import crypto
+from cryptography.hazmat.primitives.serialization import load_pem_public_key
+from cryptography.hazmat.backends import default_backend
 
-from libcx import (
-    CX_GEN_AES_128_CTR_2048,
-    CX_GEN_AES_256_CTR_2048,
-    Generator,
-    SeedCalculator,
-)
+from libcx import (CX_GEN_AES_128_CTR_2048, CX_GEN_AES_256_CTR_2048,
+                   Generator, SeedCalculator)
 
 
 class TestSeedCalculator(unittest.TestCase):
     """Seed calculator self-tests"""
 
-    KEY_A = crypto.load_publickey(crypto.FILETYPE_PEM, textwrap.dedent("""
+    KEY_A = load_pem_public_key(textwrap.dedent("""
     -----BEGIN PUBLIC KEY-----
     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq++v4g9bweWB+wOOCIEP
     h2ORXBOdGDXyNOuHpYOabgabhJRFbLNzEULhhDD2fqR3GEne6wJ8vDB0fj4foKiR
@@ -26,9 +23,9 @@ class TestSeedCalculator(unittest.TestCase):
     lZfcpwRmkhI2s4gUog9R72TEkJWpudDpwQb0HEq2uMJbfnPnrFLOHr/ZjK1KVKPm
     9QIDAQAB
     -----END PUBLIC KEY-----
-    """))
+    """).encode(), backend=default_backend())
 
-    KEY_B = crypto.load_publickey(crypto.FILETYPE_PEM, textwrap.dedent("""
+    KEY_B = load_pem_public_key(textwrap.dedent("""
     -----BEGIN PUBLIC KEY-----
     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwfgIKqmWkKZE7wE5R7mP
     5LTZtrWsfU2qSASga8TutHHqfvncAK36+ZFHLY8/UJtjbkP3q0tPmIRmJfeM2QLM
@@ -38,7 +35,7 @@ class TestSeedCalculator(unittest.TestCase):
     cYWRvaXIaQMEhou6Ouli30YjNZPvbhMxRck4+lSF9KN209L/1nfvlw3MCAGfc662
     jQIDAQAB
     -----END PUBLIC KEY-----
-    """))
+    """).encode(), backend=default_backend())
 
     def test_api(self):
         """Test API usage"""
@@ -127,6 +124,3 @@ class TestSeedCalculator(unittest.TestCase):
                            self.KEY_A)
         with self.assertRaises(Exception):
             SeedCalculator(CX_GEN_AES_128_CTR_2048, bytes(range(24)), None)
-        with self.assertRaises(Exception):
-            SeedCalculator(CX_GEN_AES_128_CTR_2048, bytes(range(24)),
-                           crypto.PKey())

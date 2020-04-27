@@ -9,16 +9,6 @@ from setuptools.command.build_ext import build_ext
 from setuptools.command.egg_info import egg_info
 
 
-# Use cythonize, if Cython is installed
-try:
-    from Cython.Build import cythonize
-except ImportError:
-    if Path('libcx/cdefs.c').exists():
-        cythonize = lambda exts, **kwargs: exts
-    else:
-        raise
-
-
 # Use local libcx C library, if present
 cxgitdir = Path('../c')
 cxdistdir = Path('dist-libcx')
@@ -139,21 +129,16 @@ setup(
         'build_ext': BuildExtCommand,
     },
     setup_requires=[
+        'cffi',
         'setuptools_scm',
     ],
     install_requires = [
-        'pyOpenSSL',
+        'cffi',
+        'cryptography',
     ],
-    ext_modules=cythonize(
-        [
-            Extension('libcx.cdefs', ['libcx/cdefs.pyx']),
-            Extension('libcx.generator', ['libcx/generator.pyx']),
-            Extension('libcx.seedcalc', ['libcx/seedcalc.pyx']),
-            Extension('libcx.preseed', ['libcx/preseed.pyx']),
-        ],
-        language_level=3,
-        annotate=True,
-    ),
+    cffi_modules=[
+        'libcx/cffi/build.py:builder',
+    ],
     test_suite='test',
     zip_safe=False,
 )

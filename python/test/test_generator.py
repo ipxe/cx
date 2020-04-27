@@ -3,12 +3,8 @@
 import unittest
 from uuid import UUID
 
-from libcx import (
-    CX_GEN_AES_128_CTR_2048,
-    CX_GEN_AES_256_CTR_2048,
-    GeneratorType,
-    Generator,
-)
+from libcx import (CX_GEN_AES_128_CTR_2048, CX_GEN_AES_256_CTR_2048,
+                   GeneratorType, Generator)
 
 
 class TestGenerator(unittest.TestCase):
@@ -24,8 +20,31 @@ class TestGenerator(unittest.TestCase):
         self.assertEqual(CX_GEN_AES_256_CTR_2048, 2)
         self.assertEqual(CX_GEN_AES_256_CTR_2048.seed_len, 48)
         self.assertEqual(CX_GEN_AES_256_CTR_2048.max_iterations, 2048)
+
+    def test_properties(self):
+        """Test properties"""
         gen = Generator(CX_GEN_AES_128_CTR_2048, bytes(range(24)))
         self.assertIs(gen.type, CX_GEN_AES_128_CTR_2048)
+        with self.assertRaises(AttributeError):
+            gen.type = CX_GEN_AES_256_CTR_2048
+        self.assertEqual(gen.seed, bytes(range(24)))
+        with self.assertRaises(AttributeError):
+            gen.seed = b'invalid'
+
+    def test_iteration(self):
+        """Test iteration"""
+        gen = Generator(CX_GEN_AES_128_CTR_2048, bytes(range(24)))
+        ids1 = list(gen)
+        ids2 = list(gen)
+        self.assertEqual(len(ids1), 2048)
+        self.assertEqual(ids1, ids2)
+
+    def test_errors(self):
+        """Test expected errors"""
+        with self.assertRaises(ValueError):
+            Generator(0, bytes(range(24)))
+        with self.assertRaises(ValueError):
+            Generator(CX_GEN_AES_128_CTR_2048, b'hello')
 
     def test_spec_type1(self):
         """Test generator type 1 with official test vectors"""
@@ -59,14 +78,3 @@ class TestGenerator(unittest.TestCase):
         self.assertEqual(len(ids), 2048)
         self.assertEqual(ids[0], UUID('e46c75f2-6968-4655-b751-3738547b5cc9'))
         self.assertEqual(ids[-1], UUID('9d9b113a-94d4-4d0c-9ea6-540db7bb8fb8'))
-
-    def test_errors(self):
-        """Test expected errors"""
-        with self.assertRaises(ValueError):
-            Generator(0, bytes(range(24)))
-        with self.assertRaises(ValueError):
-            Generator(CX_GEN_AES_128_CTR_2048, b'hello')
-        gen = Generator(CX_GEN_AES_128_CTR_2048, bytes(range(24)))
-        self.assertEqual(len(list(gen)), 2048)
-        with self.assertRaises(StopIteration):
-            next(gen)
