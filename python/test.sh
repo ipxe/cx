@@ -13,6 +13,10 @@ python3 -m coverage erase
 python3 -m coverage run --branch --source libcx setup.py test
 python3 -m coverage report --show-missing
 
+# Generate XML coverage report
+#
+python3 -m coverage xml
+
 # Run pycodestyle
 #
 python3 -m pycodestyle libcx test

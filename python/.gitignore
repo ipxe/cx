@@ -8,3 +8,4 @@ MANIFEST.in
 *.pyc
 *.egg-info
 .coverage
+coverage.xml

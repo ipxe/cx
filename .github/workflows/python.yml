@@ -22,6 +22,10 @@ jobs:
         working-directory: python
         run: |
           ./test.sh
+      - name: Coverage report
+        uses: codecov/codecov-action@v1
+        with:
+          file: python/coverage.xml
       - name: Source distribution
         working-directory: python
         run: |
