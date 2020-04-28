@@ -3915,6 +3915,14 @@ A QR code that is scanned by the patient
 \end_layout
 
 \begin_layout Standard
+A Confirmation Code is essentially an authorisation token that grants permission
+ for the holder of the token to create a Notification at an Alert Level
+ selected by the Publisher.
+ A Publisher MUST implement processes to ensure that only appropriately
+ authorised personnel are able to issue and access new Confirmation Codes.
+\end_layout
+
+\begin_layout Standard
 An Advertiser MUST provide a capability for the user to interactively enter
  an arbitrary UTF-8 string as the Confirmation Code, and MAY provide other
  capabilities such as scanning a QR code or recognising a Publisher-specific
