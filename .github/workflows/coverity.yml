@@ -38,7 +38,7 @@ jobs:
       - name: Build via Coverity Scan
         working-directory: c/libcx-scan
         run: |
-          /opt/coverity/bin/cov-build --dir cov-int make
+          /opt/coverity/bin/cov-build --dir cov-int make all check
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
