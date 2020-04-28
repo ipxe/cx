@@ -8,6 +8,7 @@ CX: Privacy-compatible distributed contact tracing
 
 [![Release](https://img.shields.io/github/v/release/ipxe/cx?label=Release&logo=github)](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
 [![PyPI](https://img.shields.io/pypi/v/libcx?color=informational&label=PyPI&logo=pypi)](https://pypi.org/project/libcx/)
+[![Coverage](https://img.shields.io/codecov/c/gh/ipxe/cx?label=Coverage&logo=codecov)](https://codecov.io/gh/ipxe/cx)
 
 Download the full [architecture
 specification](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
