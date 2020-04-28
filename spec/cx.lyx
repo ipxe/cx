@@ -8605,12 +8605,11 @@ Response
 \begin_inset space ~
 \end_inset
 
-Content-Type: text/html (in the case of an error status code)
+Content-Type: text/html (or empty response)
 \end_layout
 
 \begin_layout Description
-Response Status code only, with a human-readable HTML error description
- in the case of an error status code.
+Response Status code plus OPTIONAL human-readable message in HTML format
 \end_layout
 
 \begin_layout Standard
@@ -8644,8 +8643,10 @@ An Advertiser SHALL refuse to attempt to retrieve content from this endpoint
 
 \begin_layout Standard
 An Advertiser SHALL provide an indication to the user as to whether or not
- the reponse was successful, and SHOULD provide an opportunity for the user
- to view the HTML error description if the response was not successful.
+ the reponse was successful, SHOULD provide an opportunity for the user
+ to view the HTML error message if the response was not successful, and
+ MAY provide an opportunity for the user to view the HTML message if the
+ response was successful.
 \end_layout
 
 \begin_layout Subsection
