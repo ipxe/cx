@@ -32,6 +32,7 @@
  */
 
 #include <stdint.h>
+#include <endian.h>
 #include <jni.h>
 #include <cx.h>
 #include <cx/generator.h>
@@ -45,6 +46,14 @@ static struct {
 	/** Class */
 	jclass clazz;
 } cxjni;
+
+/** java.util.UUID */
+static struct {
+	/** Class */
+	jclass clazz;
+	/** Constructor */
+	jmethodID constructor;
+} juuid;
 
 /******************************************************************************
  *
@@ -200,26 +209,34 @@ static jlong JNICALL genInstantiate ( JNIEnv *env, jclass clazz, jint type,
  * @v handle		Generator handle
  * @ret id		Contact ID (or NULL on error)
  */
-static jbyteArray JNICALL genIterate ( JNIEnv *env, jclass clazz,
-				       jlong handle ) {
+static jobject JNICALL genIterate ( JNIEnv *env, jclass clazz, jlong handle ) {
 	struct cx_generator *gen = ( void * ) handle;
-	struct cx_contact_id id;
-	jbyteArray bytes;
+	union {
+		uint64_t half[2];
+		struct cx_contact_id id;
+	} u;
+	jobject uuid;
 
 	( void ) clazz;
 
+	/* Sanity check */
+	_Static_assert ( sizeof ( u.half ) == sizeof ( u.id ),
+			 "cx_contact_id layout mismatch" );
+
 	/* Iterate generator */
-	if ( ! cx_gen_iterate ( gen, &id ) )
+	if ( ! cx_gen_iterate ( gen, &u.id ) )
 		return NULL;
 
-	/* Construct byte array */
-	bytes = bytes_new ( env, &id, sizeof ( id ) );
-	if ( ! bytes ) {
+	/* Construct UUID */
+	uuid = (*env)->NewObject ( env, juuid.clazz, juuid.constructor,
+				   ( ( jlong ) be64toh ( u.half[0] ) ),
+				   ( ( jlong ) be64toh ( u.half[1] ) ) );
+	if ( ! uuid ) {
 		cx_gen_invalidate ( gen );
 		return NULL;
 	}
 
-	return bytes;
+	return uuid;
 }
 
 /**
@@ -295,8 +312,13 @@ static const JNINativeMethod cxjni_native_methods[] = {
 	{ "genSeedLen", "(I)I", genSeedLen },
 	{ "genMaxIterations", "(I)I", genMaxIterations },
 	{ "genInstantiate", "(I[B)J", genInstantiate },
-	{ "genIterate", "(J)[B", genIterate },
+	{ "genIterate", "(J)Ljava/util/UUID;", genIterate },
 	{ "genUninstantiate", "(J)V", genUninstantiate },
+};
+
+/** util.java.UUID methods */
+static const struct jni_required_method uuid_methods[] = {
+	{ "<init>", "(JJ)V", &juuid.constructor },
 };
 
 /** Required JNI classes */
@@ -305,6 +327,11 @@ static const struct jni_class_descriptor jni_classes[] = {
 		.name = "org/ipxe/cx/CxJni",
 		.clazz = &cxjni.clazz,
 		.native = JNI_METHODS ( cxjni_native_methods ),
+	},
+	{
+		.name = "java/util/UUID",
+		.clazz = &juuid.clazz,
+		.required = JNI_METHODS ( uuid_methods ),
 	},
 };
 
