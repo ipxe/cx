@@ -1,0 +1,5 @@
+headers = cx.h cx/generator.h cx/seedcalc.h cx/preseed.h cx/seedrep.h
+headerFilter = cx.h cx/*.h
+
+compilerOpts = -I/usr/include -I../c/include
+linkerOpts = -L/usr/lib64 -lcx
