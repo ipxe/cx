@@ -1,4 +1,5 @@
 CX: Privacy-compatible distributed contact tracing
+[![Logo](spec/logo-icon.png)](spec/logo.svg)
 ==================================================
 
 [![Documentation](https://img.shields.io/github/workflow/status/ipxe/cx/Documentation?label=Documentation&logo=latex)](https://github.com/ipxe/cx/actions?query=workflow%3ADocumentation+branch%3Amaster)
@@ -12,7 +13,7 @@ CX: Privacy-compatible distributed contact tracing
 
 Download the full [architecture
 specification](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
-[![PDF](spec/clipart/pdf.png)](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
+[![PDF](spec/clipart/pdf-icon.png)](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
 
 Overview
 --------
