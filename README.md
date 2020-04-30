@@ -12,7 +12,7 @@ CX: Privacy-compatible distributed contact tracing
 
 Download the full [architecture
 specification](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
-[![PDF](pdf.png)](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
+[![PDF](spec/clipart/pdf.png)](https://github.com/ipxe/cx/releases/latest/download/cx.pdf)
 
 Overview
 --------
@@ -85,7 +85,7 @@ The architecture provides the following features:
     formats are chosen to be easily implemented using widely available
     and well-trusted existing libraries.
 
-![image](broadcasting.png)
+![image](spec/broadcasting.png)
 
 Each participating device broadcasts a regular stream of messages. Each
 message contains a temporary unique **contact identifier**, which is a
@@ -105,7 +105,7 @@ The contact identifier changes frequently, making it impossible for
 unwanted observers (such as a stalker, or the owner of a shopping mall,
 or a government agency) to use it to track the device.
 
-![image](observing.png)
+![image](spec/observing.png)
 
 Each participating device also listens for messages broadcast by other
 nearby devices, and keeps a record of all the contact identifiers that
@@ -122,7 +122,7 @@ The device may choose to record extra information, such as when or where
 the contact identifier was observed. This extra information is also
 stored on the device and will never be shared with anyone.
 
-![image](diagnosis.png)
+![image](spec/diagnosis.png)
 
 If the device owner becomes infected, the healthcare provider generates
 a **confirmation code** and communicates this confirmation code to the
@@ -152,7 +152,7 @@ The seed value is the only piece of information that is uploaded. The
 healthcare provider has no way to know where the device owner has been
 or who the device owner has contacted.
 
-![image](publication.png)
+![image](spec/publication.png)
 
 The healthcare provider publishes a **notification** list of hazardous
 seed values corresponding to positive diagnoses. Each participating
@@ -180,7 +180,7 @@ A healthcare provider can provide guidance or tools to assist in
 estimating the levels of risk and in suggesting the actions that should
 be taken by affected device owners.
 
-![image](international.png)
+![image](spec/international.png)
 
 The volume of notifications is potentially very large. There are several
 mechanisms in place to minimise the amount of data that each device
@@ -222,7 +222,7 @@ For healthcare providers in neighbouring or overlapping geographic
 areas, notifications may be exchanged directly to reduce the volume of
 notifications reaching the worldwide subscription zone.
 
-![image](cooperation.png)
+![image](spec/cooperation.png)
 
 This is an **open standard**. Any healthcare provider or app developer
 can deploy this technology. There are no licensing fees, patents, or

@@ -51,18 +51,20 @@ version.tex :
 	pandoc --default-image-extension=png -t gfm $< -o $@
 
 cx-intro.md : cx.md Makefile
-	tail -n +2 $< | sed -E '/^#.*/q' | head -n -1 > $@
+	tail -n +2 $< | \
+		sed -E 's/\[image\]\(/\[image\]\(spec\// ; /^#.*/q' | \
+		head -n -1 > $@
 
-../%.png : %.svg Makefile
+%.png : %.svg Makefile
 	rsvg-convert -f png -d 150 -p 150 -o $@ $<
 
-../pdf.png : clipart/pdf.svg Makefile
+clipart/pdf.png : clipart/pdf.svg Makefile
 	rsvg-convert -f png -h 32 -o $@ $<
 
 ../README.md : README-header.md.part cx-intro.md README-footer.md.part \
-	       ../broadcasting.png ../observing.png ../diagnosis.png \
-	       ../publication.png ../international.png ../cooperation.png \
-	       ../pdf.png Makefile
+	       broadcasting.png observing.png diagnosis.png \
+	       publication.png international.png cooperation.png \
+	       clipart/pdf.png Makefile
 	cat README-header.md.part cx-intro.md README-footer.md.part > $@
 
 readme : ../README.md Makefile
