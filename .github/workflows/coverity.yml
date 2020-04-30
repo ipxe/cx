@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Install packages
         run: |
+          sudo apt update
           sudo apt install -y -o Acquire::Retries=50 \
                            autoconf-archive valgrind openssl xxd asn1c
       - name: Download Coverity Scan build tool

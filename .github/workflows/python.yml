@@ -12,6 +12,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Prerequisites
         run: |
+          sudo apt update
           sudo apt install -y -o Acquire::Retries=50 \
                            autoconf-archive openssl xxd asn1c \
                            python3-pip python3-setuptools python3-cffi \
@@ -43,6 +44,7 @@ jobs:
     steps:
       - name: Prerequisites
         run: |
+          sudo apt update
           sudo apt install -y -o Acquire::Retries=50 \
                            python3-pip python3-setuptools
       - name: Download distribution
@@ -63,6 +65,7 @@ jobs:
     steps:
       - name: Prerequisites
         run: |
+          sudo apt update
           sudo apt install -y -o Acquire::Retries=50 python3-setuptools
       - name: Download distribution
         uses: actions/download-artifact@v1
