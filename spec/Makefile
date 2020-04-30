@@ -54,7 +54,7 @@ cx-intro.md : cx.md Makefile
 	tail -n +2 $< | sed -E '/^#.*/q' | head -n -1 > $@
 
 ../%.png : %.svg Makefile
-	rsvg-convert -f png -d 150 -o $@ $<
+	rsvg-convert -f png -d 150 -p 150 -o $@ $<
 
 ../pdf.png : clipart/pdf.svg Makefile
 	rsvg-convert -f png -h 32 -o $@ $<
