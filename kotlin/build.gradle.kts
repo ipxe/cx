@@ -1,12 +1,28 @@
 plugins {
     kotlin("multiplatform")
+    id("com.android.library")
 }
 
 repositories {
     mavenCentral()
+    jcenter()
+    google()
+}
+
+android {
+    compileSdkVersion(29)
+    sourceSets {
+	val main by getting {
+	    manifest.apply {
+		srcFile("src/androidMain/AndroidManifest.xml")
+	    }
+	}
+    }
 }
 
 kotlin {
+
+    android()
 
     jvm()
 
@@ -33,6 +49,14 @@ kotlin {
 	    dependencies {
 		implementation(kotlin("test-junit"))
 	    }
+	}
+
+	val androidMain by getting {
+	    dependsOn(jvmMain)
+	}
+
+	val androidTest by getting {
+	    dependsOn(jvmTest)
 	}
 
     }
