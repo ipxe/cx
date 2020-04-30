@@ -27,7 +27,7 @@ public class Generator(
 	    throw IllegalArgumentException("Invalid generator type")
 	}
 	if (handle == 0L) {
-	    throw OutOfMemoryError()
+	    throw IllegalStateException("Failed to construct generator")
 	}
     }
 

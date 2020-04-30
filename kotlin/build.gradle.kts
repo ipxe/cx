@@ -39,11 +39,7 @@ kotlin {
 	    }
 	}
 
-	val jvmMain by getting {
-	    dependencies {
-		implementation(kotlin("stdlib"))
-	    }
-	}
+	val jvmMain by getting
 
 	val jvmTest by getting {
 	    dependencies {
@@ -57,6 +53,12 @@ kotlin {
 
 	val androidTest by getting {
 	    dependsOn(jvmTest)
+	}
+
+	all {
+	    dependencies {
+		implementation(kotlin("stdlib"))
+	    }
 	}
 
     }
