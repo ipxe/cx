@@ -101,28 +101,6 @@ static inline void bytes_release ( JNIEnv *env, jbyteArray bytes,
 	(*env)->ReleaseByteArrayElements ( env, bytes, data, JNI_ABORT );
 }
 
-/**
- * Create new byte array
- *
- * @v env		JNI environment
- * @v data		Byte array data
- * @v len		Length of byte array data
- * @ret bytes		Byte array (or NULL on error)
- */
-static inline jbyteArray bytes_new ( JNIEnv *env, void *data, size_t len ) {
-	jbyteArray bytes;
-
-	/* Create new byte array */
-	bytes = (*env)->NewByteArray ( env, len );
-	if ( ! bytes )
-		return NULL;
-
-	/* Set byte array content */
-	(*env)->SetByteArrayRegion ( env, bytes, 0, len, data );
-
-	return bytes;
-}
-
 /******************************************************************************
  *
  * Generators
