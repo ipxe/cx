@@ -58,6 +58,7 @@ CX_SEED_REPORT * cx_seedrep_sign_asn1 ( const struct cx_seed_report *report,
 	const struct cx_seed_descriptor *desc;
 	CX_SEED_REPORT *seedReport;
 	CX_SEED_DESCRIPTOR *seedDescriptor;
+	CX_GENERATOR_TYPE generatorType;
 	unsigned int i;
 
 	/* Allocate and initialise structure */
@@ -84,7 +85,8 @@ CX_SEED_REPORT * cx_seedrep_sign_asn1 ( const struct cx_seed_report *report,
 		}
 
 		/* Set descriptor fields */
-		if ( ! CX_SEED_DESCRIPTOR_set1 ( seedDescriptor, desc->type,
+		generatorType = ( ( CX_GENERATOR_TYPE ) desc->type );
+		if ( ! CX_SEED_DESCRIPTOR_set1 ( seedDescriptor, generatorType,
 						 desc->preseed, desc->len,
 						 desc->key ) ) {
 			DBG ( "SEEDREP could not set descriptor %d fields\n",
@@ -172,6 +174,7 @@ void * cx_seedrep_sign_der ( const struct cx_seed_report *report,
  */
 struct cx_seed_report * cx_seedrep_verify_asn1 ( CX_SEED_REPORT *seedReport ) {
 	CX_SEED_DESCRIPTOR *seedDescriptor;
+	CX_GENERATOR_TYPE generatorType;
 	struct cx_seed_report *report;
 	struct cx_seed_descriptor *desc;
 	unsigned int count;
@@ -231,7 +234,8 @@ struct cx_seed_report * cx_seedrep_verify_asn1 ( CX_SEED_REPORT *seedReport ) {
 		}
 
 		/* Get generator type */
-		desc[i].type = CX_SEED_DESCRIPTOR_get_type ( seedDescriptor );
+		generatorType = CX_SEED_DESCRIPTOR_get_type ( seedDescriptor );
+		desc[i].type = ( ( enum cx_generator_type ) generatorType );
 		if ( ! desc[i].type ) {
 			DBG ( "SEEDREP could not get descriptor %d type\n",
 			      i );
