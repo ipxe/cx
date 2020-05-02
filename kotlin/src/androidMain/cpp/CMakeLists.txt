@@ -26,6 +26,9 @@ ExternalProject_Add(
     ANDROID_NDK=${ANDROID_NDK}
     ${CMAKE_CURRENT_SOURCE_DIR}/openssl/Configure
       --prefix=${INSTALL_PREFIX}
+      -ffunction-sections -fdata-sections
+      no-autoerrinit no-autoload-config no-egd no-engine no-hw
+      no-ssl no-tests no-tls
       android-${ANDROID_ARCH_NAME}
   BUILD_COMMAND
     PATH=${ANDROID_PATH}
@@ -54,7 +57,8 @@ ExternalProject_Add(
       --enable-jni
       "CC=${CMAKE_C_COMPILER}"
       "CPPFLAGS=-I${INSTALL_INCLUDEDIR}"
-      "CFLAGS=--target=${CMAKE_C_COMPILER_TARGET}"
+      "CFLAGS=--target=${CMAKE_C_COMPILER_TARGET} \
+              -ffunction-sections -fdata-sections"
       "LDFLAGS=-XCClinker --target=${CMAKE_C_COMPILER_TARGET} \
                -L${INSTALL_LIBDIR}"
   BUILD_COMMAND
@@ -72,8 +76,12 @@ add_dependencies(cxjni openssl-project libcx-project)
 target_include_directories(cxjni PRIVATE ${INSTALL_INCLUDEDIR})
 target_link_libraries(
   cxjni
-  -Wl,-Bstatic -Wl,--as-needed
+  -Wl,-Bstatic -Wl,-Bsymbolic -Wl,--as-needed
+  -Wl,--exclude-libs=libcx.a
+  -Wl,--exclude-libs=libssl.a
+  -Wl,--exclude-libs=libcrypto.a
   -L${INSTALL_LIBDIR}
   -lcxjni -lcx -lssl -lcrypto
   -Wl,-Bdynamic
+  -Wl,--gc-sections -Wl,--strip-all
 )
