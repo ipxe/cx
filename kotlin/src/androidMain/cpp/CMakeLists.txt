@@ -66,43 +66,14 @@ ExternalProject_Add(
 )
 add_dependencies(libcx-project openssl-project)
 
-# libcrypto.so
-add_library(crypto SHARED IMPORTED)
-add_dependencies(crypto openssl-project)
-set_target_properties(
-  crypto PROPERTIES IMPORTED_LOCATION ${INSTALL_LIBDIR}/libcrypto.so
-)
-
-# libssl.so
-add_library(ssl SHARED IMPORTED)
-add_dependencies(ssl openssl-project)
-set_target_properties(
-  ssl PROPERTIES IMPORTED_LOCATION ${INSTALL_LIBDIR}/libssl.so
-)
-
-# libcx.so
-add_library(cx SHARED IMPORTED)
-add_dependencies(cx libcx-project)
-set_target_properties(
-  cx PROPERTIES IMPORTED_LOCATION ${INSTALL_LIBDIR}/libcx.so
-)
-
-# libcxjni.so
-add_library(cxjni SHARED IMPORTED)
-add_dependencies(cxjni libcx-project)
-set_target_properties(
-  cxjni PROPERTIES IMPORTED_LOCATION ${INSTALL_LIBDIR}/libcxjni.so
-)
-
-# Dummy library to trick Gradle into actually building something,
-# since it uses cmake-file-api(7) to identify build targets, and
-# imported libraries do not show up within this list.
-add_library(dummy SHARED dummy.c)
-add_dependencies(dummy crypto ssl cx cxjni)
-add_custom_command(TARGET dummy POST_BUILD COMMAND cp
-  ${INSTALL_LIBDIR}/libcrypto.so
-  ${INSTALL_LIBDIR}/libssl.so
-  ${INSTALL_LIBDIR}/libcx.so
-  ${INSTALL_LIBDIR}/libcxjni.so
-  ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/
+# Final JNI library
+add_library(cxjni SHARED cxjni-wrap.c)
+add_dependencies(cxjni openssl-project libcx-project)
+target_include_directories(cxjni PRIVATE ${INSTALL_INCLUDEDIR})
+target_link_libraries(
+  cxjni
+  -Wl,-Bstatic -Wl,--as-needed
+  -L${INSTALL_LIBDIR}
+  -lcxjni -lcx -lssl -lcrypto
+  -Wl,-Bdynamic
 )
