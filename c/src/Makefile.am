@@ -86,7 +86,6 @@ cxtest_SOURCES = cxtest.h cxtest.c \
 		 $(TEST_SOURCES) $(TESTKEY_SOURCES)
 cxtest_CPPFLAGS = $(SSL_CFLAGS) -include cxtest.h -I$(srcdir)/asn1 \
 		  $(AM_CPPFLAGS)
-cxtest_CFLAGS = $(AM_CFLAGS) -Wunused-const-variable=2
 cxtest_LDADD = libcx.la $(SSL_LIBS) libcxasn1.la
 
 # JNI library
