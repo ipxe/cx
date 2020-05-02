@@ -33,9 +33,9 @@
 
 #include <stdint.h>
 #include <endian.h>
-#include <jni.h>
 #include <cx.h>
 #include <cx/generator.h>
+#include <cx/jni.h>
 #include "debug.h"
 
 /** Required JNI version */
