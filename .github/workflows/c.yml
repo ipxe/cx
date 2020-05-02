@@ -3,8 +3,9 @@ name: C library
 on: [push]
 
 jobs:
+
   build:
-    name: Build C library
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -61,3 +62,33 @@ jobs:
         with:
           name: libcx.tar.gz
           path: c/libcx-artifact.tar.gz
+
+  clang:
+    name: Build (Clang)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Install packages
+        run: |
+          sudo apt update
+          sudo apt install -y -o Acquire::Retries=50 \
+                           autoconf-archive valgrind openssl xxd asn1c \
+                           openjdk-11-jdk clang
+      - name: Autotools
+        working-directory: c
+        run: |
+          ./autogen.sh
+      - name: Configure
+        working-directory: c
+        run: |
+          CC=clang ./configure --enable-jni
+      - name: Build
+        working-directory: c
+        run: |
+          make
+      - name: Test
+        working-directory: c
+        run: |
+          make check
+          make check-valgrind
