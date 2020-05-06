@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("org.jlleitschuh.gradle.ktlint") version("9.2.1")
 }
 
 repositories {
@@ -65,7 +66,10 @@ kotlin {
                 implementation(kotlin("stdlib"))
             }
         }
-
     }
+}
 
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
 }
