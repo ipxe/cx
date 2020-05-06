@@ -10,21 +10,12 @@ repositories {
 }
 
 android {
-    ndkVersion = "21.0.6113669"
     compileSdkVersion(29)
-    defaultConfig {
-        minSdkVersion(23)
-    }
     sourceSets {
         val main by getting {
             manifest.apply {
                 srcFile("src/androidMain/AndroidManifest.xml")
             }
-        }
-    }
-    externalNativeBuild {
-        cmake {
-            setPath("src/androidMain/cpp/CMakeLists.txt")
         }
     }
 }

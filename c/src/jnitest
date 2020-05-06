@@ -1,6 +1,0 @@
-#!/bin/sh
-
-set -e
-set -x
-
-java -Djava.library.path=.libs -verbose:jni org.ipxe.cx.CxJni

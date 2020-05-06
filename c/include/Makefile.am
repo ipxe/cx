@@ -5,7 +5,6 @@ nobase_libcx_HEADERS = \
 	cx/asn1.h \
 	cx/drbg.h \
 	cx/generator.h \
-	cx/jni.h \
 	cx/preseed.h \
 	cx/seedcalc.h \
 	cx/seedrep.h

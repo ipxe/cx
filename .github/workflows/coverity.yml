@@ -18,8 +18,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y -o Acquire::Retries=50 \
-                           autoconf-archive valgrind openssl xxd asn1c \
-                           openjdk-11-jdk
+                           autoconf-archive valgrind openssl xxd asn1c
       - name: Download Coverity Scan build tool
         run: |
           curl --form token=${{ secrets.COVERITY_SCAN_TOKEN }} \
@@ -36,7 +35,7 @@ jobs:
           make
           make distdir VERSION=scan
           cd libcx-scan
-          ./configure --enable-jni
+          ./configure
       - name: Build via Coverity Scan
         working-directory: c/libcx-scan
         run: |

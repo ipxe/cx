@@ -88,31 +88,9 @@ cxtest_CPPFLAGS = $(SSL_CFLAGS) -include cxtest.h -I$(srcdir)/asn1 \
 		  $(AM_CPPFLAGS)
 cxtest_LDADD = libcx.la $(SSL_LIBS) libcxasn1.la
 
-# JNI library
-#
-CXJNI_CPPFLAGS = $(foreach dir,$(JNI_INCLUDE_DIRS),-I$(dir))
-CXJNI_EXPORT = '^JNI_On(Load|Unload)'
-libcxjni_la_SOURCES = cxjni.c
-libcxjni_la_CPPFLAGS = $(CXJNI_CPPFLAGS) $(AM_CPPFLAGS)
-libcxjni_la_LDFLAGS = -export-symbols-regex $(CXJNI_EXPORT) $(AM_LDFLAGS)
-libcxjni_la_LIBADD = libcx.la
-
-# JNI test
-#
-org/ipxe/cx/CxJni.class : CxJni.java
-	javac $< -d $(builddir)
-
-# JNI conditional inclusion
-#
-if ENABLE_JNI
-lib_LTLIBRARIES += libcxjni.la
-TESTS += jnitest
-jnitest : org/ipxe/cx/CxJni.class
-endif
-
 # Link test file
 #
-EXTRA_DIST += linktest.c CxJni.java jnitest
+EXTRA_DIST += linktest.c
 
 # Cleanup
 #

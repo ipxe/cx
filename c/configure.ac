@@ -5,10 +5,6 @@ AC_CONFIG_SRCDIR([src/generator.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
 
-# Arguments
-AC_ARG_ENABLE([jni], [AS_HELP_STRING([--enable-jni],
-				     [Enable JNI library @<:@default=no@:>@])])
-
 # Check for programs
 AC_PROG_CC
 AC_PROG_CXX
@@ -28,7 +24,6 @@ LT_INIT([shared pic-only])
 
 # Configure automake
 AM_INIT_AUTOMAKE([foreign subdir-objects])
-AM_CONDITIONAL([ENABLE_JNI], [test x"$enable_jni" = x"yes"])
 
 # Check for libraries
 PKG_CHECK_MODULES(SSL, openssl)
@@ -36,8 +31,6 @@ PKG_CHECK_MODULES(SSL, openssl)
 # Check for headers
 AC_CHECK_HEADERS([stddef.h stdlib.h string.h \
 		  openssl/rand_drbg.h openssl/x509.h])
-AS_IF([test x"$enable_jni" = x"yes"], [AX_JNI_INCLUDE_DIR])
-AC_SUBST([JNI_INCLUDE_DIRS])
 
 # Check for types
 AC_TYPE_SIZE_T
