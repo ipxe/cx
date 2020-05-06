@@ -20,27 +20,27 @@ public class Generator(
     private val handle = LibCx.genInstantiate(type.value, seed)
 
     var remaining = type.maxIterations
-	private set
+        private set
 
     init {
-	if (remaining == 0) {
-	    throw IllegalArgumentException("Invalid generator type")
-	}
-	if (handle == 0L) {
-	    throw IllegalStateException("Failed to construct generator")
-	}
+        if (remaining == 0) {
+            throw IllegalArgumentException("Invalid generator type")
+        }
+        if (handle == 0L) {
+            throw IllegalStateException("Failed to construct generator")
+        }
     }
 
     override fun hasNext() = remaining != 0
 
     override fun next() : Uuid {
-	val id = LibCx.genIterate(handle) ?: throw NoSuchElementException()
-	remaining--
-	return id
+        val id = LibCx.genIterate(handle) ?: throw NoSuchElementException()
+        remaining--
+        return id
     }
 
     protected fun finalize() {
-	LibCx.genUninstantiate(handle)
+        LibCx.genUninstantiate(handle)
     }
 
 }
