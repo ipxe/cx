@@ -1,7 +1,12 @@
+import java.net.URL
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.GradlePassConfigurationImpl
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jlleitschuh.gradle.ktlint") version("9.2.1")
+    id("org.jetbrains.dokka") version("0.10.1")
 }
 
 repositories {
@@ -72,4 +77,23 @@ kotlin {
 ktlint {
     verbose.set(true)
     outputToConsole.set(true)
+}
+
+/* The Dokka plugin's "global" block doesn't work for most options */
+val dokkaOptions: GradlePassConfigurationImpl.() -> Unit = {
+    includeNonPublic = false
+    jdkVersion = 7
+    externalDocumentationLink {
+        url = URL("https://www.bouncycastle.org/docs/docs1.5on/index.html")
+    }
+}
+
+tasks {
+    val dokka by getting(DokkaTask::class) {
+        multiplatform {
+            val android by creating(dokkaOptions)
+            val jvm by creating(dokkaOptions)
+            val native by creating(dokkaOptions)
+        }
+    }
 }
