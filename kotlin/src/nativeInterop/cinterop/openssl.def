@@ -1,0 +1,11 @@
+headers = openssl/evp.h openssl/x509.h
+headerFilter = openssl/crypto.h openssl/evp.h openssl/x509.h
+
+compilerOpts.linux = -I/usr/include
+linkerOpts.linux = -L/usr/lib64 -L/usr/lib -lssl -lcrypto
+
+---
+
+static inline void openssl_free(void *addr) {
+	openssl_free(addr);
+}

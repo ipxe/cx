@@ -38,6 +38,7 @@ kotlin {
     linuxX64("native") {
         val main by compilations.getting
         val libcx by main.cinterops.creating
+        val openssl by main.cinterops.creating
     }
 
     sourceSets {
