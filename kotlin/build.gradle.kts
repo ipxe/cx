@@ -49,7 +49,11 @@ kotlin {
             }
         }
 
-        val jvmMain by getting
+        val jvmMain by getting {
+            dependencies {
+                implementation("org.bouncycastle:bcpkix-jdk15on:1.65")
+            }
+        }
 
         val jvmTest by getting {
             dependencies {
