@@ -2,21 +2,35 @@ import java.net.URL
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.GradlePassConfigurationImpl
 
+/* Dependencies */
+val uuidDependency: String by project
+val bouncyCastleDependency: String by project
+
+/* Documentation URLs */
+val bouncyCastleDocs: String by project
+
+/* Miscellaneous other version numbers */
+val androidSdkVersion: String by project
+val dokkaJdkVersion: String by project
+
+/* Gradle plugins */
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("org.jlleitschuh.gradle.ktlint") version("9.2.1")
-    id("org.jetbrains.dokka") version("0.10.1")
+    id("org.jlleitschuh.gradle.ktlint")
+    id("org.jetbrains.dokka")
 }
 
+/* Non-plugin repositories */
 repositories {
     mavenCentral()
     jcenter()
     google()
 }
 
+/* Android SDK configuration */
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(androidSdkVersion.toInt())
     sourceSets {
         val main by getting {
             manifest.apply {
@@ -26,6 +40,7 @@ android {
     }
 }
 
+/* Main build configuration */
 kotlin {
 
     android()
@@ -42,13 +57,13 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                api("com.benasher44:uuid:0.1.0")
+                api(uuidDependency)
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                implementation("org.bouncycastle:bcpkix-jdk15on:1.65")
+                implementation(bouncyCastleDependency)
             }
         }
 
@@ -74,20 +89,24 @@ kotlin {
     }
 }
 
+/* Linting */
 ktlint {
     verbose.set(true)
     outputToConsole.set(true)
 }
 
-/* The Dokka plugin's "global" block doesn't work for most options */
+/* Documentation
+ *
+ * The Dokka plugin's "global" block doesn't work for most options;
+ * work around this by defining and reusing a lambda.
+ */
 val dokkaOptions: GradlePassConfigurationImpl.() -> Unit = {
     includeNonPublic = false
-    jdkVersion = 7
+    jdkVersion = dokkaJdkVersion.toInt()
     externalDocumentationLink {
-        url = URL("https://www.bouncycastle.org/docs/docs1.5on/index.html")
+        url = URL(bouncyCastleDocs)
     }
 }
-
 tasks {
     val dokka by getting(DokkaTask::class) {
         multiplatform {
