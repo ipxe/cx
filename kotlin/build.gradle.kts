@@ -37,7 +37,7 @@ kotlin {
 
     linuxX64("native") {
         val main by compilations.getting
-        val interop by main.cinterops.creating
+        val libcx by main.cinterops.creating
     }
 
     sourceSets {

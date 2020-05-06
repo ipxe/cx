@@ -1,6 +1,6 @@
 package org.ipxe.cx
 
-import interop.*
+import libcx.*
 import kotlinx.cinterop.*
 import com.benasher44.uuid.*
 
