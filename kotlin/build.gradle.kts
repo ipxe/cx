@@ -38,6 +38,12 @@ android {
             }
         }
     }
+    buildTypes {
+        val release by getting {
+            isMinifyEnabled = true
+            proguardFile(getDefaultProguardFile("proguard-android.txt"))
+        }
+    }
 }
 
 /* Main build configuration */
