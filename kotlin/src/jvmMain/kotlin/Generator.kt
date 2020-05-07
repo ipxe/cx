@@ -4,10 +4,10 @@ import com.benasher44.uuid.uuidOf
 import java.util.UUID
 import kotlin.experimental.and
 import kotlin.experimental.or
-import org.bouncycastle.crypto.engines.AESEngine
-import org.bouncycastle.crypto.prng.EntropySource
-import org.bouncycastle.crypto.prng.drbg.CTRSP800DRBG
-import org.bouncycastle.crypto.prng.drbg.SP80090DRBG
+import org.spongycastle.crypto.engines.AESEngine
+import org.spongycastle.crypto.prng.EntropySource
+import org.spongycastle.crypto.prng.drbg.CTRSP800DRBG
+import org.spongycastle.crypto.prng.drbg.SP80090DRBG
 
 /**
  * Generator entropy source

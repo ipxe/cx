@@ -7,11 +7,11 @@ import java.security.NoSuchAlgorithmException
 import java.security.PrivateKey
 import java.security.PublicKey
 import java.security.spec.X509EncodedKeySpec
-import org.bouncycastle.asn1.ASN1ObjectIdentifier
-import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers
-import org.bouncycastle.asn1.x509.AlgorithmIdentifier
-import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo
-import org.bouncycastle.asn1.x9.X9ObjectIdentifiers
+import org.spongycastle.asn1.ASN1ObjectIdentifier
+import org.spongycastle.asn1.pkcs.PKCSObjectIdentifiers
+import org.spongycastle.asn1.x509.AlgorithmIdentifier
+import org.spongycastle.asn1.x509.SubjectPublicKeyInfo
+import org.spongycastle.asn1.x9.X9ObjectIdentifiers
 
 /** Invalid public or private key */
 public actual typealias InvalidKeyException = InvalidKeyException
