@@ -48,7 +48,7 @@ jobs:
           sudo apt install -y -o Acquire::Retries=50 \
                            python3-pip python3-setuptools
       - name: Download distribution
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4.1.7
         with:
           name: python-dist
       - name: Install
@@ -68,7 +68,7 @@ jobs:
           sudo apt update
           sudo apt install -y -o Acquire::Retries=50 python3-setuptools
       - name: Download distribution
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4.1.7
         with:
           name: python-dist
       - name: Unpack
@@ -104,7 +104,7 @@ jobs:
       - sdist-extlibcx
     steps:
       - name: Download distribution
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4.1.7
         with:
           name: python-dist
       - name: Publish to PyPI
